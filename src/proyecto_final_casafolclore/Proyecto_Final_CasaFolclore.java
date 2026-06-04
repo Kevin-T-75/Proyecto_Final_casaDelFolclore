@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package proyecto_final_casafolclore;
+import java.util.Date;
 
 /**
  *
@@ -16,8 +17,10 @@ public class Proyecto_Final_CasaFolclore {
     public static void main(String[] args) {
         // TODO code application logic here
 
+        Administrador admin = new Administrador();
+        ReporteAdministrador rep1 = new ReporteAdministrador("R001", new Date(), "Reporte de alquileres");
         
-        System.out.println("helooooooo");
+        
     }
     
 }
