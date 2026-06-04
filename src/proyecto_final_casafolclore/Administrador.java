@@ -8,6 +8,6 @@ package proyecto_final_casafolclore;
  *
  * @author neyli
  */
-public class Administrador {
+public class Administrador extends Usuario {
     
 }
