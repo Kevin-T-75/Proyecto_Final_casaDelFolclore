@@ -45,6 +45,13 @@ public class ReporteAdministrador {
         this.tipoReporte = tipoReporte;
     }
 
+   public void generarReporte(){
+       System.out.println("Generando reporte " + tipoReporte + ". Espere un momento...");
+   }
+   public void mostrarReporte(){
    
-    
+       System.out.println("ID: " + idReporte);
+       System.out.println("Fecha: " + fechaGeneracion);
+       System.out.println("Tipo: " + tipoReporte);
+   }
 }
