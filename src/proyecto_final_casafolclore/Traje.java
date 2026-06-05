@@ -79,9 +79,13 @@ public class Traje {
     public void actualizarEstado(){
         
     }
-    public void consultarDisponible(){
-        
+    public String consultarDisponible() {
+    if (estado) {
+        return "Disponible";
+    } else {
+        return "Alquilado";
     }
+}
 
    
     
