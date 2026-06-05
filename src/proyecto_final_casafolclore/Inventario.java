@@ -57,15 +57,5 @@ public class Inventario {
         }
     }
     
-    public int consultarEstado()
-    {int contador =0;
-        for (Traje t : listaTraje)
-        {
-            if (t.getEstado().equalsIgnoreCase("Disponible"))
-            {
-                contador++;
-            }
-        }
-        return contador;
-    }
+    
 }
