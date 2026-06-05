@@ -10,10 +10,10 @@ package proyecto_final_casafolclore;
  */
 public abstract class Usuario {
     
-    private String idUsuario;
-    private String nombre_Usuario; 
-    private String correo_Usuario; 
-    private String contraseña_Usuario; 
+    protected String idUsuario;
+    protected  String nombre_Usuario; 
+    protected  String correo_Usuario; 
+    protected  String contraseña_Usuario; 
 
     public String getIdUsuario() {
         return idUsuario;
@@ -55,10 +55,8 @@ public abstract class Usuario {
     }
     
     
-    
     public abstract void iniciarSesion();
-        
-        
+       
     
     public abstract void cerrarSesion();
         
