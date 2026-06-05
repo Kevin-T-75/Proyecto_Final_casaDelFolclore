@@ -4,10 +4,68 @@
  */
 package proyecto_final_casafolclore;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author USER
  */
 public class Inventario {
+    private String idInventario;
+    private int CantidadDisponible;
+    private int CantidadTotal;
+
+    public ArrayList<Traje> listaTraje = new ArrayList();
     
+    public String getIdInventario() {
+        return idInventario;
+    }
+
+    public void setIdInventario(String idInventario) {
+        this.idInventario = idInventario;
+    }
+
+    public int getCantidadDisponible() {
+        return CantidadDisponible;
+    }
+
+    public void setCantidadDisponible(int CantidadDisponible) {
+        this.CantidadDisponible = CantidadDisponible;
+    }
+
+    public int getCantidadTotal() {
+        return CantidadTotal;
+    }
+
+    public void setCantidadTotal(int CantidadTotal) {
+        this.CantidadTotal = CantidadTotal;
+    }
+    
+    public void AgregarTraje(Traje trajes)
+    {
+         listaTraje.add(trajes);
+        CantidadTotal++;
+        CantidadDisponible++;
+    }
+    
+    public void EliminarTraje(Traje trajes)
+    {
+        if(listaTraje.remove(trajes))
+        {
+            CantidadTotal--;
+            CantidadDisponible--;
+        }
+    }
+    
+    public int consultarEstado()
+    {int contador =0;
+        for (Traje t : listaTraje)
+        {
+            if (t.getEstado().equalsIgnoreCase("Disponible"))
+            {
+                contador++;
+            }
+        }
+        return contador;
+    }
 }
