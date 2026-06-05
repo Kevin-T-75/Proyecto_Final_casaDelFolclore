@@ -16,22 +16,64 @@ public class Proyecto_Final_CasaFolclore {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+         Administrador admin = new Administrador(
+                "Gerente",
+                "U001",
+                "Carlos Ramos",
+                "carlos@gmail.com",
+                "12345"
+        );
 
-        Administrador admin = new Administrador("Gerente", "U001", "Carlos Ramos", "carlos@gmail.com", "12345");
-        ReporteAdministrador rep1 = new ReporteAdministrador("R001", new Date(), "Reporte de alquileres");
-     
-        //el administrador tiene las siguientes opciones:
-        
-//        1. Registrar cliente;
-//        2. Registrar traje;
-//        3. Registrar alquiler;
-//        4. Registrar pago;
-//        5. Consultar inventario
-//        6. Gnerar reporte
-//        7. Cerrar sesioon
-        
+        ReporteAdministrador rep1 = new ReporteAdministrador(
+                "R001",
+                new Date(),
+                "Reporte de alquileres"
+        );
+
+        Cliente cliente1 = new Cliente(
+                "987654321",
+                "Cajamarca",
+                "Frecuente"
+        );
+
+        Traje traje1 = new Traje(
+                "T001",
+                "Traje de Marinera",
+                "Marinera Norteña",
+                "M",
+                true,
+                "80"
+        );
+
         admin.iniciarSesion();
-        System.out.println("hola");
+
+        System.out.println("1. Registrar cliente");
+        cliente1.registrar();
+        admin.gestionarClientes();
+
+        System.out.println("2. Registrar traje");
+        admin.gestionarTrajes();
+
+        System.out.println("3. Registrar alquiler");
+        cliente1.alquilar();
+
+        System.out.println("4. Registrar pago");
+        System.out.println("Pago registrado correctamente");
+
+        System.out.println("5. Consultar inventario");
+        System.out.println("Estado del traje: " + traje1.consultarDisponible());
+
+        System.out.println("6. Generar reporte");
+        rep1.generarReporte();
+        admin.gestionarReporte(rep1);
+
+        System.out.println("Lista de reportes:");
+        admin.mostrarReportes();
+
+        System.out.println("7. Cerrar sesión");
+        admin.cerrarSesion();
     }
-    
 }
+
+
+
