@@ -14,7 +14,7 @@ public class Traje {
     private String nombre_Traje;
     private String danza;
     private String talla;
-    private String estado;
+    private boolean estado;
     private String precioAlquiler;
 
     public String getIdTraje() {
@@ -49,14 +49,16 @@ public class Traje {
         this.talla = talla;
     }
 
-    public String getEstado() {
+    public boolean isEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(boolean estado) {
         this.estado = estado;
     }
 
+   
+    
     public String getPrecioAlquiler() {
         return precioAlquiler;
     }
@@ -65,7 +67,7 @@ public class Traje {
         this.precioAlquiler = precioAlquiler;
     }
 
-    public Traje(String idTraje, String nombre_Traje, String danza, String talla, String estado, String precioAlquiler) {
+    public Traje(String idTraje, String nombre_Traje, String danza, String talla, boolean estado, String precioAlquiler) {
         this.idTraje = idTraje;
         this.nombre_Traje = nombre_Traje;
         this.danza = danza;
@@ -73,6 +75,8 @@ public class Traje {
         this.estado = estado;
         this.precioAlquiler = precioAlquiler;
     }
+
+   
     
     
 
