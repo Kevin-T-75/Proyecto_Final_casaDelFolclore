@@ -31,6 +31,7 @@ public class Proyecto_Final_CasaFolclore {
 //        7. Cerrar sesioon
         
         admin.iniciarSesion();
+        System.out.println("hola");
     }
     
 }
