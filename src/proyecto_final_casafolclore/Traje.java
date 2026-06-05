@@ -75,6 +75,13 @@ public class Traje {
         this.estado = estado;
         this.precioAlquiler = precioAlquiler;
     }
+    
+    public void actualizarEstado(){
+        
+    }
+    public void consultarDisponible(){
+        
+    }
 
    
     
