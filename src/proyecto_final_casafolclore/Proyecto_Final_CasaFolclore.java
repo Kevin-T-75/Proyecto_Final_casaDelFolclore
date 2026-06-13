@@ -95,7 +95,11 @@ public class Proyecto_Final_CasaFolclore {
                 Cliente cliente = new Cliente(
                         telefono,
                         direccion,
-                        tipoCliente
+                        tipoCliente, 
+                        id,
+                        nombre,
+                        correo,
+                        contraseña
                 );
 
                 System.out.println("Cliente registrado correctamente.");
@@ -157,7 +161,11 @@ public class Proyecto_Final_CasaFolclore {
                 Cliente clienteAlquiler = new Cliente(
                         "999999999",
                         "Sin dirección",
-                        "Normal"
+                        "Normal",
+                        "123",
+                        "Grecia",
+                        "gy@gmail.com",
+                        "gr123"
                 );
 
                 Pago pagoAlquiler = new Pago(
@@ -253,11 +261,27 @@ public class Proyecto_Final_CasaFolclore {
 
         System.out.print("Tipo de cliente: ");
         String tipoCliente = sc.nextLine();
+        
+        System.out.print("ID: ");
+        String id = sc.nextLine();
+
+        System.out.print("Nombre: ");
+        String nombre = sc.nextLine();
+
+        System.out.print("Correo: ");
+        String correo = sc.nextLine();
+
+        System.out.print("Contraseña: ");
+        String contraseña = sc.nextLine();
 
         Cliente cliente = new Cliente(
                 telefono,
                 direccion,
-                tipoCliente
+                tipoCliente,
+                id,
+                nombre,
+                correo,
+                contraseña
         );
 
         int opcion;
