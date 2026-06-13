@@ -17,6 +17,9 @@ public class MenuAdmin extends javax.swing.JFrame {
      */
     public MenuAdmin() {
         initComponents();
+        setSize(900, 600); //tamaño
+        setLocationRelativeTo(null); //centrado
+        setResizable(false); //no deja maximizar, mas rapido aqui
     }
 
     /**
@@ -28,17 +31,113 @@ public class MenuAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblMenu = new javax.swing.JLabel();
+        lblOpciones = new javax.swing.JLabel();
+        btnGAlquiler = new javax.swing.JButton();
+        btnGTrajes = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
+        btnGCliente3 = new javax.swing.JButton();
+        btnInventario = new javax.swing.JButton();
+        btnGPago = new javax.swing.JButton();
+        lblSaludo = new javax.swing.JLabel();
+        lblMensaje = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(900, 600));
+
+        lblMenu.setFont(new java.awt.Font("SansSerif", 0, 36)); // NOI18N
+        lblMenu.setText("========== MENU DE ADMINISTRADOR ===========");
+
+        lblOpciones.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        lblOpciones.setText("Dashboard");
+
+        btnGAlquiler.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        btnGAlquiler.setText("Registrar alquiler");
+
+        btnGTrajes.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        btnGTrajes.setText("Gestionar trajes");
+
+        btnLogout.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        btnLogout.setText("Cerrar sesión");
+
+        btnGCliente3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        btnGCliente3.setText("Registrar cliente");
+
+        btnInventario.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        btnInventario.setText("Ver inventario");
+
+        btnGPago.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        btnGPago.setText("Registrar pago");
+
+        lblSaludo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        lblSaludo.setText("Bienvenido/a ");
+
+        lblMensaje.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        lblMensaje.setText("¿Qué deseas hacer hoy?");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(lblMenu)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(btnInventario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnGPago, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnGCliente3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnGTrajes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnGAlquiler, javax.swing.GroupLayout.Alignment.LEADING)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnLogout)
+                .addGap(59, 59, 59))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(540, Short.MAX_VALUE)
+                    .addComponent(lblSaludo, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(29, 29, 29)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(335, 335, 335)
+                    .addComponent(lblMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(387, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(btnLogout)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMenu)
+                .addGap(93, 93, 93)
+                .addComponent(lblOpciones)
+                .addGap(18, 18, 18)
+                .addComponent(btnGCliente3)
+                .addGap(18, 18, 18)
+                .addComponent(btnGTrajes)
+                .addGap(18, 18, 18)
+                .addComponent(btnGAlquiler)
+                .addGap(18, 18, 18)
+                .addComponent(btnGPago)
+                .addGap(18, 18, 18)
+                .addComponent(btnInventario)
+                .addContainerGap(131, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(17, 17, 17)
+                    .addComponent(lblSaludo)
+                    .addContainerGap(564, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(135, 135, 135)
+                    .addComponent(lblMensaje)
+                    .addContainerGap(441, Short.MAX_VALUE)))
         );
 
         pack();
@@ -70,5 +169,15 @@ public class MenuAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGAlquiler;
+    private javax.swing.JButton btnGCliente3;
+    private javax.swing.JButton btnGPago;
+    private javax.swing.JButton btnGTrajes;
+    private javax.swing.JButton btnInventario;
+    private javax.swing.JButton btnLogout;
+    private javax.swing.JLabel lblMensaje;
+    private javax.swing.JLabel lblMenu;
+    private javax.swing.JLabel lblOpciones;
+    private javax.swing.JLabel lblSaludo;
     // End of variables declaration//GEN-END:variables
 }

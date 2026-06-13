@@ -17,6 +17,9 @@ public class MenuCliente extends javax.swing.JFrame {
      */
     public MenuCliente() {
         initComponents();
+        setSize(900, 600); //tamaño
+        setLocationRelativeTo(null); //centrado
+        setResizable(false); //no deja maximizar, mas rapido aqui
     }
 
     /**
@@ -28,21 +31,92 @@ public class MenuCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblSaludo = new javax.swing.JLabel();
+        btnLogout = new javax.swing.JButton();
+        lblMenu = new javax.swing.JLabel();
+        lblMensaje = new javax.swing.JLabel();
+        lblOpciones = new javax.swing.JLabel();
+        btnAlquilar = new javax.swing.JButton();
+        btnReservar = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(900, 600));
+
+        lblSaludo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        lblSaludo.setText("Bienvenido/a ");
+
+        btnLogout.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        btnLogout.setText("Cerrar sesión");
+
+        lblMenu.setFont(new java.awt.Font("SansSerif", 0, 36)); // NOI18N
+        lblMenu.setText("============== MENU DE CLIENTE ===============");
+
+        lblMensaje.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        lblMensaje.setText("¿Qué deseas hacer hoy?");
+
+        lblOpciones.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        lblOpciones.setText("Dashboard");
+
+        btnAlquilar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        btnAlquilar.setText("Alquilar");
+
+        btnReservar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        btnReservar.setText("Reservar");
+        btnReservar.addActionListener(this::btnReservarActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(lblMenu)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblSaludo, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLogout))
+                .addGap(75, 75, 75))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(342, 342, 342)
+                        .addComponent(lblMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(btnAlquilar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnReservar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblSaludo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnLogout)
+                .addGap(12, 12, 12)
+                .addComponent(lblMenu)
+                .addGap(36, 36, 36)
+                .addComponent(lblMensaje)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addComponent(lblOpciones)
+                .addGap(18, 18, 18)
+                .addComponent(btnReservar)
+                .addGap(18, 18, 18)
+                .addComponent(btnAlquilar)
+                .addGap(223, 223, 223))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReservarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -70,5 +144,12 @@ public class MenuCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlquilar;
+    private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnReservar;
+    private javax.swing.JLabel lblMensaje;
+    private javax.swing.JLabel lblMenu;
+    private javax.swing.JLabel lblOpciones;
+    private javax.swing.JLabel lblSaludo;
     // End of variables declaration//GEN-END:variables
 }

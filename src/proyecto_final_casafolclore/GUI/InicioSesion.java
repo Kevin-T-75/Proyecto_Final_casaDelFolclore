@@ -19,6 +19,8 @@ public class InicioSesion extends javax.swing.JFrame {
      */
     public InicioSesion() {
         initComponents();
+        setSize(690, 430); //tamaño
+        setLocationRelativeTo(null); //esto es para centrar
     }
 
     /**
@@ -44,6 +46,8 @@ public class InicioSesion extends javax.swing.JFrame {
         txtContrasena = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setName("Login"); // NOI18N
+        setResizable(false);
 
         Titulo.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         Titulo.setText("SISTEMA DE REGISTRO Y ALQUILER \"LA CASA DEL FOLCLORE\"");
@@ -193,6 +197,7 @@ public class InicioSesion extends javax.swing.JFrame {
             return;
         }
         
+        //este mensaje permite indicar que todo va bien xd
         JOptionPane.showMessageDialog(this, "Ingreso correcto");
         
         if (rbAdmin.isSelected()) 
@@ -217,14 +222,10 @@ public class InicioSesion extends javax.swing.JFrame {
 
     private void rbAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbAdminActionPerformed
         // De las opciones ingresar como admin
-        
-        
     }//GEN-LAST:event_rbAdminActionPerformed
 
     private void rbClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbClienteActionPerformed
         // De las opciones ingresar como cliente
-        
-        
     }//GEN-LAST:event_rbClienteActionPerformed
 
     /**
