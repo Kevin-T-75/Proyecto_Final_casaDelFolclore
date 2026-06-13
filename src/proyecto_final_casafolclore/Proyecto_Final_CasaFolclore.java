@@ -289,10 +289,10 @@ public class Proyecto_Final_CasaFolclore {
         do {
 
             System.out.println("\n===== MENÚ CLIENTE =====");
-            System.out.println("1. Ver Datos");
-            System.out.println("2. Reservar");
-            System.out.println("3. Alquilar");
-            System.out.println("4. Salir");
+//            System.out.println("1. Ver Datos"); //esto no existe en el diagrama
+            System.out.println("1. Reservar");
+            System.out.println("2. Alquilar");
+            System.out.println("3. Salir");
             System.out.print("Seleccione: ");
 
             opcion = sc.nextInt();
@@ -300,32 +300,19 @@ public class Proyecto_Final_CasaFolclore {
 
             switch (opcion) {
 
-            case 1:
-
-                System.out.println("Teléfono: "
-                        + cliente.getTelefono_Cliente());
-
-                System.out.println("Dirección: "
-                        + cliente.getDireccion_Cliente());
-
-                System.out.println("Tipo: "
-                        + cliente.getTipo_Cliente());
-
-            break;
-
-                case 2:
+                case 1:
 
                     cliente.reserva();
                     System.out.println("Reserva realizada.");
                     break;
 
-                case 3:
+                case 2:
 
                     cliente.alquilar();
                     System.out.println("Alquiler realizado.");
                     break;
 
-                case 4:
+                case 3:
 
                     System.out.println("Gracias por usar el sistema.");
                     break;

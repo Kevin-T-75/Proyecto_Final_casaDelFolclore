@@ -14,7 +14,6 @@ package proyecto_final_casafolclore.Clases;
 public class Administrador extends Usuario{
     
     private String cargo;
-//    private ArrayList<ReporteAdministrador> reportes = new ArrayList<>();
 
     public Administrador(String cargo, String idUsuario, String nombre_Usuario, String correo_Usuario, String contraseña_Usuario) {
         super(idUsuario, nombre_Usuario, correo_Usuario, contraseña_Usuario);
