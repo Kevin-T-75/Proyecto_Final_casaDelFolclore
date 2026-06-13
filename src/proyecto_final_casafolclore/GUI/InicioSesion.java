@@ -4,6 +4,8 @@
  */
 package proyecto_final_casafolclore.GUI;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author neyli
@@ -28,53 +30,63 @@ public class InicioSesion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        Titulo = new javax.swing.JLabel();
+        lblCorreo = new javax.swing.JLabel();
+        txtCorreo = new javax.swing.JTextField();
+        lblContrasena = new javax.swing.JLabel();
+        btnIngresar = new javax.swing.JButton();
+        rbCliente = new javax.swing.JRadioButton();
+        rbAdmin = new javax.swing.JRadioButton();
+        lblInicio = new javax.swing.JLabel();
+        lblNota = new javax.swing.JLabel();
+        btnSalir = new javax.swing.JButton();
+        txtContrasena = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        jLabel1.setText("SISTEMA DE REGISTRO Y ALQUILER \"LA CASA DEL FOLKCLORE\"");
+        Titulo.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        Titulo.setText("SISTEMA DE REGISTRO Y ALQUILER \"LA CASA DEL FOLCLORE\"");
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        jLabel2.setText("Correo:");
+        lblCorreo.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        lblCorreo.setText("Correo:");
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField1.setName("txtCorreo"); // NOI18N
+        txtCorreo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtCorreo.setName("txtCorreo"); // NOI18N
+        txtCorreo.addActionListener(this::txtCorreoActionPerformed);
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        jLabel3.setText("Contraseña:");
+        lblContrasena.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        lblContrasena.setText("Contraseña:");
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField2.setName("txtContraseña"); // NOI18N
+        btnIngresar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        btnIngresar.setText("INGRESAR");
+        btnIngresar.setName("btnLogin"); // NOI18N
+        btnIngresar.addActionListener(this::btnIngresarActionPerformed);
 
-        jButton1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton1.setText("INGRESAR");
-        jButton1.setName("btnLogin"); // NOI18N
+        buttonGroup1.add(rbCliente);
+        rbCliente.setLabel("Cliente");
+        rbCliente.setName("rdCliente"); // NOI18N
+        rbCliente.addActionListener(this::rbClienteActionPerformed);
 
-        jRadioButton1.setLabel("Cliente");
-        jRadioButton1.setName("rdCliente"); // NOI18N
+        buttonGroup1.add(rbAdmin);
+        rbAdmin.setSelected(true);
+        rbAdmin.setText("Administrador");
+        rbAdmin.setName("rdAdmin"); // NOI18N
+        rbAdmin.addActionListener(this::rbAdminActionPerformed);
 
-        jRadioButton2.setText("Administrador");
-        jRadioButton2.setName("rdAdmin"); // NOI18N
+        lblInicio.setText("Iniciar sesión como:");
 
-        jLabel4.setText("Iniciar sesión como:");
+        lblNota.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        lblNota.setText("*Si es cliente y quiere registrar o alquilar por primera vez, contáctese con la tienda:");
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        jLabel5.setText("*Si es cliente y quiere registrar o alquilar por primera vez, contáctese con la tienda:");
+        btnSalir.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        btnSalir.setText("SALIR");
+        btnSalir.setName("btnSalir"); // NOI18N
+        btnSalir.addActionListener(this::btnSalirActionPerformed);
 
-        jButton2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton2.setText("SALIR");
-        jButton2.setName("btnSalir"); // NOI18N
+        txtContrasena.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtContrasena.setName("btnContrasena"); // NOI18N
+        txtContrasena.addActionListener(this::txtContrasenaActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -82,67 +94,138 @@ public class InicioSesion extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnIngresar)
                 .addGap(27, 27, 27)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(217, 217, 217))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
-                        .addComponent(jLabel5))
+                        .addComponent(lblNota))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(57, 57, 57)
-                        .addComponent(jLabel1))
+                        .addComponent(Titulo))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(83, 83, 83)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
+                            .addComponent(lblContrasena)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2)))
+                                .addComponent(lblCorreo)))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtCorreo)
+                            .addComponent(txtContrasena, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(159, 159, 159)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(41, 41, 41)
-                        .addComponent(jRadioButton2)
+                        .addComponent(rbAdmin)
                         .addGap(44, 44, 44)
-                        .addComponent(jRadioButton1)))
-                .addContainerGap(67, Short.MAX_VALUE))
+                        .addComponent(rbCliente)))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(45, 45, 45)
-                .addComponent(jLabel1)
+                .addComponent(Titulo)
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblCorreo)
+                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblContrasena)
+                    .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jLabel4))
+                    .addComponent(rbCliente)
+                    .addComponent(rbAdmin)
+                    .addComponent(lblInicio))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnIngresar)
+                    .addComponent(btnSalir))
                 .addGap(33, 33, 33)
-                .addComponent(jLabel5)
+                .addComponent(lblNota)
                 .addGap(25, 25, 25))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
+        // correo
+        
+        
+    }//GEN-LAST:event_txtCorreoActionPerformed
+
+    private void txtContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContrasenaActionPerformed
+        // contraseña
+        
+        
+    }//GEN-LAST:event_txtContrasenaActionPerformed
+
+    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
+        // Ingresar boton
+        
+        String correo = txtCorreo.getText();
+        String contraseña = String.valueOf(txtContrasena.getPassword());
+        
+        //validaciones
+        if (correo.isEmpty() || contraseña.isEmpty()) 
+        {
+        //importar la libreria para mensajes
+        JOptionPane.showMessageDialog(this, "Llene todos los campos");
+        return;
+        }
+         // Validar correo
+        if (!correo.contains("@") || !correo.contains(".com")) {
+            JOptionPane.showMessageDialog(this, "Ingrese un correo valido");
+            return;
+        }
+
+        // Validar contraseña
+        if (contraseña.length() < 8) {
+            JOptionPane.showMessageDialog(this, "La contraseña debe tener al menos 8 caracteres.");
+            return;
+        }
+        
+        JOptionPane.showMessageDialog(this, "Ingreso correcto");
+        
+        if (rbAdmin.isSelected()) 
+        {
+            new MenuAdmin().setVisible(true);
+            this.dispose(); //para cerrar ventana actual y abrir otra
+        } 
+        else if (rbCliente.isSelected()) {
+            new MenuCliente().setVisible(true);
+            this.dispose();
+        } 
+        else {
+            JOptionPane.showMessageDialog(this, "Seleccione una opcion");
+        }
+    }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        // Salir boton
+        
+        System.exit(0);
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void rbAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbAdminActionPerformed
+        // De las opciones ingresar como admin
+        
+        
+    }//GEN-LAST:event_rbAdminActionPerformed
+
+    private void rbClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbClienteActionPerformed
+        // De las opciones ingresar como cliente
+        
+        
+    }//GEN-LAST:event_rbClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,16 +253,17 @@ public class InicioSesion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel Titulo;
+    private javax.swing.JButton btnIngresar;
+    private javax.swing.JButton btnSalir;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JLabel lblContrasena;
+    private javax.swing.JLabel lblCorreo;
+    private javax.swing.JLabel lblInicio;
+    private javax.swing.JLabel lblNota;
+    private javax.swing.JRadioButton rbAdmin;
+    private javax.swing.JRadioButton rbCliente;
+    private javax.swing.JPasswordField txtContrasena;
+    private javax.swing.JTextField txtCorreo;
     // End of variables declaration//GEN-END:variables
 }
