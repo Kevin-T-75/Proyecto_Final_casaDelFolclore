@@ -3,6 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package proyecto_final_casafolclore;
+import proyecto_final_casafolclore.Clases.Traje;
+import proyecto_final_casafolclore.Clases.Pago;
+import proyecto_final_casafolclore.Clases.Cliente;
+import proyecto_final_casafolclore.Clases.Alquiler;
+import proyecto_final_casafolclore.Clases.Administrador;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -65,8 +70,8 @@ public class Proyecto_Final_CasaFolclore {
         System.out.println("3. Registrar Alquiler");
         System.out.println("4. Registrar Pago");
         System.out.println("5. Consultar Inventario");
-        System.out.println("6. Generar Reporte");
-        System.out.println("7. Cerrar Sesión");
+//        System.out.println("6. Generar Reporte"); //para ver si borramos
+        System.out.println("0. Cerrar Sesión");
         System.out.print("Seleccione una opción: ");
 
         opcion = sc.nextInt();
@@ -90,7 +95,11 @@ public class Proyecto_Final_CasaFolclore {
                 Cliente cliente = new Cliente(
                         telefono,
                         direccion,
-                        tipoCliente
+                        tipoCliente, 
+                        id,
+                        nombre,
+                        correo,
+                        contraseña
                 );
 
                 System.out.println("Cliente registrado correctamente.");
@@ -152,7 +161,11 @@ public class Proyecto_Final_CasaFolclore {
                 Cliente clienteAlquiler = new Cliente(
                         "999999999",
                         "Sin dirección",
-                        "Normal"
+                        "Normal",
+                        "123",
+                        "Grecia",
+                        "gy@gmail.com",
+                        "gr123"
                 );
 
                 Pago pagoAlquiler = new Pago(
@@ -207,22 +220,22 @@ public class Proyecto_Final_CasaFolclore {
                 System.out.println("Funcionalidad disponible.");
                 break;
 
-            case 6:
+//            case 6:
+//
+////                ReporteAdministrador reporte =
+////                        new ReporteAdministrador(
+////                                "R001",
+////                                new Date(),
+////                                "Reporte General"
+////                        );
+////
+////                reporte.generarReporte();
+////                admin.gestionarReporte(reporte);
+////                admin.mostrarReportes();
+//
+//                break;
 
-                ReporteAdministrador reporte =
-                        new ReporteAdministrador(
-                                "R001",
-                                new Date(),
-                                "Reporte General"
-                        );
-
-                reporte.generarReporte();
-                admin.gestionarReporte(reporte);
-                admin.mostrarReportes();
-
-                break;
-
-            case 7:
+            case 0:
 
                 admin.cerrarSesion();
                 System.out.println("Sesión finalizada.");
@@ -248,11 +261,27 @@ public class Proyecto_Final_CasaFolclore {
 
         System.out.print("Tipo de cliente: ");
         String tipoCliente = sc.nextLine();
+        
+        System.out.print("ID: ");
+        String id = sc.nextLine();
+
+        System.out.print("Nombre: ");
+        String nombre = sc.nextLine();
+
+        System.out.print("Correo: ");
+        String correo = sc.nextLine();
+
+        System.out.print("Contraseña: ");
+        String contraseña = sc.nextLine();
 
         Cliente cliente = new Cliente(
                 telefono,
                 direccion,
-                tipoCliente
+                tipoCliente,
+                id,
+                nombre,
+                correo,
+                contraseña
         );
 
         int opcion;

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package proyecto_final_casafolclore;
+package proyecto_final_casafolclore.Clases;
 
 /**
  *
@@ -53,14 +53,9 @@ public abstract class Usuario {
         this.correo_Usuario = correo_Usuario;
         this.contraseña_Usuario = contraseña_Usuario;
     }
-    
-    
-    public abstract void iniciarSesion();
-       
+
+    public abstract void iniciarSesion();    
     
     public abstract void cerrarSesion();
-        
-    
-
-    
+ 
 }
