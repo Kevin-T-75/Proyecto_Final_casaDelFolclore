@@ -8,7 +8,7 @@ package proyecto_final_casafolclore.Clases;
  *
  * @author OS
  */
-public class Cliente {
+public class Cliente extends Usuario{
     
     private String telefono_Cliente;
     private String direccion_Cliente;
@@ -38,7 +38,8 @@ public class Cliente {
         this.tipo_Cliente = tipo_Cliente;
     }
 
-    public Cliente(String telefono_Cliente, String direccion_Cliente, String tipo_Cliente) {
+    public Cliente(String telefono_Cliente, String direccion_Cliente, String tipo_Cliente, String idUsuario, String nombre_Usuario, String correo_Usuario, String contraseña_Usuario) {
+        super(idUsuario, nombre_Usuario, correo_Usuario, contraseña_Usuario);
         this.telefono_Cliente = telefono_Cliente;
         this.direccion_Cliente = direccion_Cliente;
         this.tipo_Cliente = tipo_Cliente;
@@ -54,7 +55,14 @@ public class Cliente {
         
     }
 
-        
-    
-    
+    @Override
+    public void iniciarSesion() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void cerrarSesion() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }

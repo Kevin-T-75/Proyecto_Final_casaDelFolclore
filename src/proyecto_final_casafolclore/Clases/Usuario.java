@@ -53,14 +53,9 @@ public abstract class Usuario {
         this.correo_Usuario = correo_Usuario;
         this.contraseña_Usuario = contraseña_Usuario;
     }
-    
-    
-    public abstract void iniciarSesion();
-       
+
+    public abstract void iniciarSesion();    
     
     public abstract void cerrarSesion();
-        
-    
-
-    
+ 
 }
