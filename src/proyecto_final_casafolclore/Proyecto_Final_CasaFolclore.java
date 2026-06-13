@@ -65,8 +65,8 @@ public class Proyecto_Final_CasaFolclore {
         System.out.println("3. Registrar Alquiler");
         System.out.println("4. Registrar Pago");
         System.out.println("5. Consultar Inventario");
-        System.out.println("6. Generar Reporte");
-        System.out.println("7. Cerrar Sesión");
+//        System.out.println("6. Generar Reporte"); //para ver si borramos
+        System.out.println("0. Cerrar Sesión");
         System.out.print("Seleccione una opción: ");
 
         opcion = sc.nextInt();
@@ -207,22 +207,22 @@ public class Proyecto_Final_CasaFolclore {
                 System.out.println("Funcionalidad disponible.");
                 break;
 
-            case 6:
+//            case 6:
+//
+////                ReporteAdministrador reporte =
+////                        new ReporteAdministrador(
+////                                "R001",
+////                                new Date(),
+////                                "Reporte General"
+////                        );
+////
+////                reporte.generarReporte();
+////                admin.gestionarReporte(reporte);
+////                admin.mostrarReportes();
+//
+//                break;
 
-                ReporteAdministrador reporte =
-                        new ReporteAdministrador(
-                                "R001",
-                                new Date(),
-                                "Reporte General"
-                        );
-
-                reporte.generarReporte();
-                admin.gestionarReporte(reporte);
-                admin.mostrarReportes();
-
-                break;
-
-            case 7:
+            case 0:
 
                 admin.cerrarSesion();
                 System.out.println("Sesión finalizada.");

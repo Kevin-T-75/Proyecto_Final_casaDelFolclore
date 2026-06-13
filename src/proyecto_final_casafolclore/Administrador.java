@@ -4,7 +4,7 @@
  */
 package proyecto_final_casafolclore;
 
-import java.util.ArrayList;
+//import java.util.ArrayList; //por si acaso, solo lo dejare comentado lo del reporte
 
 /**
  *
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Administrador extends Usuario{
     
     private String cargo;
-    private ArrayList<ReporteAdministrador> reportes = new ArrayList<>();
+//    private ArrayList<ReporteAdministrador> reportes = new ArrayList<>();
 
     public Administrador(String cargo, String idUsuario, String nombre_Usuario, String correo_Usuario, String contraseña_Usuario) {
         super(idUsuario, nombre_Usuario, correo_Usuario, contraseña_Usuario);
@@ -38,10 +38,10 @@ public class Administrador extends Usuario{
         System.out.println("Administrador cerro sesion");
     }
     
-    public void gestionarReporte(ReporteAdministrador r) {
-        reportes.add(r);
-        System.out.println("Reporte agregado correctamente");
-    }
+//    public void gestionarReporte(ReporteAdministrador r) {
+//        reportes.add(r);
+//        System.out.println("Reporte agregado correctamente");
+//    }
 
     public void gestionarTrajes() {
         System.out.println("Gestion de trajes completada");
@@ -51,13 +51,13 @@ public class Administrador extends Usuario{
         System.out.println("Gestion de clientes completada");
     }
     
-    public void mostrarReportes() {
-        System.out.println("Lista de reportes actual: ");
-        
-        for (int i = 0; i < reportes.size(); i++) {
-            ReporteAdministrador r = reportes.get(i);
-            r.mostrarReporte();
-            System.out.println("----------------");
-        }
-    }
+//    public void mostrarReportes() {
+//        System.out.println("Lista de reportes actual: ");
+//        
+//        for (int i = 0; i < reportes.size(); i++) {
+//            ReporteAdministrador r = reportes.get(i);
+//            r.mostrarReporte();
+//            System.out.println("----------------");
+//        }
+//    }
 }
