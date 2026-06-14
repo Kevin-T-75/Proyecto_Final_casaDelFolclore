@@ -21,6 +21,11 @@ public class MenuCliente extends javax.swing.JFrame {
         setLocationRelativeTo(null); //centrado
         setResizable(false); //no deja maximizar, mas rapido aqui
     }
+    
+     public MenuCliente(String correo) { //segundo constructor para correo, no quiero arriesgarme Debe cambiar con base de datos
+        initComponents();
+        lblSaludo.setText("Bienvenido/a, " + correo);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -34,21 +39,22 @@ public class MenuCliente extends javax.swing.JFrame {
         pblEntrada = new javax.swing.JPanel();
         lblSaludo = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
-        pnlPic = new javax.swing.JPanel();
         pnlDashboard1 = new javax.swing.JPanel();
         lblOpciones1 = new javax.swing.JLabel();
         btnAlquilar = new javax.swing.JButton();
         btnReservar = new javax.swing.JButton();
         pnlPantalla = new javax.swing.JPanel();
         lblMensaje = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 51));
         setPreferredSize(new java.awt.Dimension(900, 600));
 
-        pblEntrada.setBackground(new java.awt.Color(0, 153, 102));
+        pblEntrada.setBackground(new java.awt.Color(171, 78, 10));
+        pblEntrada.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        lblSaludo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblSaludo.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         lblSaludo.setForeground(new java.awt.Color(255, 255, 255));
         lblSaludo.setText("Bienvenido/a,");
 
@@ -56,42 +62,27 @@ public class MenuCliente extends javax.swing.JFrame {
         btnLogout.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         btnLogout.setForeground(new java.awt.Color(0, 51, 51));
         btnLogout.setText("Cerrar sesión");
+        btnLogout.addActionListener(this::btnLogoutActionPerformed);
 
         javax.swing.GroupLayout pblEntradaLayout = new javax.swing.GroupLayout(pblEntrada);
         pblEntrada.setLayout(pblEntradaLayout);
         pblEntradaLayout.setHorizontalGroup(
             pblEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pblEntradaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pblEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pblEntradaLayout.createSequentialGroup()
-                        .addComponent(lblSaludo, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(63, 63, 63))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pblEntradaLayout.createSequentialGroup()
-                        .addComponent(btnLogout)
-                        .addGap(35, 35, 35))))
+                .addGap(29, 29, 29)
+                .addComponent(lblSaludo, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnLogout)
+                .addGap(41, 41, 41))
         );
         pblEntradaLayout.setVerticalGroup(
             pblEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pblEntradaLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(lblSaludo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnLogout)
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
-
-        pnlPic.setBackground(new java.awt.Color(255, 204, 153));
-
-        javax.swing.GroupLayout pnlPicLayout = new javax.swing.GroupLayout(pnlPic);
-        pnlPic.setLayout(pnlPicLayout);
-        pnlPicLayout.setHorizontalGroup(
-            pnlPicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        pnlPicLayout.setVerticalGroup(
-            pnlPicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 60, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pblEntradaLayout.createSequentialGroup()
+                .addContainerGap(28, Short.MAX_VALUE)
+                .addGroup(pblEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLogout)
+                    .addComponent(lblSaludo))
+                .addGap(18, 18, 18))
         );
 
         pnlDashboard1.setBackground(new java.awt.Color(51, 51, 51));
@@ -102,6 +93,7 @@ public class MenuCliente extends javax.swing.JFrame {
 
         btnAlquilar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         btnAlquilar.setText("Alquilar");
+        btnAlquilar.addActionListener(this::btnAlquilarActionPerformed);
 
         btnReservar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         btnReservar.setText("Reservar");
@@ -128,7 +120,7 @@ public class MenuCliente extends javax.swing.JFrame {
                 .addComponent(btnReservar)
                 .addGap(42, 42, 42)
                 .addComponent(btnAlquilar)
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         pnlPantalla.setBackground(new java.awt.Color(204, 204, 204));
@@ -154,24 +146,30 @@ public class MenuCliente extends javax.swing.JFrame {
                 .addGap(152, 152, 152))
         );
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto_final_casafolclore/GUI/Imagenes/franja.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pblEntrada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnlPic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(pnlDashboard1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlPantalla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 16, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(pblEntrada, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(pnlDashboard1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pnlPantalla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(pblEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlPic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlDashboard1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -183,8 +181,16 @@ public class MenuCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarActionPerformed
-        // TODO add your handling code here:
+        // BOTON RESERVAR
     }//GEN-LAST:event_btnReservarActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        //boton cerrar sesion
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void btnAlquilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlquilarActionPerformed
+        // boton alquular
+    }//GEN-LAST:event_btnAlquilarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,6 +226,7 @@ public class MenuCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnInventario;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnReservar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblMensaje;
     private javax.swing.JLabel lblOpciones;
     private javax.swing.JLabel lblOpciones1;
@@ -228,6 +235,5 @@ public class MenuCliente extends javax.swing.JFrame {
     private javax.swing.JPanel pnlDashboard;
     private javax.swing.JPanel pnlDashboard1;
     private javax.swing.JPanel pnlPantalla;
-    private javax.swing.JPanel pnlPic;
     // End of variables declaration//GEN-END:variables
 }

@@ -21,6 +21,11 @@ public class MenuAdmin extends javax.swing.JFrame {
         setLocationRelativeTo(null); //centrado
         setResizable(false); //no deja maximizar, mas rapido aqui
     }
+    
+    public MenuAdmin(String correo) { //segundo constructor para correo, no quiero arriesgarme Debe cambiar con base de datos
+        initComponents();
+        lblSaludo.setText("Bienvenido/a, " + correo);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,8 +37,8 @@ public class MenuAdmin extends javax.swing.JFrame {
     private void initComponents() {
 
         pblEntrada = new javax.swing.JPanel();
-        lblSaludo = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
+        lblSaludo = new javax.swing.JLabel();
         pnlDashboard = new javax.swing.JPanel();
         btnGAlquiler = new javax.swing.JButton();
         btnGTrajes = new javax.swing.JButton();
@@ -43,63 +48,67 @@ public class MenuAdmin extends javax.swing.JFrame {
         lblOpciones = new javax.swing.JLabel();
         pnlPantalla = new javax.swing.JPanel();
         lblMensaje = new javax.swing.JLabel();
-        pnlPic = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 51));
         setPreferredSize(new java.awt.Dimension(900, 600));
 
-        pblEntrada.setBackground(new java.awt.Color(0, 153, 102));
-
-        lblSaludo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lblSaludo.setForeground(new java.awt.Color(255, 255, 255));
-        lblSaludo.setText("Bienvenido/a,");
+        pblEntrada.setBackground(new java.awt.Color(153, 102, 0));
+        pblEntrada.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btnLogout.setBackground(new java.awt.Color(204, 204, 204));
         btnLogout.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         btnLogout.setForeground(new java.awt.Color(0, 51, 51));
         btnLogout.setText("Cerrar sesión");
+        btnLogout.addActionListener(this::btnLogoutActionPerformed);
+
+        lblSaludo.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        lblSaludo.setForeground(new java.awt.Color(255, 255, 255));
+        lblSaludo.setText("Bienvenido/a,");
 
         javax.swing.GroupLayout pblEntradaLayout = new javax.swing.GroupLayout(pblEntrada);
         pblEntrada.setLayout(pblEntradaLayout);
         pblEntradaLayout.setHorizontalGroup(
             pblEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pblEntradaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pblEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pblEntradaLayout.createSequentialGroup()
-                        .addComponent(lblSaludo, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(63, 63, 63))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pblEntradaLayout.createSequentialGroup()
-                        .addComponent(btnLogout)
-                        .addGap(33, 33, 33))))
+                .addGap(25, 25, 25)
+                .addComponent(lblSaludo, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
+                .addComponent(btnLogout)
+                .addGap(33, 33, 33))
         );
         pblEntradaLayout.setVerticalGroup(
             pblEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pblEntradaLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(lblSaludo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnLogout)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGap(25, 25, 25)
+                .addGroup(pblEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSaludo)
+                    .addComponent(btnLogout))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pnlDashboard.setBackground(new java.awt.Color(51, 51, 51));
 
         btnGAlquiler.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         btnGAlquiler.setText("Registrar alquiler");
+        btnGAlquiler.addActionListener(this::btnGAlquilerActionPerformed);
 
         btnGTrajes.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         btnGTrajes.setText("Gestionar trajes");
+        btnGTrajes.addActionListener(this::btnGTrajesActionPerformed);
 
         btnGCliente3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         btnGCliente3.setText("Registrar cliente");
+        btnGCliente3.addActionListener(this::btnGCliente3ActionPerformed);
 
         btnInventario.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         btnInventario.setText("Ver inventario");
+        btnInventario.addActionListener(this::btnInventarioActionPerformed);
 
         btnGPago.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         btnGPago.setText("Registrar pago");
+        btnGPago.addActionListener(this::btnGPagoActionPerformed);
 
         lblOpciones.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lblOpciones.setForeground(new java.awt.Color(255, 255, 255));
@@ -149,59 +158,76 @@ public class MenuAdmin extends javax.swing.JFrame {
         pnlPantalla.setLayout(pnlPantallaLayout);
         pnlPantallaLayout.setHorizontalGroup(
             pnlPantallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPantallaLayout.createSequentialGroup()
-                .addContainerGap(122, Short.MAX_VALUE)
+            .addGroup(pnlPantallaLayout.createSequentialGroup()
+                .addGap(106, 106, 106)
                 .addComponent(lblMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
         pnlPantallaLayout.setVerticalGroup(
             pnlPantallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPantallaLayout.createSequentialGroup()
-                .addContainerGap(196, Short.MAX_VALUE)
+                .addContainerGap(199, Short.MAX_VALUE)
                 .addComponent(lblMensaje)
-                .addGap(159, 159, 159))
+                .addGap(156, 156, 156))
         );
 
-        pnlPic.setBackground(new java.awt.Color(255, 204, 153));
-
-        javax.swing.GroupLayout pnlPicLayout = new javax.swing.GroupLayout(pnlPic);
-        pnlPic.setLayout(pnlPicLayout);
-        pnlPicLayout.setHorizontalGroup(
-            pnlPicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        pnlPicLayout.setVerticalGroup(
-            pnlPicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 61, Short.MAX_VALUE)
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto_final_casafolclore/GUI/Imagenes/franja.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(pblEntrada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(pnlDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlPantalla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(pnlPic, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(pnlDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pnlPantalla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pblEntrada, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(pblEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlPic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pnlPantalla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        // coton cerrar sesion
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void btnGCliente3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGCliente3ActionPerformed
+        // boton registro cliente
+    }//GEN-LAST:event_btnGCliente3ActionPerformed
+
+    private void btnGTrajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGTrajesActionPerformed
+        // boton gestion traje
+    }//GEN-LAST:event_btnGTrajesActionPerformed
+
+    private void btnGAlquilerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGAlquilerActionPerformed
+        // boton registro alquiler
+    }//GEN-LAST:event_btnGAlquilerActionPerformed
+
+    private void btnGPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGPagoActionPerformed
+        // boton registro pago
+    }//GEN-LAST:event_btnGPagoActionPerformed
+
+    private void btnInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventarioActionPerformed
+        // boton inventario
+    }//GEN-LAST:event_btnInventarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -235,12 +261,12 @@ public class MenuAdmin extends javax.swing.JFrame {
     private javax.swing.JButton btnGTrajes;
     private javax.swing.JButton btnInventario;
     private javax.swing.JButton btnLogout;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblMensaje;
     private javax.swing.JLabel lblOpciones;
     private javax.swing.JLabel lblSaludo;
     private javax.swing.JPanel pblEntrada;
     private javax.swing.JPanel pnlDashboard;
     private javax.swing.JPanel pnlPantalla;
-    private javax.swing.JPanel pnlPic;
     // End of variables declaration//GEN-END:variables
 }
