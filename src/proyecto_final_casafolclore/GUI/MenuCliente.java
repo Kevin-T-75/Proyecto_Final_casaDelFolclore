@@ -24,6 +24,9 @@ public class MenuCliente extends javax.swing.JFrame {
     
      public MenuCliente(String correo) { //segundo constructor para correo, no quiero arriesgarme Debe cambiar con base de datos
         initComponents();
+        setSize(900, 600); //tamaño
+        setLocationRelativeTo(null); //centrado
+        setResizable(false); //no deja maximizar, mas rapido aqui
         lblSaludo.setText("Bienvenido/a, " + correo);
     }
 
