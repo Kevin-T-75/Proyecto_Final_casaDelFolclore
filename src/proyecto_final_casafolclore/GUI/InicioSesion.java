@@ -202,11 +202,11 @@ public class InicioSesion extends javax.swing.JFrame {
         
         if (rbAdmin.isSelected()) 
         {
-            new MenuAdmin().setVisible(true);
+            new MenuAdmin(correo).setVisible(true);
             this.dispose(); //para cerrar ventana actual y abrir otra
         } 
         else if (rbCliente.isSelected()) {
-            new MenuCliente().setVisible(true);
+            new MenuCliente(correo).setVisible(true);
             this.dispose();
         } 
         else {
