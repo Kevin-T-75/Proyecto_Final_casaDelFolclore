@@ -31,31 +31,74 @@ public class MenuCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pblEntrada = new javax.swing.JPanel();
         lblSaludo = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
-        lblMenu = new javax.swing.JLabel();
-        lblMensaje = new javax.swing.JLabel();
-        lblOpciones = new javax.swing.JLabel();
+        pnlPic = new javax.swing.JPanel();
+        pnlDashboard1 = new javax.swing.JPanel();
+        lblOpciones1 = new javax.swing.JLabel();
         btnAlquilar = new javax.swing.JButton();
         btnReservar = new javax.swing.JButton();
+        pnlPantalla = new javax.swing.JPanel();
+        lblMensaje = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(51, 51, 51));
         setPreferredSize(new java.awt.Dimension(900, 600));
 
-        lblSaludo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        lblSaludo.setText("Bienvenido/a ");
+        pblEntrada.setBackground(new java.awt.Color(0, 153, 102));
 
-        btnLogout.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        lblSaludo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblSaludo.setForeground(new java.awt.Color(255, 255, 255));
+        lblSaludo.setText("Bienvenido/a,");
+
+        btnLogout.setBackground(new java.awt.Color(204, 204, 204));
+        btnLogout.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        btnLogout.setForeground(new java.awt.Color(0, 51, 51));
         btnLogout.setText("Cerrar sesión");
 
-        lblMenu.setFont(new java.awt.Font("SansSerif", 0, 36)); // NOI18N
-        lblMenu.setText("============== MENU DE CLIENTE ===============");
+        javax.swing.GroupLayout pblEntradaLayout = new javax.swing.GroupLayout(pblEntrada);
+        pblEntrada.setLayout(pblEntradaLayout);
+        pblEntradaLayout.setHorizontalGroup(
+            pblEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pblEntradaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pblEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pblEntradaLayout.createSequentialGroup()
+                        .addComponent(lblSaludo, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(63, 63, 63))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pblEntradaLayout.createSequentialGroup()
+                        .addComponent(btnLogout)
+                        .addGap(35, 35, 35))))
+        );
+        pblEntradaLayout.setVerticalGroup(
+            pblEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pblEntradaLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(lblSaludo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnLogout)
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
 
-        lblMensaje.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        lblMensaje.setText("¿Qué deseas hacer hoy?");
+        pnlPic.setBackground(new java.awt.Color(255, 204, 153));
 
-        lblOpciones.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        lblOpciones.setText("Dashboard");
+        javax.swing.GroupLayout pnlPicLayout = new javax.swing.GroupLayout(pnlPic);
+        pnlPic.setLayout(pnlPicLayout);
+        pnlPicLayout.setHorizontalGroup(
+            pnlPicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        pnlPicLayout.setVerticalGroup(
+            pnlPicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+
+        pnlDashboard1.setBackground(new java.awt.Color(51, 51, 51));
+
+        lblOpciones1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblOpciones1.setForeground(new java.awt.Color(255, 255, 255));
+        lblOpciones1.setText("DASHBOARD");
 
         btnAlquilar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         btnAlquilar.setText("Alquilar");
@@ -64,51 +107,76 @@ public class MenuCliente extends javax.swing.JFrame {
         btnReservar.setText("Reservar");
         btnReservar.addActionListener(this::btnReservarActionPerformed);
 
+        javax.swing.GroupLayout pnlDashboard1Layout = new javax.swing.GroupLayout(pnlDashboard1);
+        pnlDashboard1.setLayout(pnlDashboard1Layout);
+        pnlDashboard1Layout.setHorizontalGroup(
+            pnlDashboard1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDashboard1Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(pnlDashboard1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblOpciones1, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                    .addComponent(btnReservar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAlquilar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+        pnlDashboard1Layout.setVerticalGroup(
+            pnlDashboard1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDashboard1Layout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addComponent(lblOpciones1)
+                .addGap(82, 82, 82)
+                .addComponent(btnReservar)
+                .addGap(42, 42, 42)
+                .addComponent(btnAlquilar)
+                .addContainerGap(97, Short.MAX_VALUE))
+        );
+
+        pnlPantalla.setBackground(new java.awt.Color(204, 204, 204));
+
+        lblMensaje.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        lblMensaje.setForeground(new java.awt.Color(102, 102, 102));
+        lblMensaje.setText("¿Qué deseas hacer hoy?");
+
+        javax.swing.GroupLayout pnlPantallaLayout = new javax.swing.GroupLayout(pnlPantalla);
+        pnlPantalla.setLayout(pnlPantallaLayout);
+        pnlPantallaLayout.setHorizontalGroup(
+            pnlPantallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPantallaLayout.createSequentialGroup()
+                .addContainerGap(114, Short.MAX_VALUE)
+                .addComponent(lblMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(89, 89, 89))
+        );
+        pnlPantallaLayout.setVerticalGroup(
+            pnlPantallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPantallaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(152, 152, 152))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pblEntrada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlPic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(lblMenu)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblSaludo, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLogout))
-                .addGap(75, 75, 75))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(342, 342, 342)
-                        .addComponent(lblMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(btnAlquilar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnReservar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(pnlDashboard1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlPantalla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblSaludo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnLogout)
-                .addGap(12, 12, 12)
-                .addComponent(lblMenu)
-                .addGap(36, 36, 36)
-                .addComponent(lblMensaje)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addComponent(lblOpciones)
-                .addGap(18, 18, 18)
-                .addComponent(btnReservar)
-                .addGap(18, 18, 18)
-                .addComponent(btnAlquilar)
-                .addGap(223, 223, 223))
+                .addComponent(pblEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlPic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlDashboard1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlPantalla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -145,11 +213,21 @@ public class MenuCliente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlquilar;
+    private javax.swing.JButton btnGAlquiler;
+    private javax.swing.JButton btnGCliente3;
+    private javax.swing.JButton btnGPago;
+    private javax.swing.JButton btnGTrajes;
+    private javax.swing.JButton btnInventario;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnReservar;
     private javax.swing.JLabel lblMensaje;
-    private javax.swing.JLabel lblMenu;
     private javax.swing.JLabel lblOpciones;
+    private javax.swing.JLabel lblOpciones1;
     private javax.swing.JLabel lblSaludo;
+    private javax.swing.JPanel pblEntrada;
+    private javax.swing.JPanel pnlDashboard;
+    private javax.swing.JPanel pnlDashboard1;
+    private javax.swing.JPanel pnlPantalla;
+    private javax.swing.JPanel pnlPic;
     // End of variables declaration//GEN-END:variables
 }
