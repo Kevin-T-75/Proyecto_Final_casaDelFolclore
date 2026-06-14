@@ -21,6 +21,7 @@ public class InicioSesion extends javax.swing.JFrame {
         initComponents();
         setSize(690, 430); //tamaño
         setLocationRelativeTo(null); //esto es para centrar
+
     }
 
     /**
@@ -44,12 +45,16 @@ public class InicioSesion extends javax.swing.JFrame {
         lblNota = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
         txtContrasena = new javax.swing.JPasswordField();
+        lblPic1 = new javax.swing.JLabel();
+        lblPic2 = new javax.swing.JLabel();
+        lblPic4 = new javax.swing.JLabel();
+        lblPic5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("Login"); // NOI18N
-        setResizable(false);
 
-        Titulo.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        Titulo.setFont(new java.awt.Font("Lucida Bright", 1, 18)); // NOI18N
+        Titulo.setForeground(new java.awt.Color(102, 51, 0));
         Titulo.setText("SISTEMA DE REGISTRO Y ALQUILER \"LA CASA DEL FOLCLORE\"");
 
         lblCorreo.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
@@ -62,7 +67,9 @@ public class InicioSesion extends javax.swing.JFrame {
         lblContrasena.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         lblContrasena.setText("Contraseña:");
 
+        btnIngresar.setBackground(new java.awt.Color(202, 149, 90));
         btnIngresar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        btnIngresar.setForeground(new java.awt.Color(0, 0, 0));
         btnIngresar.setText("INGRESAR");
         btnIngresar.setName("btnLogin"); // NOI18N
         btnIngresar.addActionListener(this::btnIngresarActionPerformed);
@@ -78,12 +85,16 @@ public class InicioSesion extends javax.swing.JFrame {
         rbAdmin.setName("rdAdmin"); // NOI18N
         rbAdmin.addActionListener(this::rbAdminActionPerformed);
 
+        lblInicio.setForeground(new java.awt.Color(0, 102, 204));
         lblInicio.setText("Iniciar sesión como:");
 
         lblNota.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        lblNota.setForeground(new java.awt.Color(204, 102, 0));
         lblNota.setText("*Si es cliente y quiere registrar o alquilar por primera vez, contáctese con la tienda:");
 
+        btnSalir.setBackground(new java.awt.Color(255, 204, 102));
         btnSalir.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(0, 0, 0));
         btnSalir.setText("SALIR");
         btnSalir.setName("btnSalir"); // NOI18N
         btnSalir.addActionListener(this::btnSalirActionPerformed);
@@ -92,100 +103,110 @@ public class InicioSesion extends javax.swing.JFrame {
         txtContrasena.setName("btnContrasena"); // NOI18N
         txtContrasena.addActionListener(this::txtContrasenaActionPerformed);
 
+        lblPic1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto_final_casafolclore/GUI/Imagenes/fondo.png"))); // NOI18N
+        lblPic1.setText("jLabel1");
+
+        lblPic2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto_final_casafolclore/GUI/Imagenes/fondo.png"))); // NOI18N
+        lblPic2.setText("jLabel1");
+
+        lblPic4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto_final_casafolclore/GUI/Imagenes/145802.png"))); // NOI18N
+
+        lblPic5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto_final_casafolclore/GUI/Imagenes/WhatsApp_icon.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnIngresar)
-                .addGap(27, 27, 27)
-                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(217, 217, 217))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblPic2, javax.swing.GroupLayout.PREFERRED_SIZE, 688, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPic1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(lblNota))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(Titulo))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(83, 83, 83)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblContrasena)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblCorreo)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtCorreo)
-                            .addComponent(txtContrasena, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(159, 159, 159)
                         .addComponent(lblInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(41, 41, 41)
                         .addComponent(rbAdmin)
                         .addGap(44, 44, 44)
-                        .addComponent(rbCliente)))
-                .addContainerGap(79, Short.MAX_VALUE))
+                        .addComponent(rbCliente))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblContrasena)
+                            .addComponent(lblCorreo, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtCorreo)
+                            .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(lblNota)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblPic4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblPic5))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(Titulo)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnIngresar)
+                .addGap(27, 27, 27)
+                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(217, 217, 217))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addComponent(lblPic1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
                 .addComponent(Titulo)
-                .addGap(44, 44, 44)
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCorreo)
                     .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblContrasena)
                     .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rbCliente)
                     .addComponent(rbAdmin)
                     .addComponent(lblInicio))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnIngresar)
                     .addComponent(btnSalir))
-                .addGap(33, 33, 33)
-                .addComponent(lblNota)
-                .addGap(25, 25, 25))
+                .addGap(18, 29, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblPic4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblPic5, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(lblNota, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(lblPic2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
-        // correo
-        
-        
-    }//GEN-LAST:event_txtCorreoActionPerformed
-
-    private void txtContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContrasenaActionPerformed
-        // contraseña
-        
-        
-    }//GEN-LAST:event_txtContrasenaActionPerformed
-
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         // Ingresar boton
-        
+
         String correo = txtCorreo.getText();
         String contraseña = String.valueOf(txtContrasena.getPassword());
-        
+
         //validaciones
-        if (correo.isEmpty() || contraseña.isEmpty()) 
+        if (correo.isEmpty() || contraseña.isEmpty())
         {
-        //importar la libreria para mensajes
-        JOptionPane.showMessageDialog(this, "Llene todos los campos");
-        return;
+            //importar la libreria para mensajes
+            JOptionPane.showMessageDialog(this, "Llene todos los campos");
+            return;
         }
-         // Validar correo
+        // Validar correo
         if (!correo.contains("@") || !correo.contains(".com")) {
             JOptionPane.showMessageDialog(this, "Ingrese un correo valido");
             return;
@@ -196,27 +217,37 @@ public class InicioSesion extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "La contraseña debe tener al menos 8 caracteres.");
             return;
         }
-        
+
         //este mensaje permite indicar que todo va bien xd
         JOptionPane.showMessageDialog(this, "Ingreso correcto");
-        
-        if (rbAdmin.isSelected()) 
+
+        if (rbAdmin.isSelected())
         {
-            new MenuAdmin(correo).setVisible(true);
+            new MenuAdmin(correo).setVisible(true); //con esto si inicia, aqui debe ir para base de datos
             this.dispose(); //para cerrar ventana actual y abrir otra
-        } 
+        }
         else if (rbCliente.isSelected()) {
             new MenuCliente(correo).setVisible(true);
             this.dispose();
-        } 
+        }
         else {
             JOptionPane.showMessageDialog(this, "Seleccione una opcion");
         }
     }//GEN-LAST:event_btnIngresarActionPerformed
 
+    private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
+        // correo
+
+    }//GEN-LAST:event_txtCorreoActionPerformed
+
+    private void txtContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContrasenaActionPerformed
+        // contraseña
+
+    }//GEN-LAST:event_txtContrasenaActionPerformed
+
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // Salir boton
-        
+
         System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
 
@@ -262,6 +293,10 @@ public class InicioSesion extends javax.swing.JFrame {
     private javax.swing.JLabel lblCorreo;
     private javax.swing.JLabel lblInicio;
     private javax.swing.JLabel lblNota;
+    private javax.swing.JLabel lblPic1;
+    private javax.swing.JLabel lblPic2;
+    private javax.swing.JLabel lblPic4;
+    private javax.swing.JLabel lblPic5;
     private javax.swing.JRadioButton rbAdmin;
     private javax.swing.JRadioButton rbCliente;
     private javax.swing.JPasswordField txtContrasena;

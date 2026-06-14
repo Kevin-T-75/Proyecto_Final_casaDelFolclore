@@ -207,6 +207,9 @@ public class MenuAdmin extends javax.swing.JFrame {
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         // coton cerrar sesion
+        InicioSesion login = new InicioSesion();
+        login.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void btnGCliente3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGCliente3ActionPerformed
