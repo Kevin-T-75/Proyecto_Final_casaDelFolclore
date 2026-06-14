@@ -4,8 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/Clases%20Sistemas/Java/Proyecto_Final_casaDelFolclore/src/proyecto_final_casafolclore/Proyecto_Final_CasaFolclore.java</file>
-            <file>file:/D:/Clases%20Sistemas/Java/Proyecto_Final_casaDelFolclore/src/proyecto_final_casafolclore/Administrador.java</file>
-            <file>file:/D:/Clases%20Sistemas/Java/Proyecto_Final_casaDelFolclore/src/proyecto_final_casafolclore/ReporteAdministrador.java</file>
+            <file>file:/D:/Clases%20Sistemas/Java/Proyecto_Final_casaDelFolclore/src/proyecto_final_casafolclore/GUI/InicioSesion.java</file>
+            <file>file:/D:/Clases%20Sistemas/Java/Proyecto_Final_casaDelFolclore/src/proyecto_final_casafolclore/GUI/MenuAdmin.java</file>
+            <file>file:/D:/Clases%20Sistemas/Java/Proyecto_Final_casaDelFolclore/src/proyecto_final_casafolclore/GUI/MenuCliente.java</file>
         </group>
     </open-files>
 </project-private>
