@@ -50,6 +50,7 @@ public class MenuCliente extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 51));
         setPreferredSize(new java.awt.Dimension(900, 600));
+        setResizable(false);
 
         pblEntrada.setBackground(new java.awt.Color(171, 78, 10));
         pblEntrada.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -222,20 +223,13 @@ public class MenuCliente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlquilar;
-    private javax.swing.JButton btnGAlquiler;
-    private javax.swing.JButton btnGCliente3;
-    private javax.swing.JButton btnGPago;
-    private javax.swing.JButton btnGTrajes;
-    private javax.swing.JButton btnInventario;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnReservar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblMensaje;
-    private javax.swing.JLabel lblOpciones;
     private javax.swing.JLabel lblOpciones1;
     private javax.swing.JLabel lblSaludo;
     private javax.swing.JPanel pblEntrada;
-    private javax.swing.JPanel pnlDashboard;
     private javax.swing.JPanel pnlDashboard1;
     private javax.swing.JPanel pnlPantalla;
     // End of variables declaration//GEN-END:variables

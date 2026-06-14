@@ -53,6 +53,7 @@ public class MenuAdmin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 51));
         setPreferredSize(new java.awt.Dimension(900, 600));
+        setResizable(false);
 
         pblEntrada.setBackground(new java.awt.Color(153, 102, 0));
         pblEntrada.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));

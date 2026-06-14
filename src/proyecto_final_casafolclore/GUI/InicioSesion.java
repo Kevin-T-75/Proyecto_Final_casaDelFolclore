@@ -52,6 +52,7 @@ public class InicioSesion extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("Login"); // NOI18N
+        setResizable(false);
 
         Titulo.setFont(new java.awt.Font("Lucida Bright", 1, 18)); // NOI18N
         Titulo.setForeground(new java.awt.Color(102, 51, 0));
