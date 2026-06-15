@@ -119,7 +119,7 @@ public class GUI_pago extends javax.swing.JFrame {
         jLabel1.setText("jLabel1");
         jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        pnlPantalla.setBackground(new java.awt.Color(255, 255, 255));
+        pnlPantalla.setBackground(new java.awt.Color(249, 243, 234));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto_final_casafolclore/GUI/Imagenes/9361196-removebg-preview.png"))); // NOI18N
         jLabel2.setText("jLabel2");
