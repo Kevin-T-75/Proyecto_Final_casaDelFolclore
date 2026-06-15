@@ -209,6 +209,9 @@ public class MenuAdmin extends javax.swing.JFrame {
 
     private void btnGCliente3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGCliente3ActionPerformed
         // boton registro cliente
+        RegistroCliente cliente = new RegistroCliente();
+        cliente.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnGCliente3ActionPerformed
 
     private void btnGTrajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGTrajesActionPerformed
