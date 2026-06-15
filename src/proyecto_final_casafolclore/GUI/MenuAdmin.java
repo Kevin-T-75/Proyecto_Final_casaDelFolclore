@@ -216,7 +216,8 @@ public class MenuAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGTrajesActionPerformed
 
     private void btnGAlquilerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGAlquilerActionPerformed
-        // boton registro alquiler
+         new GUI_regalquiler().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnGAlquilerActionPerformed
 
     private void btnInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventarioActionPerformed
