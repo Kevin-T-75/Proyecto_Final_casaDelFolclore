@@ -47,7 +47,6 @@ public class MenuAdmin extends javax.swing.JFrame {
         btnGTrajes = new javax.swing.JButton();
         btnGCliente3 = new javax.swing.JButton();
         btnInventario = new javax.swing.JButton();
-        btnGPago = new javax.swing.JButton();
         lblOpciones = new javax.swing.JLabel();
         pnlPantalla = new javax.swing.JPanel();
         lblMensaje = new javax.swing.JLabel();
@@ -109,10 +108,6 @@ public class MenuAdmin extends javax.swing.JFrame {
         btnInventario.setText("Ver inventario");
         btnInventario.addActionListener(this::btnInventarioActionPerformed);
 
-        btnGPago.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        btnGPago.setText("Registrar pago");
-        btnGPago.addActionListener(this::btnGPagoActionPerformed);
-
         lblOpciones.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lblOpciones.setForeground(new java.awt.Color(255, 255, 255));
         lblOpciones.setText("DASHBOARD");
@@ -129,7 +124,6 @@ public class MenuAdmin extends javax.swing.JFrame {
                         .addComponent(btnGCliente3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnGTrajes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnGAlquiler, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                        .addComponent(btnGPago, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnInventario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
@@ -145,10 +139,8 @@ public class MenuAdmin extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnGAlquiler)
                 .addGap(18, 18, 18)
-                .addComponent(btnGPago)
-                .addGap(18, 18, 18)
                 .addComponent(btnInventario)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
 
         pnlPantalla.setBackground(new java.awt.Color(204, 204, 204));
@@ -224,12 +216,9 @@ public class MenuAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGTrajesActionPerformed
 
     private void btnGAlquilerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGAlquilerActionPerformed
-        // boton registro alquiler
+         new GUI_regalquiler().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnGAlquilerActionPerformed
-
-    private void btnGPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGPagoActionPerformed
-        // boton registro pago
-    }//GEN-LAST:event_btnGPagoActionPerformed
 
     private void btnInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventarioActionPerformed
         // boton inventario
@@ -263,7 +252,6 @@ public class MenuAdmin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGAlquiler;
     private javax.swing.JButton btnGCliente3;
-    private javax.swing.JButton btnGPago;
     private javax.swing.JButton btnGTrajes;
     private javax.swing.JButton btnInventario;
     private javax.swing.JButton btnLogout;

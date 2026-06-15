@@ -123,7 +123,6 @@ public class GUI_pago extends javax.swing.JFrame {
         lbl_totaldias = new javax.swing.JLabel();
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("Teléfono:");
 
         jTextField7.setBackground(new java.awt.Color(204, 204, 204));
@@ -160,7 +159,6 @@ public class GUI_pago extends javax.swing.JFrame {
 
         jLabel4.setBackground(new java.awt.Color(0, 0, 0));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Realiza el pago de tu alquiler o reserva.");
 
         jSeparator1.setForeground(new java.awt.Color(153, 153, 153));
@@ -170,19 +168,15 @@ public class GUI_pago extends javax.swing.JFrame {
         jLabel5.setText("DATOS DEL CLIENTE");
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Cliente:");
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("DNI:");
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Teléfono:");
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("Correo:");
 
         ct_cliente.setEditable(false);
@@ -214,23 +208,18 @@ public class GUI_pago extends javax.swing.JFrame {
         jLabel14.setText("DETALLE DEL ALQUILER / RESERVA");
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
         jLabel15.setText("Producto:");
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(0, 0, 0));
         jLabel16.setText("Talla:");
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(0, 0, 0));
         jLabel17.setText("Cantidad");
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(0, 0, 0));
         jLabel18.setText("Fecha inicio:");
 
         jLabel19.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(0, 0, 0));
         jLabel19.setText("Fecha fin:");
 
         ct_producto.setEditable(false);
@@ -267,16 +256,12 @@ public class GUI_pago extends javax.swing.JFrame {
         jLabel20.setForeground(new java.awt.Color(0, 102, 204));
         jLabel20.setText("RESUMEN DE PAGO ");
 
-        jLabel21.setForeground(new java.awt.Color(0, 0, 0));
         jLabel21.setText("Precio por día:");
 
-        jLabel22.setForeground(new java.awt.Color(0, 0, 0));
         jLabel22.setText("Cantidad:");
 
-        jLabel23.setForeground(new java.awt.Color(0, 0, 0));
         jLabel23.setText("S/. 50.00");
 
-        lbl_cantidad.setForeground(new java.awt.Color(0, 0, 0));
         lbl_cantidad.setText("1");
 
         jSeparator5.setForeground(new java.awt.Color(204, 204, 204));
@@ -291,7 +276,6 @@ public class GUI_pago extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(204, 255, 204));
         jButton1.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("PAGAR");
         jButton1.addActionListener(this::jButton1ActionPerformed);
 
@@ -302,7 +286,6 @@ public class GUI_pago extends javax.swing.JFrame {
         jLabel28.setText("jLabel28");
 
         buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButton2.setText("      Efectivo");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -337,7 +320,6 @@ public class GUI_pago extends javax.swing.JFrame {
         jLabel29.setText("jLabel28");
 
         buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButton1.setText("      YAPE");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -366,7 +348,6 @@ public class GUI_pago extends javax.swing.JFrame {
         jPanel4.setForeground(new java.awt.Color(51, 255, 51));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("N° Comprobante");
 
         lblcomprobante.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -424,10 +405,8 @@ public class GUI_pago extends javax.swing.JFrame {
                 .addComponent(jLabel30))
         );
 
-        jLabel31.setForeground(new java.awt.Color(0, 0, 0));
         jLabel31.setText("Total días:");
 
-        lbl_totaldias.setForeground(new java.awt.Color(0, 0, 0));
         lbl_totaldias.setText("0");
 
         javax.swing.GroupLayout pnlPantallaLayout = new javax.swing.GroupLayout(pnlPantalla);
