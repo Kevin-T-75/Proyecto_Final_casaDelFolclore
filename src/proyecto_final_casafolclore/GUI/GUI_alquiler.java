@@ -497,9 +497,60 @@ public class GUI_alquiler extends javax.swing.JFrame {
 
     private void btn_alquiler1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alquiler1ActionPerformed
 
-        
-        new GUI_pago().setVisible(true);
-        this.dispose();
+         String cliente = jTextField9.getText() + " " + jTextField12.getText();
+         String dni = jTextField13.getText();
+         String telefono = jTextField11.getText();
+         String correo = jTextField10.getText();
+
+         String producto = jTextField8.getText();
+         String talla = cmb_talla.getSelectedItem().toString();
+         String cantidad = spinner_cantidad.getValue().toString();
+
+         String fechaInicio = jTextField5.getText();
+         String fechaFin = jTextField4.getText();
+
+         long dias = 1;
+
+         try {
+             java.text.SimpleDateFormat formato =
+                     new java.text.SimpleDateFormat("dd/MM/yyyy");
+
+             java.util.Date inicio = formato.parse(fechaInicio);
+             java.util.Date fin = formato.parse(fechaFin);
+
+             dias = (fin.getTime() - inicio.getTime())
+                     / (1000 * 60 * 60 * 24);
+
+             if (dias <= 0) {
+                 dias = 1;
+             }
+
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+
+         int cantidadTrajes = Integer.parseInt(cantidad);
+
+         double precioPorDia = 50.0;
+
+         double totalPagar = dias * cantidadTrajes * precioPorDia;
+
+         GUI_pago pago = new GUI_pago(
+                 cliente,
+                 dni,
+                 telefono,
+                 correo,
+                 producto,
+                 talla,
+                 cantidad,
+                 fechaInicio,
+                 fechaFin,
+                 String.valueOf(dias),
+                 String.format("%.2f", totalPagar)
+         );
+
+         pago.setVisible(true);
+         this.dispose();
     }//GEN-LAST:event_btn_alquiler1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

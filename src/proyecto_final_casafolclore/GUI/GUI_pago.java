@@ -17,16 +17,42 @@ public class GUI_pago extends javax.swing.JFrame {
      */
     public GUI_pago() {
         initComponents();
-        ct_cliente.setText("Kevin Tasilla");
-        ct_dni.setText("75849302");        // Ejemplo de DNI
-        ct_telefono.setText("987654321");   // Ejemplo de Teléfono
-        ct_correo.setText("kevin@correo.com");
+       
         
         java.util.Random random = new java.util.Random();
         int numeroAleatorio = random.nextInt(999999) + 1;
         String n_comprobante = String.format("%06d", numeroAleatorio);
         lblcomprobante.setText(n_comprobante);
     }
+    
+    public GUI_pago(String cliente, String dni, String telefono,
+                String correo, String producto, String talla,
+                String cantidad, String fechaInicio,
+                String fechaFin, String dias,
+                String totalPagar) {
+
+       initComponents();
+
+       ct_cliente.setText(cliente);
+       ct_dni.setText(dni);
+       ct_telefono.setText(telefono);
+       ct_correo.setText(correo);
+
+       ct_producto.setText(producto);
+       ct_talla.setText(talla);
+       ct_cantidad.setText(cantidad);
+       ct_fechai.setText(fechaInicio);
+       ct_fechaf.setText(fechaFin);
+
+       lbl_cantidad.setText(cantidad);
+       lbl_totaldias.setText(dias);
+       lbl_totalp.setText("S/. " + totalPagar);
+
+       java.util.Random random = new java.util.Random();
+       int numeroAleatorio = random.nextInt(999999) + 1;
+        lblcomprobante.setText(String.format("%06d", numeroAleatorio));
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -75,10 +101,10 @@ public class GUI_pago extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
+        lbl_cantidad = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
         jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
+        lbl_totalp = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
@@ -93,6 +119,8 @@ public class GUI_pago extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        lbl_totaldias = new javax.swing.JLabel();
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 0, 0));
@@ -240,16 +268,16 @@ public class GUI_pago extends javax.swing.JFrame {
         jLabel20.setText("RESUMEN DE PAGO ");
 
         jLabel21.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel21.setText("Precio unitario:");
+        jLabel21.setText("Precio por día:");
 
         jLabel22.setForeground(new java.awt.Color(0, 0, 0));
         jLabel22.setText("Cantidad:");
 
         jLabel23.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel23.setText("S/. 00.00");
+        jLabel23.setText("S/. 50.00");
 
-        jLabel24.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel24.setText("1");
+        lbl_cantidad.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_cantidad.setText("1");
 
         jSeparator5.setForeground(new java.awt.Color(204, 204, 204));
 
@@ -257,9 +285,9 @@ public class GUI_pago extends javax.swing.JFrame {
         jLabel25.setForeground(new java.awt.Color(0, 102, 204));
         jLabel25.setText("TOTAL A PAGAR:");
 
-        jLabel26.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel26.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel26.setText("S/ 00.00");
+        lbl_totalp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbl_totalp.setForeground(new java.awt.Color(102, 102, 102));
+        lbl_totalp.setText("S/ 00.00");
 
         jButton1.setBackground(new java.awt.Color(204, 255, 204));
         jButton1.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
@@ -396,6 +424,12 @@ public class GUI_pago extends javax.swing.JFrame {
                 .addComponent(jLabel30))
         );
 
+        jLabel31.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel31.setText("Total días:");
+
+        lbl_totaldias.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_totaldias.setText("0");
+
         javax.swing.GroupLayout pnlPantallaLayout = new javax.swing.GroupLayout(pnlPantalla);
         pnlPantalla.setLayout(pnlPantallaLayout);
         pnlPantallaLayout.setHorizontalGroup(
@@ -427,17 +461,21 @@ public class GUI_pago extends javax.swing.JFrame {
                                             .addComponent(jLabel22))
                                         .addGap(142, 142, 142)
                                         .addGroup(pnlPantallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel24)
-                                            .addComponent(jLabel23))))
+                                            .addComponent(lbl_cantidad)
+                                            .addComponent(jLabel23)
+                                            .addComponent(lbl_totaldias))))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(6, 6, 6))
                     .addGroup(pnlPantallaLayout.createSequentialGroup()
                         .addComponent(jLabel25)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel26)
+                        .addComponent(lbl_totalp)
                         .addGap(29, 29, 29)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnlPantallaLayout.createSequentialGroup()
+                        .addComponent(jLabel31)
+                        .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(pnlPantallaLayout.createSequentialGroup()
                 .addGap(74, 74, 74)
                 .addGroup(pnlPantallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -581,13 +619,17 @@ public class GUI_pago extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(pnlPantallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(jLabel22)
-                                            .addComponent(jLabel24))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(lbl_cantidad))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(pnlPantallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel31)
+                                            .addComponent(lbl_totaldias))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(28, 28, 28)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(pnlPantallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(jLabel25)
-                                            .addComponent(jLabel26)
+                                            .addComponent(lbl_totalp)
                                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(41, 41, 41))))
@@ -691,14 +733,13 @@ public class GUI_pago extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -718,6 +759,9 @@ public class GUI_pago extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JLabel lbl_cantidad;
+    private javax.swing.JLabel lbl_totaldias;
+    private javax.swing.JLabel lbl_totalp;
     private javax.swing.JLabel lblcomprobante;
     private javax.swing.JPanel pnlPantalla;
     // End of variables declaration//GEN-END:variables
