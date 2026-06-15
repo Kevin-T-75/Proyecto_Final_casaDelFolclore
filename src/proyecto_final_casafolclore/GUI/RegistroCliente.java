@@ -4,6 +4,10 @@
  */
 package proyecto_final_casafolclore.GUI;
 
+import javax.swing.JOptionPane;
+import proyecto_final_casafolclore.Clases.Cliente; //importar clase cliente
+import proyecto_final_casafolclore.Logica.ControladorCliente; //importar controlador
+
 /**
  *
  * @author neyli
@@ -11,7 +15,7 @@ package proyecto_final_casafolclore.GUI;
 public class RegistroCliente extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RegistroCliente.class.getName());
-
+    private ControladorCliente controlador = new ControladorCliente(); //controlador
     /**
      * Creates new form RegistroCliente
      */
@@ -41,15 +45,15 @@ public class RegistroCliente extends javax.swing.JFrame {
         txtIDU = new javax.swing.JTextField();
         txtCorreo = new javax.swing.JTextField();
         txtContra = new javax.swing.JTextField();
-        txtName2 = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
         txtDic = new javax.swing.JTextField();
-        txtTel2 = new javax.swing.JTextField();
+        txtTel = new javax.swing.JTextField();
         pnlArriba = new javax.swing.JPanel();
         lblRCliente = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         btnRegistrar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbTipo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,17 +97,17 @@ public class RegistroCliente extends javax.swing.JFrame {
         txtContra.setName("txtIDU"); // NOI18N
         txtContra.addActionListener(this::txtContraActionPerformed);
 
-        txtName2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtName2.setName("txtIDU"); // NOI18N
-        txtName2.addActionListener(this::txtName2ActionPerformed);
+        txtName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtName.setName("txtIDU"); // NOI18N
+        txtName.addActionListener(this::txtNameActionPerformed);
 
         txtDic.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtDic.setName("txtIDU"); // NOI18N
         txtDic.addActionListener(this::txtDicActionPerformed);
 
-        txtTel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtTel2.setName("txtIDU"); // NOI18N
-        txtTel2.addActionListener(this::txtTel2ActionPerformed);
+        txtTel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtTel.setName("txtIDU"); // NOI18N
+        txtTel.addActionListener(this::txtTelActionPerformed);
 
         pnlArriba.setBackground(new java.awt.Color(0, 153, 51));
         pnlArriba.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -149,8 +153,8 @@ public class RegistroCliente extends javax.swing.JFrame {
         btnCancelar.setName("btnLogin"); // NOI18N
         btnCancelar.addActionListener(this::btnCancelarActionPerformed);
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Particular", "Institución Educativa", "Grupo de Danza", "Academia de Baile", "Municipalidad", "Empresa" }));
+        cbTipo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Particular", "Institución Educativa", "Grupo de Danza", "Academia de Baile", "Municipalidad", "Empresa" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -173,7 +177,7 @@ public class RegistroCliente extends javax.swing.JFrame {
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(lblTel)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(txtTel2, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(txtTel, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(lblContrasena)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -185,12 +189,12 @@ public class RegistroCliente extends javax.swing.JFrame {
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                             .addComponent(lblNombre)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(txtName2, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(lblTipo)
                                             .addGap(18, 18, 18)
-                                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addComponent(cbTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(lblDic)
                                             .addGap(18, 18, 18)
@@ -213,7 +217,7 @@ public class RegistroCliente extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombre)
-                    .addComponent(txtName2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -224,7 +228,7 @@ public class RegistroCliente extends javax.swing.JFrame {
                     .addComponent(lblContrasena))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtTel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTel))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -233,7 +237,7 @@ public class RegistroCliente extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTipo)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(61, 61, 61)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrar)
@@ -256,55 +260,74 @@ public class RegistroCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtContraActionPerformed
 
-    private void txtName2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtName2ActionPerformed
+    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtName2ActionPerformed
+    }//GEN-LAST:event_txtNameActionPerformed
 
     private void txtDicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDicActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDicActionPerformed
 
-    private void txtTel2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTel2ActionPerformed
+    private void txtTelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtTel2ActionPerformed
+    }//GEN-LAST:event_txtTelActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // registrar boton
         
-//        String id = txtIdUsuario.getText();
-//        String nombre = txtNombre.getText();
-//        String correo = txtCorreo.getText();
-//        String contraseña = txtContraseña.getText();
-//        String telefono = txtTelefono.getText();
-//        String direccion = txtDireccion.getText();
-//        String tipoCliente = cmbTipoCliente.getSelectedItem().toString();
-//
-//        if (id.isEmpty() || nombre.isEmpty() || correo.isEmpty() || contraseña.isEmpty()
-//                || telefono.isEmpty() || direccion.isEmpty()) {
-//
-//            JOptionPane.showMessageDialog(this, "Complete todos los campos.");
-//            return;
-//        }
-//
-//        Cliente cliente = new Cliente(
-//                telefono,
-//                direccion,
-//                tipoCliente,
-//                id,
-//                nombre,
-//                correo,
-//                contraseña
-//        );
-//
-//        listaClientes.add(cliente);
-//
-//        JOptionPane.showMessageDialog(this, "Cliente registrado correctamente.");
-//
-//        limpiarCampos();
-    }//GEN-LAST:event_btnRegistrarActionPerformed
+        String id = txtIDU.getText();
+        String nombre = txtName.getText();
+        String correo = txtCorreo.getText();
+        String contraseña = txtContra.getText();
+        String telefono = txtTel.getText();
+        String direccion = txtDic.getText();
+        String tipoCliente = cbTipo.getSelectedItem().toString();
 
+        //validaciones
+        if (id.isEmpty() || nombre.isEmpty() || correo.isEmpty() || contraseña.isEmpty()
+            || telefono.isEmpty() || direccion.isEmpty()) {
+
+        JOptionPane.showMessageDialog(this, "Complete todos los campos.");
+        return;
+        }
+
+        if (!correo.contains("@") || !correo.endsWith(".com")) {
+            JOptionPane.showMessageDialog(this, "Ingrese un correo válido");
+            return;
+        }
+
+        if (contraseña.length() < 8) {
+            JOptionPane.showMessageDialog(this, "La contraseña debe tener al menos 8 caracteres.");
+            return;
+        }
+
+        if (telefono.length()!=9){
+            JOptionPane.showMessageDialog(this, "Ingrese número válido");
+            return;
+        }
+        
+          Cliente cliente = new Cliente(telefono,direccion,tipoCliente,id,
+            nombre,correo,contraseña);
+
+        controlador.registrarCliente(cliente);
+
+        JOptionPane.showMessageDialog(this, "Cliente registrado correctamente.");
+
+        limpiarCampos();
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+    private void limpiarCampos() { //este es para que despues de completar o cancelar se limpie solito
+        txtIDU.setText("");
+        txtName.setText("");
+        txtCorreo.setText("");
+        txtContra.setText("");
+        txtTel.setText("");
+        txtDic.setText("");
+        cbTipo.setSelectedIndex(0);
+        txtIDU.requestFocus();
+    }
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
+        limpiarCampos();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
@@ -335,7 +358,7 @@ public class RegistroCliente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnRegistrar;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cbTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblContrasena;
     private javax.swing.JLabel lblCorreo4;
@@ -350,7 +373,7 @@ public class RegistroCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDic;
     private javax.swing.JTextField txtIDU;
-    private javax.swing.JTextField txtName2;
-    private javax.swing.JTextField txtTel2;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtTel;
     // End of variables declaration//GEN-END:variables
 }

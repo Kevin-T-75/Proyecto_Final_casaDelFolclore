@@ -41,7 +41,7 @@
                                       <Group type="102" attributes="0">
                                           <Component id="lblTel" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="txtTel2" min="-2" pref="345" max="-2" attributes="0"/>
+                                          <Component id="txtTel" min="-2" pref="345" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
                                           <Component id="lblContrasena" min="-2" max="-2" attributes="0"/>
@@ -56,14 +56,14 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="lblNombre" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="txtName2" min="-2" pref="345" max="-2" attributes="0"/>
+                                          <Component id="txtName" min="-2" pref="345" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
                                       <Group type="102" attributes="0">
                                           <Component id="lblTipo" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="jComboBox1" max="32767" attributes="0"/>
+                                          <Component id="cbTipo" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
                                           <Component id="lblDic" min="-2" max="-2" attributes="0"/>
@@ -98,7 +98,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtName2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtName" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -112,7 +112,7 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="txtTel2" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtTel" min="-2" max="-2" attributes="0"/>
                   <Component id="lblTel" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -123,7 +123,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblTipo" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbTipo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -246,7 +246,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtContraActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtName2">
+    <Component class="javax.swing.JTextField" name="txtName">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="14" style="0"/>
@@ -254,7 +254,7 @@
         <Property name="name" type="java.lang.String" value="txtIDU" noResource="true"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtName2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNameActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtDic">
@@ -268,7 +268,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDicActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtTel2">
+    <Component class="javax.swing.JTextField" name="txtTel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="14" style="0"/>
@@ -276,7 +276,7 @@
         <Property name="name" type="java.lang.String" value="txtIDU" noResource="true"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTel2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTelActionPerformed"/>
       </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="pnlArriba">
@@ -373,7 +373,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox1">
+    <Component class="javax.swing.JComboBox" name="cbTipo">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="14" style="0"/>
