@@ -24,6 +24,7 @@ public class RegistroCliente extends javax.swing.JFrame {
         setSize(620, 640); //tamaño
         setLocationRelativeTo(null); //centrado
         setResizable(false); //no deja maximizar, mas rapido aqui
+        txtIDU.setText(controlador.generarID()); //aqui llamamos al generador automatico del controlador
     }
 
     /**
@@ -86,6 +87,7 @@ public class RegistroCliente extends javax.swing.JFrame {
         lblTipo.setText("Tipo de cliente");
 
         txtIDU.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtIDU.setEnabled(false);
         txtIDU.setName("txtIDU"); // NOI18N
         txtIDU.addActionListener(this::txtIDUActionPerformed);
 
@@ -109,14 +111,14 @@ public class RegistroCliente extends javax.swing.JFrame {
         txtTel.setName("txtIDU"); // NOI18N
         txtTel.addActionListener(this::txtTelActionPerformed);
 
-        pnlArriba.setBackground(new java.awt.Color(0, 153, 51));
+        pnlArriba.setBackground(new java.awt.Color(204, 153, 0));
         pnlArriba.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         lblRCliente.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         lblRCliente.setForeground(new java.awt.Color(255, 255, 255));
         lblRCliente.setText("Registro de Cliente");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto_final_casafolclore/GUI/7531708.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto_final_casafolclore/GUI/Imagenes/7531708.png"))); // NOI18N
 
         javax.swing.GroupLayout pnlArribaLayout = new javax.swing.GroupLayout(pnlArriba);
         pnlArriba.setLayout(pnlArribaLayout);
@@ -139,7 +141,7 @@ public class RegistroCliente extends javax.swing.JFrame {
                 .addGap(29, 29, 29))
         );
 
-        btnRegistrar.setBackground(new java.awt.Color(51, 153, 0));
+        btnRegistrar.setBackground(new java.awt.Color(255, 204, 0));
         btnRegistrar.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         btnRegistrar.setForeground(new java.awt.Color(0, 0, 0));
         btnRegistrar.setText("REGISTRAR");
@@ -324,10 +326,14 @@ public class RegistroCliente extends javax.swing.JFrame {
         txtDic.setText("");
         cbTipo.setSelectedIndex(0);
         txtIDU.requestFocus();
+        txtIDU.setText(controlador.generarID());
     }
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         limpiarCampos();
+        MenuAdmin menu = new MenuAdmin();
+        menu.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
