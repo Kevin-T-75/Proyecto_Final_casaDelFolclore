@@ -13,7 +13,12 @@ import proyecto_final_casafolclore.Clases.Cliente;
  */
 public class ControladorCliente {
     private ArrayList<Cliente> listaClientes = new ArrayList<>();
+    private static int contador = 1; //este sera poara la ID usuario
 
+    public String generarID() {
+        return String.format("F%04d", contador++); //numeros automaticos
+    }
+    
     public void registrarCliente(Cliente cliente) {
         listaClientes.add(cliente);
     }
