@@ -144,7 +144,6 @@
                           <Component id="btnGCliente3" max="32767" attributes="0"/>
                           <Component id="btnGTrajes" max="32767" attributes="0"/>
                           <Component id="btnGAlquiler" alignment="0" pref="200" max="32767" attributes="0"/>
-                          <Component id="btnGPago" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnInventario" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -164,10 +163,8 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnGAlquiler" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btnGPago" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnInventario" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="68" max="32767" attributes="0"/>
+                  <EmptySpace pref="117" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -215,17 +212,6 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInventarioActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnGPago">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Dialog" size="18" style="0"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Registrar pago"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGPagoActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblOpciones">
