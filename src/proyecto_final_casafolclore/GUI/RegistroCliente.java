@@ -121,18 +121,18 @@ public class RegistroCliente extends javax.swing.JFrame {
             .addGroup(pnlArribaLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(lblRCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlArribaLayout.setVerticalGroup(
             pnlArribaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlArribaLayout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
-                .addGroup(pnlArribaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblRCliente)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18))
+                .addContainerGap(11, Short.MAX_VALUE)
+                .addGroup(pnlArribaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(lblRCliente))
+                .addGap(29, 29, 29))
         );
 
         btnRegistrar.setBackground(new java.awt.Color(51, 153, 0));
