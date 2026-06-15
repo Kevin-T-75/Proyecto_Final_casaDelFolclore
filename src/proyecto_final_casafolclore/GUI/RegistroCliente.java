@@ -111,7 +111,7 @@ public class RegistroCliente extends javax.swing.JFrame {
         txtTel.setName("txtIDU"); // NOI18N
         txtTel.addActionListener(this::txtTelActionPerformed);
 
-        pnlArriba.setBackground(new java.awt.Color(204, 153, 0));
+        pnlArriba.setBackground(new java.awt.Color(204, 102, 0));
         pnlArriba.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         lblRCliente.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
@@ -141,7 +141,7 @@ public class RegistroCliente extends javax.swing.JFrame {
                 .addGap(29, 29, 29))
         );
 
-        btnRegistrar.setBackground(new java.awt.Color(255, 204, 0));
+        btnRegistrar.setBackground(new java.awt.Color(255, 153, 0));
         btnRegistrar.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         btnRegistrar.setForeground(new java.awt.Color(0, 0, 0));
         btnRegistrar.setText("REGISTRAR");
