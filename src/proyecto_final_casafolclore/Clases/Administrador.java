@@ -11,7 +11,7 @@ package proyecto_final_casafolclore.Clases;
  *
  * @author neyli
  */
-public class Administrador extends Usuario{
+public class Administrador extends Persona{
     
     private String cargo;
 

@@ -8,7 +8,7 @@ package proyecto_final_casafolclore.Clases;
  *
  * @author OS
  */
-public class Cliente extends Usuario{
+public class Cliente extends Persona{
     
     private String telefono_Cliente;
     private String direccion_Cliente;

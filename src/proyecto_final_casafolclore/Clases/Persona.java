@@ -8,7 +8,7 @@ package proyecto_final_casafolclore.Clases;
  *
  * @author OS
  */
-public abstract class Usuario {
+public abstract class Persona {
     
     protected String idUsuario;
     protected  String nombre_Usuario; 
@@ -47,7 +47,7 @@ public abstract class Usuario {
         this.contraseña_Usuario = contraseña_Usuario;
     }
 
-    public Usuario(String idUsuario, String nombre_Usuario, String correo_Usuario, String contraseña_Usuario) {
+    public Persona(String idUsuario, String nombre_Usuario, String correo_Usuario, String contraseña_Usuario) {
         this.idUsuario = idUsuario;
         this.nombre_Usuario = nombre_Usuario;
         this.correo_Usuario = correo_Usuario;
