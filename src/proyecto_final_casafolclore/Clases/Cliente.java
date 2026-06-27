@@ -14,6 +14,13 @@ public class Cliente extends Persona{
     private String direccion_Cliente;
     private String tipo_Cliente;
 
+    public Cliente(String telefono_Cliente, String direccion_Cliente, String tipo_Cliente, String idPersona,
+            String nombre, String correo, String contraseña) {
+        this.telefono_Cliente = telefono_Cliente;
+        this.direccion_Cliente = direccion_Cliente;
+        this.tipo_Cliente = tipo_Cliente;
+    }
+    
     public Cliente(String telefono_Cliente, String direccion_Cliente, String tipo_Cliente, String idPersona, String nombre, String apellidoPaterno, String apellidoMaterno, String tipoDocumento, String nroDocumento, String contraseña_Usuario, String correo_Usuario) {
         super(idPersona, nombre, apellidoPaterno, apellidoMaterno, tipoDocumento, nroDocumento, contraseña_Usuario, correo_Usuario);
         this.telefono_Cliente = telefono_Cliente;
