@@ -110,6 +110,7 @@ public class RegistroCliente extends javax.swing.JFrame {
 
         cbTDoc.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbTDoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DNI", "CE" }));
+        cbTDoc.addActionListener(this::cbTDocActionPerformed);
 
         lblCorreo.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         lblCorreo.setForeground(new java.awt.Color(247, 224, 121));
@@ -198,6 +199,7 @@ public class RegistroCliente extends javax.swing.JFrame {
 
         cbTipo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Particular", "Institución Educativa", "Grupo de Danza", "Academia de Baile", "Municipalidad", "Empresa" }));
+        cbTipo.addActionListener(this::cbTipoActionPerformed);
 
         lblNombre.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         lblNombre.setForeground(new java.awt.Color(249, 226, 121));
@@ -344,10 +346,12 @@ public class RegistroCliente extends javax.swing.JFrame {
 
     private void txtApellidoPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoPActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtApellidoPActionPerformed
 
     private void txtApellidoMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoMActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtApellidoMActionPerformed
 
     private void txtDicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDicActionPerformed
@@ -356,6 +360,7 @@ public class RegistroCliente extends javax.swing.JFrame {
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtNameActionPerformed
 
     private void txtNDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNDocActionPerformed
@@ -379,6 +384,10 @@ public class RegistroCliente extends javax.swing.JFrame {
 
         String id = txtIDU.getText();
         String nombre = txtName.getText();
+        String apellidoPaterno = txtApellidoP.getText();
+        String apellidoMaterno = txtApellidoM.getText();
+        String tipoDocumento = cbTDoc.getSelectedItem().toString();
+        String nroDocumento = txtNDoc.getText();
         String correo = txtCorreo.getText();
         String contraseña = txtContra.getText();
         String telefono = txtTel.getText();
@@ -386,13 +395,31 @@ public class RegistroCliente extends javax.swing.JFrame {
         String tipoCliente = cbTipo.getSelectedItem().toString();
 
         //validaciones
-        if (id.isEmpty() || nombre.isEmpty() || correo.isEmpty() || contraseña.isEmpty()
-            || telefono.isEmpty() || direccion.isEmpty()) {
+        if (id.isEmpty() || nombre.isEmpty() || apellidoPaterno.isEmpty() || 
+                apellidoMaterno.isEmpty() || nroDocumento.isEmpty() || 
+                correo.isEmpty() || contraseña.isEmpty()|| telefono.isEmpty() || 
+                direccion.isEmpty()) {
 
             JOptionPane.showMessageDialog(this, "Complete todos los campos.");
             return;
         }
+        
+        if (tipoDocumento.equals("DNI")) { //como no es un label no se puede poner == qwq no se escribe chanfles
+           if (nroDocumento.length() != 8 || !nroDocumento.matches("\\d+")) { //lo ultimo verifica que sean solo numeros
+                JOptionPane.showMessageDialog(this,
+                "El DNI debe contener exactamente 8 dígitos numéricos.");
+                return;
+            }
+        }
 
+        if (tipoDocumento.equals("CE")) {
+            if (nroDocumento.length() != 9 || !nroDocumento.matches("\\d+")) {
+            JOptionPane.showMessageDialog(this,
+                "El Carné de Extranjería debe contener exactamente 9 dígitos numéricos.");
+                return;
+            }
+        }
+        
         if (!correo.contains("@") || !correo.endsWith(".com")) {
             JOptionPane.showMessageDialog(this, "Ingrese un correo válido");
             return;
@@ -405,6 +432,10 @@ public class RegistroCliente extends javax.swing.JFrame {
 
         if (telefono.length()!=9){
             JOptionPane.showMessageDialog(this, "Ingrese número válido");
+            return;
+        }
+        if (!direccion.contains("Av.") && !direccion.contains("Jr.") && !direccion.contains("Psje.")){
+            JOptionPane.showMessageDialog(this, "Ingrese una dirección válida");
             return;
         }
 
@@ -429,9 +460,19 @@ public class RegistroCliente extends javax.swing.JFrame {
         menu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void cbTDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTDocActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbTDocActionPerformed
+
+    private void cbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbTipoActionPerformed
     private void limpiarCampos() { //este es para que despues de completar o cancelar se limpie solito
         txtIDU.setText("");
         txtName.setText("");
+        txtApellidoP.setText("");
+        txtApellidoM.setText("");
         txtCorreo.setText("");
         txtContra.setText("");
         txtTel.setText("");
