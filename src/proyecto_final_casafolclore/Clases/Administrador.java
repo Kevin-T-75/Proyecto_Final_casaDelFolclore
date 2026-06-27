@@ -15,8 +15,8 @@ public class Administrador extends Persona{
     
     private String cargo;
 
-    public Administrador(String cargo, String idUsuario, String nombre_Usuario, String correo_Usuario, String contraseña_Usuario) {
-        super(idUsuario, nombre_Usuario, correo_Usuario, contraseña_Usuario);
+    public Administrador(String cargo, String idPersona, String nombre, String apellidoPaterno, String apellidoMaterno, String tipoDocumento, String nroDocumento, String contraseña_Usuario, String correo_Usuario) {
+        super(idPersona, nombre, apellidoPaterno, apellidoMaterno, tipoDocumento, nroDocumento, contraseña_Usuario, correo_Usuario);
         this.cargo = cargo;
     }
 
@@ -51,13 +51,4 @@ public class Administrador extends Persona{
         System.out.println("Gestion de clientes completada");
     }
     
-//    public void mostrarReportes() {
-//        System.out.println("Lista de reportes actual: ");
-//        
-//        for (int i = 0; i < reportes.size(); i++) {
-//            ReporteAdministrador r = reportes.get(i);
-//            r.mostrarReporte();
-//            System.out.println("----------------");
-//        }
-//    }
 }
