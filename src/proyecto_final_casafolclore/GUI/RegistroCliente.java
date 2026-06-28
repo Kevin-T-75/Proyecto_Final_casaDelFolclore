@@ -406,16 +406,14 @@ public class RegistroCliente extends javax.swing.JFrame {
         
         if (tipoDocumento.equals("DNI")) { //como no es un label no se puede poner == qwq no se escribe chanfles
            if (nroDocumento.length() != 8 || !nroDocumento.matches("\\d+")) { //lo ultimo verifica que sean solo numeros
-                JOptionPane.showMessageDialog(this,
-                "El DNI debe contener exactamente 8 dígitos numéricos.");
+                JOptionPane.showMessageDialog(this,"Ingrese un DNI válido");
                 return;
             }
         }
 
         if (tipoDocumento.equals("CE")) {
             if (nroDocumento.length() != 9 || !nroDocumento.matches("\\d+")) {
-            JOptionPane.showMessageDialog(this,
-                "El Carné de Extranjería debe contener exactamente 9 dígitos numéricos.");
+            JOptionPane.showMessageDialog(this,"Ingrese un CE válido");
                 return;
             }
         }

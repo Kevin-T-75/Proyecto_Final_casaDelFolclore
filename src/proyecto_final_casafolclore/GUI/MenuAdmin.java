@@ -48,6 +48,7 @@ public class MenuAdmin extends javax.swing.JFrame {
         btnGCliente3 = new javax.swing.JButton();
         btnInventario = new javax.swing.JButton();
         lblOpciones = new javax.swing.JLabel();
+        btnRReserva = new javax.swing.JButton();
         pnlPantalla = new javax.swing.JPanel();
         lblMensaje = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -112,6 +113,10 @@ public class MenuAdmin extends javax.swing.JFrame {
         lblOpciones.setForeground(new java.awt.Color(255, 255, 255));
         lblOpciones.setText("DASHBOARD");
 
+        btnRReserva.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        btnRReserva.setText("Registrar reserva");
+        btnRReserva.addActionListener(this::btnRReservaActionPerformed);
+
         javax.swing.GroupLayout pnlDashboardLayout = new javax.swing.GroupLayout(pnlDashboard);
         pnlDashboard.setLayout(pnlDashboardLayout);
         pnlDashboardLayout.setHorizontalGroup(
@@ -124,23 +129,26 @@ public class MenuAdmin extends javax.swing.JFrame {
                         .addComponent(btnGCliente3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnGTrajes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnGAlquiler, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                        .addComponent(btnInventario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(btnInventario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRReserva, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         pnlDashboardLayout.setVerticalGroup(
             pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDashboardLayout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(33, 33, 33)
                 .addComponent(lblOpciones)
-                .addGap(44, 44, 44)
+                .addGap(50, 50, 50)
                 .addComponent(btnGCliente3)
                 .addGap(18, 18, 18)
                 .addComponent(btnGTrajes)
+                .addGap(14, 14, 14)
+                .addComponent(btnRReserva)
                 .addGap(18, 18, 18)
                 .addComponent(btnGAlquiler)
                 .addGap(18, 18, 18)
                 .addComponent(btnInventario)
-                .addContainerGap(117, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         pnlPantalla.setBackground(new java.awt.Color(204, 204, 204));
@@ -219,13 +227,17 @@ public class MenuAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGTrajesActionPerformed
 
     private void btnGAlquilerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGAlquilerActionPerformed
-         new GUI_regalquiler().setVisible(true);
+        new GUI_regalquiler().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGAlquilerActionPerformed
 
     private void btnInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventarioActionPerformed
         // boton inventario
     }//GEN-LAST:event_btnInventarioActionPerformed
+
+    private void btnRReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRReservaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRReservaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -258,6 +270,7 @@ public class MenuAdmin extends javax.swing.JFrame {
     private javax.swing.JButton btnGTrajes;
     private javax.swing.JButton btnInventario;
     private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnRReserva;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblMensaje;
     private javax.swing.JLabel lblOpciones;
