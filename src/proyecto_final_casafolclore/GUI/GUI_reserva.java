@@ -92,7 +92,7 @@ public class GUI_reserva extends javax.swing.JFrame {
         jLabel1.setText("jLabel1");
         jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        pnlPantalla.setBackground(new java.awt.Color(255, 255, 204));
+        pnlPantalla.setBackground(new java.awt.Color(255, 240, 204));
 
         jPanel1.setBackground(new java.awt.Color(204, 102, 0));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
