@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class conexionBD {
 
@@ -33,7 +34,7 @@ public class conexionBD {
         return conexion;
     }
     
- // TU MÉTODO DE REGISTRO ACTUALIZADO:
+ // regitrar clientes a base de datos
     public boolean registrarCliente(String id, String nombre, String appPaterno, String appMaterno, 
                                     String tipoDoc, String nroDoc, String correo, String contra, 
                                     String tel, String dir, String tipoCliente) {
@@ -42,7 +43,6 @@ public class conexionBD {
                    + "tipo_documento, nro_Documento, correo, contrasena, Tipo_Cliente, Telefono, Direccion) "
                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
-        // Llamamos directamente a conexionBD.getConexion() ya que es estático
         try (Connection cn = conexionBD.getConexion(); 
         PreparedStatement pst = cn.prepareStatement(sql)) {
 
@@ -66,4 +66,34 @@ public class conexionBD {
             return false;
         }
     }
+    
+   public String obtenerSiguienteID() {
+    // Cambiado a "F0001" (4 dígitos para coincidir con tu controlador)
+    String siguienteID = "F0001"; 
+    
+    String sql = "SELECT MAX(id_usuario) FROM clientes";
+    
+    try (Connection cn = conexionBD.getConexion();
+         PreparedStatement pst = cn.prepareStatement(sql);
+         ResultSet rs = pst.executeQuery()) {
+        
+        if (rs.next() && rs.getString(1) != null) {
+            String idMaximo = rs.getString(1); // Recupera el de la nube, ej: "F0015"
+            
+            // Extrae el número quitando la 'F' de la posición 0
+            int numero = Integer.parseInt(idMaximo.substring(1)); 
+            
+            // Incrementa en 1 para el siguiente cliente
+            numero++; 
+            
+            // Vuelve a armar el formato manteniendo los 4 dígitos (Ej: "F0016")
+            siguienteID = String.format("F%04d", numero); 
+        }
+    } catch (SQLException e) {
+        System.out.println("Error al generar el siguiente ID en la nube: " + e);
+    }
+    
+    return siguienteID; 
+}
+       
 }
