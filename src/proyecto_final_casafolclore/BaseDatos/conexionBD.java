@@ -3,6 +3,7 @@ package proyecto_final_casafolclore.BaseDatos;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.PreparedStatement;
 
 public class conexionBD {
 
@@ -30,5 +31,39 @@ public class conexionBD {
             e.printStackTrace();
         }
         return conexion;
+    }
+    
+ // TU MÉTODO DE REGISTRO ACTUALIZADO:
+    public boolean registrarCliente(String id, String nombre, String appPaterno, String appMaterno, 
+                                    String tipoDoc, String nroDoc, String correo, String contra, 
+                                    String tel, String dir, String tipoCliente) {
+        
+        String sql = "INSERT INTO clientes (id_usuario, nombre, apellido_paterno, apellido_materno, "
+                   + "tipo_documento, nro_Documento, correo, contrasena, Tipo_Cliente, Telefono, Direccion) "
+                   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        
+        // Llamamos directamente a conexionBD.getConexion() ya que es estático
+        try (Connection cn = conexionBD.getConexion(); 
+        PreparedStatement pst = cn.prepareStatement(sql)) {
+
+            
+            pst.setString(1, id);
+            pst.setString(2, nombre);
+            pst.setString(3, appPaterno);
+            pst.setString(4, appMaterno);
+            pst.setString(5, tipoDoc);
+            pst.setString(6, nroDoc);
+            pst.setString(7, correo);
+            pst.setString(8, contra);
+            pst.setString(9, tipoCliente);
+            pst.setString(10, tel);
+            pst.setString(11, dir);
+            
+            pst.executeUpdate(); 
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Error al registrar en la nube: " + e);
+            return false;
+        }
     }
 }

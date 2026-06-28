@@ -5,6 +5,7 @@
 package proyecto_final_casafolclore.GUI;
 
 import javax.swing.JOptionPane;
+import proyecto_final_casafolclore.BaseDatos.conexionBD;
 import proyecto_final_casafolclore.Clases.Cliente; //importar clase cliente
 import proyecto_final_casafolclore.Logica.ControladorCliente; //importar controlador
 
@@ -395,6 +396,23 @@ public class RegistroCliente extends javax.swing.JFrame {
         String direccion = txtDic.getText();
         String tipoCliente = cbTipo.getSelectedItem().toString();
 
+        conexionBD conexion = new conexionBD();
+        
+       boolean exito = conexion.registrarCliente(id, nombre, apellidoPaterno, apellidoMaterno, 
+                                              tipoDocumento, nroDocumento, correo, contraseña, 
+                                              telefono, direccion, tipoCliente);
+       
+       if (exito) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Usuario registrado");
+        
+      
+        
+        } else {
+        javax.swing.JOptionPane.showMessageDialog(this, "Error: No se pudo guardar el registro. Revisa la consola.");
+    }
+       
+       
+        
         //validaciones
         if (id.isEmpty() || nombre.isEmpty() || apellidoPaterno.isEmpty() || 
                 apellidoMaterno.isEmpty() || nroDocumento.isEmpty() || 
@@ -467,7 +485,7 @@ public class RegistroCliente extends javax.swing.JFrame {
     private void cbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbTipoActionPerformed
-    private void limpiarCampos() { //este es para que despues de completar o cancelar se limpie solito
+    private void limpiarCampos() { 
         txtIDU.setText("");
         txtName.setText("");
         txtApellidoP.setText("");
