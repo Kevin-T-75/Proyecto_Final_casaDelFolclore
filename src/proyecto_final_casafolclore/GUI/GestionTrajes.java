@@ -34,7 +34,7 @@ public class GestionTrajes extends javax.swing.JFrame {
         pnlFondo = new javax.swing.JPanel();
         pblEntrada = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        lblSaludo = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         btnAgregar = new javax.swing.JButton();
         btnRegistrarDevo = new javax.swing.JButton();
@@ -43,7 +43,7 @@ public class GestionTrajes extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        pnlFondo.setBackground(new java.awt.Color(204, 204, 255));
+        pnlFondo.setBackground(new java.awt.Color(255, 255, 204));
 
         pblEntrada.setBackground(new java.awt.Color(51, 102, 0));
         pblEntrada.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -54,9 +54,9 @@ public class GestionTrajes extends javax.swing.JFrame {
         jLabel3.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jLabel3.setAlignmentY(0.0F);
 
-        lblSaludo.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        lblSaludo.setForeground(new java.awt.Color(255, 255, 255));
-        lblSaludo.setText("GESTIÓN DE TRAJES");
+        lblTitulo.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        lblTitulo.setText("GESTIÓN DE TRAJES");
 
         javax.swing.GroupLayout pblEntradaLayout = new javax.swing.GroupLayout(pblEntrada);
         pblEntrada.setLayout(pblEntradaLayout);
@@ -64,7 +64,7 @@ public class GestionTrajes extends javax.swing.JFrame {
             pblEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pblEntradaLayout.createSequentialGroup()
                 .addGap(182, 182, 182)
-                .addComponent(lblSaludo)
+                .addComponent(lblTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -75,7 +75,7 @@ public class GestionTrajes extends javax.swing.JFrame {
                 .addContainerGap(17, Short.MAX_VALUE)
                 .addGroup(pblEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(lblSaludo))
+                    .addComponent(lblTitulo))
                 .addContainerGap())
         );
 
@@ -200,7 +200,7 @@ public class GestionTrajes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel lblSaludo;
+    private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel pblEntrada;
     private javax.swing.JPanel pnlFondo;
     // End of variables declaration//GEN-END:variables
