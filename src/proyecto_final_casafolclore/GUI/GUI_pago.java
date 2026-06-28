@@ -23,6 +23,7 @@ public class GUI_pago extends javax.swing.JFrame {
         int numeroAleatorio = random.nextInt(999999) + 1;
         String n_comprobante = String.format("%06d", numeroAleatorio);
         lblcomprobante.setText(n_comprobante);
+        setLocationRelativeTo(null); //centrado
     }
     
     public GUI_pago(String cliente, String dni, String telefono,

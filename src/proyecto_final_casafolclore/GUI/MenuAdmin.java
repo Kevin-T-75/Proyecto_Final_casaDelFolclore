@@ -138,7 +138,7 @@ public class MenuAdmin extends javax.swing.JFrame {
             .addGroup(pnlDashboardLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(lblOpciones)
-                .addGap(50, 50, 50)
+                .addGap(37, 37, 37)
                 .addComponent(btnGCliente3)
                 .addGap(18, 18, 18)
                 .addComponent(btnGTrajes)
@@ -148,7 +148,7 @@ public class MenuAdmin extends javax.swing.JFrame {
                 .addComponent(btnGAlquiler)
                 .addGap(18, 18, 18)
                 .addComponent(btnInventario)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
 
         pnlPantalla.setBackground(new java.awt.Color(204, 204, 204));
@@ -224,6 +224,8 @@ public class MenuAdmin extends javax.swing.JFrame {
 
     private void btnGTrajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGTrajesActionPerformed
         // boton gestion traje
+        GestionTraje gesTraje = new GestionTraje(this, true); //para que aparecezca como ventana en el boton
+        gesTraje.setVisible(true);
     }//GEN-LAST:event_btnGTrajesActionPerformed
 
     private void btnGAlquilerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGAlquilerActionPerformed
@@ -236,7 +238,12 @@ public class MenuAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInventarioActionPerformed
 
     private void btnRReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRReservaActionPerformed
-        // TODO add your handling code here:
+        // boton reservar
+        
+        setLocationRelativeTo(null); //centrado
+        GUI_reserva reserva = new GUI_reserva("admin");
+        reserva.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnRReservaActionPerformed
 
     /**
