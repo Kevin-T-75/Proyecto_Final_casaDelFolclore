@@ -5,9 +5,9 @@
 package proyecto_final_casafolclore.GUI;
 
 import javax.swing.JOptionPane;
+import proyecto_final_casafolclore.BaseDatos.conexionBD;
 import proyecto_final_casafolclore.Clases.Cliente; //importar clase cliente
 import proyecto_final_casafolclore.Logica.ControladorCliente; //importar controlador
-
 /**
  *
  * @author neyli
@@ -19,12 +19,13 @@ public class RegistroCliente extends javax.swing.JFrame {
     /**
      * Creates new form RegistroCliente
      */
-    public RegistroCliente() {
+   public RegistroCliente() {
         initComponents();
-        setSize(612, 628); //tamaño
-        setLocationRelativeTo(null); //centrado
-        setResizable(false); //no deja maximizar, mas rapido aqui
-        txtIDU.setText(controlador.generarID()); //aqui llamamos al generador automatico del controlador
+        setSize(612, 628); 
+        setLocationRelativeTo(null); 
+        setResizable(false); 
+        
+        mostrarSiguienteID(); 
     }
 
     /**
@@ -380,6 +381,15 @@ public class RegistroCliente extends javax.swing.JFrame {
         // correo
     }//GEN-LAST:event_txtCorreoActionPerformed
 
+    private void mostrarSiguienteID() {
+        // Le pedimos el ID real directamente a la base de datos en la nube
+        conexionBD conexion = new conexionBD();
+        String proximoID = conexion.obtenerSiguienteID(); 
+        
+        txtIDU.setText(proximoID);
+        txtIDU.setEditable(false); 
+    }
+    
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // registrar boton
 
@@ -394,7 +404,7 @@ public class RegistroCliente extends javax.swing.JFrame {
         String telefono = txtTel.getText();
         String direccion = txtDic.getText();
         String tipoCliente = cbTipo.getSelectedItem().toString();
-
+            
         //validaciones
         if (id.isEmpty() || nombre.isEmpty() || apellidoPaterno.isEmpty() || 
                 apellidoMaterno.isEmpty() || nroDocumento.isEmpty() || 
@@ -437,15 +447,24 @@ public class RegistroCliente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Ingrese una dirección válida");
             return;
         }
-
-        Cliente cliente = new Cliente(telefono,direccion,tipoCliente,id,
-            nombre,correo,contraseña);
-
+        
+        conexionBD conexion = new conexionBD();
+    boolean exito = conexion.registrarCliente(id, nombre, apellidoPaterno, apellidoMaterno, 
+                                              tipoDocumento, nroDocumento, correo, contraseña, 
+                                              telefono, direccion, tipoCliente);
+   
+    
+    if (exito) {
+        Cliente cliente = new Cliente(telefono, direccion, tipoCliente, id, nombre, correo, contraseña);
         controlador.registrarCliente(cliente);
 
-        JOptionPane.showMessageDialog(this, "Cliente registrado correctamente.");
-
+        JOptionPane.showMessageDialog(this, "Cliente registrado correctamente en el sistema.");
+        
         limpiarCampos();
+        mostrarSiguienteID(); 
+    } else {
+        JOptionPane.showMessageDialog(this, "Error: No se pudo guardar el registro en la base de datos.");
+    }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void txtContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraActionPerformed
@@ -467,7 +486,7 @@ public class RegistroCliente extends javax.swing.JFrame {
     private void cbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbTipoActionPerformed
-    private void limpiarCampos() { //este es para que despues de completar o cancelar se limpie solito
+    private void limpiarCampos() { 
         txtIDU.setText("");
         txtName.setText("");
         txtApellidoP.setText("");
