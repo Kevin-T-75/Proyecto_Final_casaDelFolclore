@@ -5,6 +5,7 @@
 package proyecto_final_casafolclore.GUI;
 
 import javax.swing.JOptionPane;
+import proyecto_final_casafolclore.Logica.Sesion; //para que no se borre el correo al salir entre botones, se creo una clase mejor
 
 /**
  *
@@ -224,11 +225,13 @@ public class InicioSesion extends javax.swing.JFrame {
 
         if (rbAdmin.isSelected())
         {
-            new MenuAdmin(correo).setVisible(true); //con esto si inicia, aqui debe ir para base de datos
+            Sesion.correoActual = correo;
+            new MenuAdmin().setVisible(true); //con esto si inicia, aqui debe ir para base de datos
             this.dispose(); //para cerrar ventana actual y abrir otra
         }
         else if (rbCliente.isSelected()) {
-            new MenuCliente(correo).setVisible(true);
+            Sesion.correoActual = correo;
+            new MenuCliente().setVisible(true);
             this.dispose();
         }
         else {

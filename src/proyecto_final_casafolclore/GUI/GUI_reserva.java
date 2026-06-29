@@ -34,6 +34,8 @@ public class GUI_reserva extends javax.swing.JFrame {
         setSize(750, 560); //tamaño
         setLocationRelativeTo(null); //centrado
         setResizable(false); //no deja maximizar, mas rapido aqui
+        mostrarFechaActual();
+        mostrarFechaFin();
     }
     public void mostrarFechaActual() {
         LocalDate hoy = LocalDate.now();
@@ -140,7 +142,7 @@ public class GUI_reserva extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel12))
                 .addContainerGap(10, Short.MAX_VALUE))

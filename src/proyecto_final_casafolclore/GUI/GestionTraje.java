@@ -882,6 +882,7 @@ public class GestionTraje extends javax.swing.JDialog {
 
     private void txtRIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRIDActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtRIDActionPerformed
 
     private void txtRTallaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRTallaActionPerformed
@@ -913,6 +914,14 @@ public class GestionTraje extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Ingrese un código");
             return;
         }
+        int op= JOptionPane.showConfirmDialog( //esto es para confirmar si si borrar o no, esta predeterminado en Joption
+            this,"¿Está seguro/a de que desea eliminar este traje?","ADVERTENCIA",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE);
+
+         if (op == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(this, "Se eliminó correctamente");
+        }   
     }//GEN-LAST:event_btnCElimiActionPerformed
 
     private void txtAIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAIDActionPerformed
@@ -949,19 +958,34 @@ public class GestionTraje extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "El costo solo debe contener números");
             return;
         }
-        JOptionPane.showMessageDialog(this, "Traje agregado correctamente");
+         int op= JOptionPane.showConfirmDialog( //esto es para confirmar si si borrar o no, esta predeterminado en Joption
+            this,"¿Está seguro/a de que desea agregar este traje al registro?","ADVERTENCIA",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE);
+
+         if (op == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(this, "Traje agregado correctamente");
+        }  ;
         
     }//GEN-LAST:event_btnATrajeActionPerformed
 
     private void btnCDevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCDevoActionPerformed
         // Confirmar devolucion
         
-        String id = txtEID.getText();
+        String id = txtRID.getText();
         if (id.isEmpty()) {
 
             JOptionPane.showMessageDialog(this, "Ingrese un código");
             return;
         }
+         int op= JOptionPane.showConfirmDialog( //esto es para confirmar si si borrar o no, esta predeterminado en Joption
+            this,"¿Está seguro/a de que desea registrar la devolución?","ADVERTENCIA",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE);
+
+         if (op == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(this, "Se registró la devolución correctamente");
+        }  
     }//GEN-LAST:event_btnCDevoActionPerformed
 
     private void txtRGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRGeneroActionPerformed
