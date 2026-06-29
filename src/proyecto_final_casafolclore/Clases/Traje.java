@@ -12,10 +12,10 @@ public class Traje {
     
     private String idTraje;
     private String nombre_Traje;
-    private String danza;
+    private String genero;
     private String talla;
     private boolean estado;
-    private String precioAlquiler;
+    private double precioAlquiler;
 
     public String getIdTraje() {
         return idTraje;
@@ -33,12 +33,12 @@ public class Traje {
         this.nombre_Traje = nombre_Traje;
     }
 
-    public String getDanza() {
-        return danza;
+    public String getGenero() {
+        return genero;
     }
 
-    public void setDanza(String danza) {
-        this.danza = danza;
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
 
     public String getTalla() {
@@ -59,18 +59,18 @@ public class Traje {
 
    
     
-    public String getPrecioAlquiler() {
+    public double getPrecioAlquiler() {
         return precioAlquiler;
     }
 
-    public void setPrecioAlquiler(String precioAlquiler) {
+    public void setPrecioAlquiler(double precioAlquiler) {
         this.precioAlquiler = precioAlquiler;
     }
 
-    public Traje(String idTraje, String nombre_Traje, String danza, String talla, boolean estado, String precioAlquiler) {
+    public Traje(String idTraje, String nombre_Traje, String genero, String talla, boolean estado, double precioAlquiler) {
         this.idTraje = idTraje;
         this.nombre_Traje = nombre_Traje;
-        this.danza = danza;
+        this.genero = genero;
         this.talla = talla;
         this.estado = estado;
         this.precioAlquiler = precioAlquiler;

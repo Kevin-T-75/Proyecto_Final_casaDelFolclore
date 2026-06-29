@@ -4,6 +4,8 @@
  */
 package proyecto_final_casafolclore.GUI;
 
+import proyecto_final_casafolclore.Logica.Sesion;
+
 /**
  *
  * @author neyli
@@ -20,16 +22,9 @@ public class MenuCliente extends javax.swing.JFrame {
         setSize(900, 600); //tamaño
         setLocationRelativeTo(null); //centrado
         setResizable(false); //no deja maximizar, mas rapido aqui
+        lblSaludo.setText("Bienvenido/a, " + Sesion.correoActual);
     }
     
-     public MenuCliente(String correo) { //segundo constructor para correo, no quiero arriesgarme Debe cambiar con base de datos
-        initComponents();
-        setSize(900, 600); //tamaño
-        setLocationRelativeTo(null); //centrado
-        setResizable(false); //no deja maximizar, mas rapido aqui
-        lblSaludo.setText("Bienvenido/a, " + correo);
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -184,10 +179,9 @@ public class MenuCliente extends javax.swing.JFrame {
 
     private void btnReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarActionPerformed
         // BOTON RESERVAR
-        new GUI_reserva().setVisible(true);
-
-      this.dispose();
-        
+        GUI_reserva reserva = new GUI_reserva("cliente");
+        reserva.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnReservarActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed

@@ -10,7 +10,12 @@
             <file>file:/D:/Clases%20Sistemas/Java/Proyecto_Final_casaDelFolclore/src/proyecto_final_casafolclore/Logica/ControladorCliente.java</file>
             <file>file:/D:/Clases%20Sistemas/Java/Proyecto_Final_casaDelFolclore/src/proyecto_final_casafolclore/GUI/GUI_regalquiler.java</file>
             <file>file:/D:/Clases%20Sistemas/Java/Proyecto_Final_casaDelFolclore/src/proyecto_final_casafolclore/GUI/GUI_reserva.java</file>
-            <file>file:/D:/Clases%20Sistemas/Java/Proyecto_Final_casaDelFolclore/src/proyecto_final_casafolclore/GUI/GestionTrajes.java</file>
+            <file>file:/D:/Clases%20Sistemas/Java/Proyecto_Final_casaDelFolclore/src/proyecto_final_casafolclore/GUI/GUI_alquiler.java</file>
+            <file>file:/D:/Clases%20Sistemas/Java/Proyecto_Final_casaDelFolclore/src/proyecto_final_casafolclore/GUI/GUI_pago.java</file>
+            <file>file:/D:/Clases%20Sistemas/Java/Proyecto_Final_casaDelFolclore/src/proyecto_final_casafolclore/GUI/GestionTraje.java</file>
+            <file>file:/D:/Clases%20Sistemas/Java/Proyecto_Final_casaDelFolclore/src/proyecto_final_casafolclore/Clases/Traje.java</file>
+            <file>file:/D:/Clases%20Sistemas/Java/Proyecto_Final_casaDelFolclore/src/proyecto_final_casafolclore/Logica/ControladorTraje.java</file>
+            <file>file:/D:/Clases%20Sistemas/Java/Proyecto_Final_casaDelFolclore/src/proyecto_final_casafolclore/Logica/Sesion.java</file>
         </group>
     </open-files>
 </project-private>

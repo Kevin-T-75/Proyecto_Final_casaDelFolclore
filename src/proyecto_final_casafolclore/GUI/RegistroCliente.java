@@ -374,11 +374,11 @@ public class RegistroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTelActionPerformed
 
     private void txtIDUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDUActionPerformed
-        // correo
+        // ID
     }//GEN-LAST:event_txtIDUActionPerformed
 
     private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
-        // TODO add your handling code here:
+        // correo
     }//GEN-LAST:event_txtCorreoActionPerformed
 
     private void mostrarSiguienteID() {

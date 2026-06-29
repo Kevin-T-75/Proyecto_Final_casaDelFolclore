@@ -24,6 +24,7 @@ public class GUI_alquiler extends javax.swing.JFrame {
     
     jTextField5.setText(fechaActual);
     jTextField4.setText(fechaActual);
+    setLocationRelativeTo(null); //centrado
     }
 
     /**
