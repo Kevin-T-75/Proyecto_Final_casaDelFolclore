@@ -15,7 +15,7 @@ public class Traje {
     private String genero;
     private String talla;
     private boolean estado;
-    private String precioAlquiler;
+    private double precioAlquiler;
 
     public String getIdTraje() {
         return idTraje;
@@ -59,15 +59,15 @@ public class Traje {
 
    
     
-    public String getPrecioAlquiler() {
+    public double getPrecioAlquiler() {
         return precioAlquiler;
     }
 
-    public void setPrecioAlquiler(String precioAlquiler) {
+    public void setPrecioAlquiler(double precioAlquiler) {
         this.precioAlquiler = precioAlquiler;
     }
 
-    public Traje(String idTraje, String nombre_Traje, String genero, String talla, boolean estado, String precioAlquiler) {
+    public Traje(String idTraje, String nombre_Traje, String genero, String talla, boolean estado, double precioAlquiler) {
         this.idTraje = idTraje;
         this.nombre_Traje = nombre_Traje;
         this.genero = genero;

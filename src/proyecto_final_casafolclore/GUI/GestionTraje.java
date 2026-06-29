@@ -5,6 +5,9 @@
 package proyecto_final_casafolclore.GUI;
 
 import javax.swing.JOptionPane;
+import proyecto_final_casafolclore.Clases.Traje; //importar clase traje
+import proyecto_final_casafolclore.Logica.ControladorTraje; //importar controlador
+
 
 /**
  *
@@ -13,6 +16,7 @@ import javax.swing.JOptionPane;
 public class GestionTraje extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GestionTraje.class.getName());
+    private ControladorTraje controladorTraje = new ControladorTraje(); //controlador
     String genero = "";
 
     /**
@@ -24,6 +28,7 @@ public class GestionTraje extends javax.swing.JDialog {
         setSize(600, 500); //tamaño
         setLocationRelativeTo(null); //centrado
         setResizable(false); //no deja maximizar, mas rapido aqui
+        txtAID.setText(controladorTraje.generarID());
     }
 
     /**
@@ -923,7 +928,29 @@ public class GestionTraje extends javax.swing.JDialog {
     }//GEN-LAST:event_txtACostoActionPerformed
 
     private void btnATrajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnATrajeActionPerformed
-        // TODO add your handling code here
+        // agregar traje
+        String nombre = txtAName.getText();
+
+        if (nombre.isEmpty() || txtACosto.getText().trim().isEmpty()) { //con dobule no funciona el solo isEmpty() TwT
+            JOptionPane.showMessageDialog(this, "Complete todos los campos");
+            return;
+        }
+        double costo;
+
+        try {
+            costo = Double.parseDouble(txtACosto.getText());
+
+            if (costo <= 0) {
+                JOptionPane.showMessageDialog(this, "Ingrese un costo mayor a 0");
+                return;
+                }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El costo solo debe contener números");
+            return;
+        }
+        JOptionPane.showMessageDialog(this, "Traje agregado correctamente");
+        
     }//GEN-LAST:event_btnATrajeActionPerformed
 
     private void btnCDevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCDevoActionPerformed
