@@ -6,6 +6,7 @@ package proyecto_final_casafolclore.GUI;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -66,7 +67,7 @@ public class GUI_reserva extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        txtNroDocumento = new javax.swing.JTextField();
+        txtnDocumento = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jTextField3 = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
@@ -81,6 +82,8 @@ public class GUI_reserva extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         cbTrajes = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
+        cbTDoc = new javax.swing.JComboBox<>();
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
@@ -174,19 +177,20 @@ public class GUI_reserva extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(249, 241, 229));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(137, 124, 104), 4));
 
-        txtNroDocumento.setBackground(new java.awt.Color(245, 217, 194));
-        txtNroDocumento.setForeground(new java.awt.Color(0, 0, 0));
-        txtNroDocumento.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtnDocumento.setBackground(new java.awt.Color(245, 217, 194));
+        txtnDocumento.setForeground(new java.awt.Color(0, 0, 0));
+        txtnDocumento.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtnDocumento.addActionListener(this::txtnDocumentoActionPerformed);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtNroDocumento, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+            .addComponent(txtnDocumento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtNroDocumento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(txtnDocumento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         jPanel3.setBackground(new java.awt.Color(249, 241, 229));
@@ -295,6 +299,14 @@ public class GUI_reserva extends javax.swing.JFrame {
         cbTrajes.setForeground(new java.awt.Color(0, 0, 0));
         cbTrajes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vestido de marinera", "Yanques", "Ropa de saya" }));
 
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(73, 43, 12));
+        jLabel14.setText("Tipo de documento");
+
+        cbTDoc.setBackground(new java.awt.Color(137, 124, 104));
+        cbTDoc.setForeground(new java.awt.Color(0, 0, 0));
+        cbTDoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DNI", "CE" }));
+
         javax.swing.GroupLayout pnlPantallaLayout = new javax.swing.GroupLayout(pnlPantalla);
         pnlPantalla.setLayout(pnlPantallaLayout);
         pnlPantallaLayout.setHorizontalGroup(
@@ -302,8 +314,6 @@ public class GUI_reserva extends javax.swing.JFrame {
             .addGroup(pnlPantallaLayout.createSequentialGroup()
                 .addGap(83, 83, 83)
                 .addGroup(pnlPantallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel6)
                     .addGroup(pnlPantallaLayout.createSequentialGroup()
                         .addGroup(pnlPantallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -316,7 +326,15 @@ public class GUI_reserva extends javax.swing.JFrame {
                             .addGroup(pnlPantallaLayout.createSequentialGroup()
                                 .addGap(55, 55, 55)
                                 .addComponent(jLabel4))))
-                    .addComponent(cbTrajes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cbTrajes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPantallaLayout.createSequentialGroup()
+                        .addGroup(pnlPantallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbTDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnlPantallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(74, 74, 74)
                 .addGroup(pnlPantallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel10)
@@ -346,10 +364,15 @@ public class GUI_reserva extends javax.swing.JFrame {
                 .addGap(46, 46, 46)
                 .addGroup(pnlPantallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlPantallaLayout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jLabel3)
-                        .addGap(4, 4, 4)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pnlPantallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlPantallaLayout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnlPantallaLayout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbTDoc)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel6)
                         .addGap(4, 4, 4)
@@ -432,6 +455,22 @@ public class GUI_reserva extends javax.swing.JFrame {
             "Confirmación de Reserva",
             javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
+       //validaciones
+       String tipoDocumento = cbTDoc.getSelectedItem().toString();
+       String nroDocumento = txtnDocumento.getText();
+       if (tipoDocumento.equals("DNI")) { //como no es un label no se puede poner == qwq no se escribe chanfles
+           if (nroDocumento.length() != 8 || !nroDocumento.matches("\\d+")) { //lo ultimo verifica que sean solo numeros
+                JOptionPane.showMessageDialog(this,"Ingrese un DNI válido");
+                return;
+            }
+        }
+
+        if (tipoDocumento.equals("CE")) {
+            if (nroDocumento.length() != 9 || !nroDocumento.matches("\\d+")) {
+            JOptionPane.showMessageDialog(this,"Ingrese un CE válido");
+                return;
+            }
+        }
         // 2. Cerrar la ventana actual
         new MenuCliente().setVisible(true);
 
@@ -450,6 +489,12 @@ public class GUI_reserva extends javax.swing.JFrame {
         // este codigo debe generarse automatico al el nombre del traje y la talla, esto igual que el dinero
         //quizas cambiar con combo box
     }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void txtnDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnDocumentoActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_txtnDocumentoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -477,6 +522,7 @@ public class GUI_reserva extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbTDoc;
     private javax.swing.JComboBox<String> cbTalla;
     private javax.swing.JComboBox<String> cbTrajes;
     private javax.swing.JButton jButton1;
@@ -486,6 +532,7 @@ public class GUI_reserva extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -507,6 +554,6 @@ public class GUI_reserva extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     private javax.swing.JPanel pnlPantalla;
-    private javax.swing.JTextField txtNroDocumento;
+    private javax.swing.JTextField txtnDocumento;
     // End of variables declaration//GEN-END:variables
 }
