@@ -5,6 +5,7 @@
 package proyecto_final_casafolclore.GUI;
 
 import javax.swing.JOptionPane;
+import proyecto_final_casafolclore.BaseDatos.conexionBD;
 import proyecto_final_casafolclore.Clases.Traje; //importar clase traje
 import proyecto_final_casafolclore.Logica.ControladorTraje; //importar controlador
 
@@ -416,6 +417,7 @@ public class GestionTraje extends javax.swing.JDialog {
         txtAID.setBackground(new java.awt.Color(51, 51, 51));
         txtAID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtAID.setForeground(new java.awt.Color(255, 255, 204));
+        txtAID.setText(" ");
         txtAID.setEnabled(false);
         txtAID.setName("txtIDU"); // NOI18N
         txtAID.addActionListener(this::txtAIDActionPerformed);
@@ -434,7 +436,7 @@ public class GestionTraje extends javax.swing.JDialog {
         lblAGenero.setBackground(new java.awt.Color(204, 204, 204));
         lblAGenero.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         lblAGenero.setForeground(new java.awt.Color(102, 51, 0));
-        lblAGenero.setText("Danza:");
+        lblAGenero.setText("Para:");
 
         lblATalla.setBackground(new java.awt.Color(204, 204, 204));
         lblATalla.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
@@ -495,8 +497,8 @@ public class GestionTraje extends javax.swing.JDialog {
         rbMujer.setText("MUJER");
 
         cbTalla.setBackground(new java.awt.Color(137, 124, 104));
-        cbTalla.setForeground(new java.awt.Color(0, 0, 0));
         cbTalla.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "S", "M", "L", "XL" }));
+        cbTalla.addActionListener(this::cbTallaActionPerformed);
 
         javax.swing.GroupLayout pnlFAgregarLayout = new javax.swing.GroupLayout(pnlFAgregar);
         pnlFAgregar.setLayout(pnlFAgregarLayout);
@@ -512,17 +514,14 @@ public class GestionTraje extends javax.swing.JDialog {
                         .addComponent(txtAName, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlFAgregarLayout.createSequentialGroup()
                         .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                         .addGroup(pnlFAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFAgregarLayout.createSequentialGroup()
-                                .addComponent(btnATraje, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(73, 73, 73))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFAgregarLayout.createSequentialGroup()
+                            .addGroup(pnlFAgregarLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                                 .addGroup(pnlFAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(pnlFAgregarLayout.createSequentialGroup()
-                                        .addGap(37, 37, 37)
-                                        .addComponent(lblAGenero)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblAGenero)
+                                        .addGap(18, 18, 18)
                                         .addComponent(rbVaron, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(rbMujer))
@@ -533,7 +532,11 @@ public class GestionTraje extends javax.swing.JDialog {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(lblACosto)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtACosto, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(txtACosto, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFAgregarLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnATraje, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(91, 91, 91)))))
                 .addGap(98, 98, 98))
             .addGroup(pnlFAgregarLayout.createSequentialGroup()
                 .addGap(196, 196, 196)
@@ -567,11 +570,10 @@ public class GestionTraje extends javax.swing.JDialog {
                     .addComponent(txtAName, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNameT, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
-                .addGroup(pnlFAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(rbMujer)
-                        .addComponent(rbVaron))
-                    .addComponent(lblAGenero, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(pnlFAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbMujer)
+                    .addComponent(rbVaron)
+                    .addComponent(lblAGenero))
                 .addGroup(pnlFAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlFAgregarLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -870,7 +872,12 @@ public class GestionTraje extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    public GestionTraje() {
+        initComponents(); 
+        
+        conexionBD conexion = new conexionBD();
+        txtAID.setText(conexion.obtenerSiguienteIDTraje());
+    }
     
     private void txtEIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEIDActionPerformed
         // TODO add your handling code here:
@@ -937,36 +944,67 @@ public class GestionTraje extends javax.swing.JDialog {
     }//GEN-LAST:event_txtACostoActionPerformed
 
     private void btnATrajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnATrajeActionPerformed
-        // agregar traje
-        String nombre = txtAName.getText();
+        conexionBD conexion = new conexionBD();
+        String id = conexion.obtenerSiguienteIDTraje(); // <-- AQUÍ CAMBIAMOS LA LECTURA FIJA POR EL ID REAL DE LA BD
 
-        if (nombre.isEmpty() || txtACosto.getText().trim().isEmpty()) { //con dobule no funciona el solo isEmpty() TwT
-            JOptionPane.showMessageDialog(this, "Complete todos los campos");
-            return;
+        String nombre = txtAName.getText().trim();
+
+// Captura de los JRadioButton para el Género
+        String genero = "";
+        if (rbVaron.isSelected()) {         
+            genero = "VARÓN";
+        } else if (rbMujer.isSelected()) {   
+            genero = "MUJER";
         }
+
+        String talla = cbTalla.getSelectedItem().toString(); 
+        String costoTexto = txtACosto.getText().trim(); 
+
+// 2. Validaciones de campos vacíos
+        if (nombre.isEmpty() || genero.isEmpty() || talla.isEmpty() || costoTexto.isEmpty()) { 
+            JOptionPane.showMessageDialog(this, "Complete todos los campos de la sección 'Datos del traje'.");
+            return;
+}
+
         double costo;
 
+// 3. Validación de formato numérico
         try {
-            costo = Double.parseDouble(txtACosto.getText());
-
+            costo = Double.parseDouble(costoTexto);
             if (costo <= 0) {
-                JOptionPane.showMessageDialog(this, "Ingrese un costo mayor a 0");
+                JOptionPane.showMessageDialog(this, "Ingrese un precio de alquiler mayor a 0");
                 return;
-                }
-
+            }
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "El costo solo debe contener números");
+            JOptionPane.showMessageDialog(this, "El precio para alquiler solo debe contener números.");
             return;
-        }
-         int op= JOptionPane.showConfirmDialog( //esto es para confirmar si si borrar o no, esta predeterminado en Joption
-            this,"¿Está seguro/a de que desea agregar este traje al registro?","ADVERTENCIA",
+}
+
+// 4. Confirmación corregida (Texto cambiado de 'devolución' a 'traje')
+        int op = JOptionPane.showConfirmDialog( 
+            this, "¿Está seguro/a de que desea agregar este traje al registro?", "ADVERTENCIA",
             JOptionPane.YES_NO_OPTION,
             JOptionPane.WARNING_MESSAGE);
 
-         if (op == JOptionPane.YES_OPTION) {
-            JOptionPane.showMessageDialog(this, "Traje agregado correctamente");
-        }  ;
-        
+        if (op == JOptionPane.YES_OPTION) {
+
+            // 5. Intentamos guardar en la BD una única vez usando el ID dinámico
+            boolean exitoBD = conexion.registrarTraje(id, nombre, genero, talla, String.valueOf(costo));
+
+            if (exitoBD) {
+                // 6. Si la BD lo aceptó, lo guardamos en la lista en memoria
+                Traje traje = new Traje(id, nombre, genero, talla, true, costo);
+                controladorTraje.registrarTraje(traje);
+
+                JOptionPane.showMessageDialog(this, "Traje registrado correctamente en el sistema.");
+
+                // 7. Limpiamos las cajas y actualizamos el campo de texto con el código que sigue (T0002, T0003...)
+                limpiarCamposTraje();       
+                txtAID.setText(conexion.obtenerSiguienteIDTraje()); // <-- Se actualiza con el ID real de la nube
+          } else {
+              JOptionPane.showMessageDialog(this, "Error: No se pudo guardar el registro en la base de datos.");
+         }
+    }    
     }//GEN-LAST:event_btnATrajeActionPerformed
 
     private void btnCDevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCDevoActionPerformed
@@ -991,10 +1029,22 @@ public class GestionTraje extends javax.swing.JDialog {
     private void txtRGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRGeneroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRGeneroActionPerformed
+    private void limpiarCamposTraje() {
+        txtAName.setText("");
+        txtACosto.setText("");
 
+        rbVaron.setSelected(false);
+        rbMujer.setSelected(false);
+
+        cbTalla.setSelectedIndex(0); 
+    }
     private void txtEGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEGeneroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEGeneroActionPerformed
+
+    private void cbTallaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTallaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbTallaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1028,8 +1078,17 @@ public class GestionTraje extends javax.swing.JDialog {
                         System.exit(0);
                     }
                 });
+                try {
+                    proyecto_final_casafolclore.BaseDatos.conexionBD conexion = new proyecto_final_casafolclore.BaseDatos.conexionBD();
+                    dialog.txtAID.setText(conexion.obtenerSiguienteIDTraje());
+                } catch (Exception e) {
+                    System.out.println("Error al cargar ID desde el main: " + e.getMessage());
+                }
+                // ========================================================
+
                 dialog.setVisible(true);
             }
+            
         });
     }
 
@@ -1059,7 +1118,6 @@ public class GestionTraje extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JTabbedPane jtpGTrajes;
@@ -1079,7 +1137,6 @@ public class GestionTraje extends javax.swing.JDialog {
     private javax.swing.JLabel lblRDevo1;
     private javax.swing.JLabel lblRDevo2;
     private javax.swing.JLabel lblRDevo3;
-    private javax.swing.JLabel lblRDevo4;
     private javax.swing.JLabel lblRDevo5;
     private javax.swing.JLabel lblREstado;
     private javax.swing.JLabel lblRGenero;

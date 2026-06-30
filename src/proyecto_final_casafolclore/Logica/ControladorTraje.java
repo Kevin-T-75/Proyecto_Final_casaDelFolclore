@@ -14,13 +14,15 @@ import proyecto_final_casafolclore.Clases.Traje;
  */
 public class ControladorTraje {
     private ArrayList<Traje> listaTrajes = new ArrayList<>();
-    private static int contador = 1; //este sera poara la ID traje
+    private static int contador = 1; //este sera para la ID traje
+    
     public String generarID() {
-        return String.format("T%04d", contador++); //numeros automaticos
+        return String.format("T%04d", contador); //numeros automaticos
     }
     
-    public void registrarCliente(Traje traje) {
+    public void registrarTraje(Traje traje) {
         listaTrajes.add(traje);
+        contador++;//despues de registrar empieza a sumar
     }
 
     public ArrayList<Traje> getListaClientes() {
