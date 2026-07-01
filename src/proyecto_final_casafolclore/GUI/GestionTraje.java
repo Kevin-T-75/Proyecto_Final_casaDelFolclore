@@ -31,6 +31,50 @@ public class GestionTraje extends javax.swing.JDialog {
         setResizable(false); //no deja maximizar, mas rapido aqui
         txtAID.setText(controladorTraje.generarID());
     }
+    
+    private void buscarTrajePorId(String idTraje) {
+    //solo usamos los paquetes aqui
+    java.sql.Connection con = null;
+    java.sql.PreparedStatement ps = null;
+    java.sql.ResultSet rs = null;
+
+    String sql = "SELECT nombre_traje, genero, talla, precio_traje FROM traje WHERE id_traje = ?";
+
+    try {
+        con = conexionBD.getConexion(); 
+
+        if (con == null) {
+            JOptionPane.showMessageDialog(this, "No se pudo establecer conexión con la base de datos.", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        ps = con.prepareStatement(sql);
+        ps.setString(1, idTraje);
+        rs = ps.executeQuery();
+
+        if (rs.next()) {
+            txtEName.setText(rs.getString("nombre_traje"));
+            txtEGenero.setText(rs.getString("genero")); 
+            txtETalla.setText(rs.getString("talla"));
+            txtEEstado.setText(rs.getString("precio_traje")); 
+        } else {
+            JOptionPane.showMessageDialog(this, "No se encontró ningún traje con el código ingresado.", "Sin resultados", JOptionPane.INFORMATION_MESSAGE);
+            limpiarCamposTraje();
+        }
+
+    } catch (java.sql.SQLException e) { 
+        JOptionPane.showMessageDialog(this, "Error al buscar el traje: " + e.getMessage(), "Error SQL", JOptionPane.ERROR_MESSAGE);
+    } finally { 
+        try {
+            if (rs != null) rs.close();
+            if (ps != null) ps.close();
+            if (con != null) con.close();
+        } catch (java.sql.SQLException ex) {
+            System.out.println("Error al cerrar recursos: " + ex.getMessage());
+        }
+    }
+}
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -519,7 +563,6 @@ public class GestionTraje extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                                 .addGroup(pnlFAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(pnlFAgregarLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(lblAGenero)
                                         .addGap(18, 18, 18)
                                         .addComponent(rbVaron, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -663,6 +706,7 @@ public class GestionTraje extends javax.swing.JDialog {
         btnEBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnEBuscar.setForeground(new java.awt.Color(255, 239, 221));
         btnEBuscar.setText("Buscar");
+        btnEBuscar.addActionListener(this::btnEBuscarActionPerformed);
 
         lblEName.setBackground(new java.awt.Color(204, 204, 204));
         lblEName.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
@@ -913,22 +957,49 @@ public class GestionTraje extends javax.swing.JDialog {
     }//GEN-LAST:event_txtEEstadoActionPerformed
 
     private void btnCElimiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCElimiActionPerformed
-        // eliminar traje
-        
         String id = txtEID.getText();
-        if (id.isEmpty()) {
+    if (id.isEmpty()) {
+    JOptionPane.showMessageDialog(this, "Ingrese un código");
+    return;
+}
 
-            JOptionPane.showMessageDialog(this, "Ingrese un código");
-            return;
+    int op = JOptionPane.showConfirmDialog( // esto es para confirmar si borrar o no, está predeterminado en Joption
+    this, "¿Está seguro/a de que desea eliminar este traje?", "ADVERTENCIA",
+    JOptionPane.YES_NO_OPTION,
+    JOptionPane.WARNING_MESSAGE);
+
+    if (op == JOptionPane.YES_OPTION) {
+    // BASE DE DATOS
+    java.sql.Connection con = null; 
+    java.sql.PreparedStatement ps = null;
+    String sql = "DELETE FROM traje WHERE id_traje = ?";
+    
+    try {
+        con = conexionBD.getConexion(); 
+        ps = con.prepareStatement(sql);
+        ps.setString(1, id);
+        
+        int resultado = ps.executeUpdate();
+        
+        if (resultado > 0) {
+            JOptionPane.showMessageDialog(this, "Se eliminó correctamente de la base de datos.");
+            txtEID.setText("");
+            limpiarCamposTraje();
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo eliminar. El ID no existe en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        int op= JOptionPane.showConfirmDialog( //esto es para confirmar si si borrar o no, esta predeterminado en Joption
-            this,"¿Está seguro/a de que desea eliminar este traje?","ADVERTENCIA",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.WARNING_MESSAGE);
-
-         if (op == JOptionPane.YES_OPTION) {
-            JOptionPane.showMessageDialog(this, "Se eliminó correctamente");
-        }   
+        
+    } catch (java.sql.SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error al eliminar en la base de datos: " + e.getMessage(), "Error SQL", JOptionPane.ERROR_MESSAGE);
+    } finally {
+        try {
+            if (ps != null) ps.close();
+            if (con != null) con.close();
+        } catch (java.sql.SQLException ex) {
+            System.out.println("Error al cerrar recursos: " + ex.getMessage());
+        }
+    }
+} 
     }//GEN-LAST:event_btnCElimiActionPerformed
 
     private void txtAIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAIDActionPerformed
@@ -1045,6 +1116,17 @@ public class GestionTraje extends javax.swing.JDialog {
     private void cbTallaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTallaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbTallaActionPerformed
+
+    private void btnEBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEBuscarActionPerformed
+    String idTraje = txtEID.getText().trim();
+
+    if (idTraje.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingrese el código del traje para buscar.", "Campo Vacío", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    buscarTrajePorId(idTraje);       
+    }//GEN-LAST:event_btnEBuscarActionPerformed
 
     /**
      * @param args the command line arguments

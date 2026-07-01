@@ -583,7 +583,6 @@
                                           <EmptySpace pref="11" max="32767" attributes="0"/>
                                           <Group type="103" groupAlignment="1" attributes="0">
                                               <Group type="102" attributes="0">
-                                                  <EmptySpace max="32767" attributes="0"/>
                                                   <Component id="lblAGenero" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                                   <Component id="rbVaron" min="-2" pref="79" max="-2" attributes="0"/>
@@ -1272,6 +1271,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Buscar"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEBuscarActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblEName">
                   <Properties>
