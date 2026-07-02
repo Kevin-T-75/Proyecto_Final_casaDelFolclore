@@ -6,6 +6,7 @@ package proyecto_final_casafolclore.GUI;
 
 import javax.swing.JOptionPane;
 import proyecto_final_casafolclore.BaseDatos.conexionBD;
+import proyecto_final_casafolclore.BaseDatos.registrarCliente;
 import proyecto_final_casafolclore.Clases.Cliente; //importar clase cliente
 import proyecto_final_casafolclore.Logica.ControladorCliente; //importar controlador
 /**
@@ -383,12 +384,12 @@ public class RegistroCliente extends javax.swing.JFrame {
 
     private void mostrarSiguienteID() {
         // Le pedimos el ID real directamente a la base de datos en la nube
-        conexionBD conexion = new conexionBD();
-        String proximoID = conexion.obtenerSiguienteID(); 
+        registrarCliente reg = new registrarCliente();
+        String proximoID = reg.obtenerSiguienteID(); 
         
         txtIDU.setText(proximoID);
         txtIDU.setEditable(false); 
-    }
+    } 
     
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // registrar boton
@@ -448,8 +449,8 @@ public class RegistroCliente extends javax.swing.JFrame {
             return;
         }
         
-        conexionBD conexion = new conexionBD();
-    boolean exito = conexion.registrarCliente(id, nombre, apellidoPaterno, apellidoMaterno, 
+        registrarCliente reg = new registrarCliente();
+    boolean exito = reg.registrarCliente(id, nombre, apellidoPaterno, apellidoMaterno, 
                                               tipoDocumento, nroDocumento, correo, contraseña, 
                                               telefono, direccion, tipoCliente);
    

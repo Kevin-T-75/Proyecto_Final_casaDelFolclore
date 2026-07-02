@@ -6,6 +6,7 @@ package proyecto_final_casafolclore.GUI;
 
 import javax.swing.JOptionPane;
 import proyecto_final_casafolclore.BaseDatos.conexionBD;
+import proyecto_final_casafolclore.BaseDatos.registrarTraje;
 import proyecto_final_casafolclore.Clases.Traje; //importar clase traje
 import proyecto_final_casafolclore.Logica.ControladorTraje; //importar controlador
 
@@ -919,8 +920,8 @@ public class GestionTraje extends javax.swing.JDialog {
     public GestionTraje() {
         initComponents(); 
         
-        conexionBD conexion = new conexionBD();
-        txtAID.setText(conexion.obtenerSiguienteIDTraje());
+        registrarTraje regT = new registrarTraje();
+        txtAID.setText(regT.obtenerSiguienteIDTraje());
     }
     
     private void txtEIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEIDActionPerformed
@@ -1016,7 +1017,8 @@ public class GestionTraje extends javax.swing.JDialog {
 
     private void btnATrajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnATrajeActionPerformed
         conexionBD conexion = new conexionBD();
-        String id = conexion.obtenerSiguienteIDTraje(); // <-- AQUÍ CAMBIAMOS LA LECTURA FIJA POR EL ID REAL DE LA BD
+        registrarTraje regT = new registrarTraje();
+        String id = regT.obtenerSiguienteIDTraje(); // <-- AQUÍ CAMBIAMOS LA LECTURA FIJA POR EL ID REAL DE LA BD
 
         String nombre = txtAName.getText().trim();
 
@@ -1060,7 +1062,7 @@ public class GestionTraje extends javax.swing.JDialog {
         if (op == JOptionPane.YES_OPTION) {
 
             // 5. Intentamos guardar en la BD una única vez usando el ID dinámico
-            boolean exitoBD = conexion.registrarTraje(id, nombre, genero, talla, String.valueOf(costo));
+            boolean exitoBD = regT.registrarTraje(id, nombre, genero, talla, String.valueOf(costo));
 
             if (exitoBD) {
                 // 6. Si la BD lo aceptó, lo guardamos en la lista en memoria
@@ -1071,7 +1073,7 @@ public class GestionTraje extends javax.swing.JDialog {
 
                 // 7. Limpiamos las cajas y actualizamos el campo de texto con el código que sigue (T0002, T0003...)
                 limpiarCamposTraje();       
-                txtAID.setText(conexion.obtenerSiguienteIDTraje()); // <-- Se actualiza con el ID real de la nube
+                txtAID.setText(regT.obtenerSiguienteIDTraje()); // <-- Se actualiza con el ID real de la nube
           } else {
               JOptionPane.showMessageDialog(this, "Error: No se pudo guardar el registro en la base de datos.");
          }
@@ -1162,7 +1164,8 @@ public class GestionTraje extends javax.swing.JDialog {
                 });
                 try {
                     proyecto_final_casafolclore.BaseDatos.conexionBD conexion = new proyecto_final_casafolclore.BaseDatos.conexionBD();
-                    dialog.txtAID.setText(conexion.obtenerSiguienteIDTraje());
+                    registrarTraje regT = new registrarTraje();
+                    dialog.txtAID.setText(regT.obtenerSiguienteIDTraje());
                 } catch (Exception e) {
                     System.out.println("Error al cargar ID desde el main: " + e.getMessage());
                 }
