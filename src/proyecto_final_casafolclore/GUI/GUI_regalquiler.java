@@ -21,6 +21,7 @@ public class GUI_regalquiler extends javax.swing.JFrame {
         initComponents();
         generarIdCorrelativo();
         mostrarClientesEnTabla();
+        cargarTrajesA();
         this.getContentPane().setBackground(new java.awt.Color(249, 241, 229));
         
         this.setLocationRelativeTo(null);
@@ -63,6 +64,38 @@ public class GUI_regalquiler extends javax.swing.JFrame {
             System.out.println("Error al cargar la tabla en regalquiler: " + e.getMessage());
         }
     }
+    
+        public void cargarTrajesA() {
+        
+    cb_idtraje.removeAllItems();
+    cb_idtraje.addItem("Seleccione un traje...");
+
+    String sql = "SELECT nombre_traje FROM traje"; 
+
+    try {
+        java.sql.Connection con = conexionBD.getConexion();
+        
+        java.sql.Statement st = con.createStatement();
+        
+        java.sql.ResultSet rs = st.executeQuery(sql);
+
+        while (rs.next()) {
+            while (rs.next()) {
+    String nombre = rs.getString("nombre_traje");
+    System.out.println("Traje encontrado en BD: " + nombre); // <-- AGREGA ESTO
+    cb_idtraje.addItem(nombre);
+}
+            
+        }
+
+        rs.close();
+        st.close();
+
+    } catch (Exception e) {
+        javax.swing.JOptionPane.showMessageDialog(null, "Error al cargar los trajes: " + e.getMessage());
+        e.printStackTrace();
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -94,7 +127,7 @@ public class GUI_regalquiler extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        txt_idtraje = new javax.swing.JComboBox<>();
+        cb_idtraje = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
         lbl_idtraje = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -188,9 +221,9 @@ public class GUI_regalquiler extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        txt_idtraje.setEditable(true);
-        txt_idtraje.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "item1", "Item 2", "Item 3", "Item 4" }));
-        txt_idtraje.setSelectedIndex(-1);
+        cb_idtraje.setEditable(true);
+        cb_idtraje.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "item1", "Item 2", "Item 3", "Item 4" }));
+        cb_idtraje.setSelectedIndex(-1);
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setText("ID Alquiler: ");
@@ -222,7 +255,7 @@ public class GUI_regalquiler extends javax.swing.JFrame {
                                     .addComponent(jLabel3))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_idtraje, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cb_idtraje, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_fechainicio, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_fechafin, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -262,7 +295,7 @@ public class GUI_regalquiler extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(191, 191, 191)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_idtraje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_idtraje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -400,6 +433,7 @@ private void generarIdCorrelativo() {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_alquilert;
     private javax.swing.JButton btn_volvert;
+    private javax.swing.JComboBox<String> cb_idtraje;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -421,7 +455,6 @@ private void generarIdCorrelativo() {
     private javax.swing.JLabel lbl_idtraje;
     private javax.swing.JTextField txt_fechafin;
     private javax.swing.JTextField txt_fechainicio;
-    private javax.swing.JComboBox<String> txt_idtraje;
     private javax.swing.JTextField txt_montot;
     // End of variables declaration//GEN-END:variables
 }

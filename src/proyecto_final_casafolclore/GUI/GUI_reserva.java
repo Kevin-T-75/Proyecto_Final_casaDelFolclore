@@ -18,19 +18,23 @@ public class GUI_reserva extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GUI_reserva.class.getName());
     private String origen;
     
+    
+    
     /**
      * Creates new form GUI_reserva
      */
-    public GUI_reserva() {
+    public GUI_reserva(String origen) {
         initComponents();
+        this.origen= origen;
         setSize(750, 560); //tamaño
         setLocationRelativeTo(null); //centrado
         setResizable(false); //no deja maximizar, mas rapido aqui
         mostrarFechaActual();
         mostrarFechaFin();
-        cargarTrajesTipicos();
+        
+        cargarTrajes();
     }
-    public GUI_reserva(String origen) { //este constructor es para que regrese a determinado menu dependiendo de quien inicio sesion
+    public GUI_reserva() { //este constructor es para que regrese a determinado menu dependiendo de quien inicio sesion
         initComponents();
         this.origen = origen;
         setSize(750, 560); //tamaño
@@ -52,7 +56,7 @@ public class GUI_reserva extends javax.swing.JFrame {
         jTextField9.setText(fin.format(formato));
     }
     
-    public void cargarTrajesTipicos() {
+    public void cargarTrajes() {
         
     cbTrajes.removeAllItems();
     cbTrajes.addItem("Seleccione un traje...");
@@ -60,24 +64,23 @@ public class GUI_reserva extends javax.swing.JFrame {
     String sql = "SELECT nombre_traje FROM traje"; 
 
     try {
-        // 1. Obtenemos la conexión de tu clase dedicada
         java.sql.Connection con = conexionBD.getConexion();
         
-        // 2. CREAMOS EL STATEMENT (Esto te faltaba para que funcione 'st')
         java.sql.Statement st = con.createStatement();
         
-        // 3. Ejecutamos la consulta
         java.sql.ResultSet rs = st.executeQuery(sql);
 
         while (rs.next()) {
-            String nombre = rs.getString("nombre_traje");
-            cbTrajes.addItem(nombre);
+            while (rs.next()) {
+    String nombre = rs.getString("nombre_traje");
+    System.out.println("Traje encontrado en BD: " + nombre); // <-- AGREGA ESTO
+    cbTrajes.addItem(nombre);
+}
+            
         }
 
-        // 4. Cerramos únicamente el lector y el statement para liberar memoria
         rs.close();
         st.close();
-        // NOTA: No cerramos 'con' para no romper la conexión general de tu proyecto
 
     } catch (Exception e) {
         javax.swing.JOptionPane.showMessageDialog(null, "Error al cargar los trajes: " + e.getMessage());
