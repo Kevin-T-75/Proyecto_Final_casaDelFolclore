@@ -75,6 +75,48 @@ public class GestionTraje extends javax.swing.JDialog {
         }
     }
 }
+    private void buscarTrajePorIdR(String idTraje) {
+    //solo usamos los paquetes aqui
+    java.sql.Connection con = null;
+    java.sql.PreparedStatement ps = null;
+    java.sql.ResultSet rs = null;
+
+    String sql = "SELECT nombre_traje, genero, talla, precio_traje FROM traje WHERE id_traje = ?";
+
+    try {
+        con = conexionBD.getConexion(); 
+
+        if (con == null) {
+            JOptionPane.showMessageDialog(this, "No se pudo establecer conexión con la base de datos.", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        ps = con.prepareStatement(sql);
+        ps.setString(1, idTraje);
+        rs = ps.executeQuery();
+
+        if (rs.next()) {
+            txtRName.setText(rs.getString("nombre_traje"));
+            txtRGenero.setText(rs.getString("genero")); 
+            txtRTalla.setText(rs.getString("talla"));
+            txtREstado.setText(rs.getString("precio_traje")); 
+        } else {
+            JOptionPane.showMessageDialog(this, "No se encontró ningún traje con el código ingresado.", "Sin resultados", JOptionPane.INFORMATION_MESSAGE);
+            limpiarCamposTraje();
+        }
+
+    } catch (java.sql.SQLException e) { 
+        JOptionPane.showMessageDialog(this, "Error al buscar el traje: " + e.getMessage(), "Error SQL", JOptionPane.ERROR_MESSAGE);
+    } finally { 
+        try {
+            if (rs != null) rs.close();
+            if (ps != null) ps.close();
+            if (con != null) con.close();
+        } catch (java.sql.SQLException ex) {
+            System.out.println("Error al cerrar recursos: " + ex.getMessage());
+        }
+    }
+}
     
 
     /**
@@ -224,6 +266,7 @@ public class GestionTraje extends javax.swing.JDialog {
         btnRBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnRBuscar.setForeground(new java.awt.Color(253, 236, 212));
         btnRBuscar.setText("Buscar");
+        btnRBuscar.addActionListener(this::btnRBuscarActionPerformed);
 
         lblRName.setBackground(new java.awt.Color(204, 204, 204));
         lblRName.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
@@ -1129,6 +1172,17 @@ public class GestionTraje extends javax.swing.JDialog {
 
     buscarTrajePorId(idTraje);       
     }//GEN-LAST:event_btnEBuscarActionPerformed
+
+    private void btnRBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRBuscarActionPerformed
+        String idTrajer = txtRID.getText().trim();
+
+    if (idTrajer.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingrese el código del traje para buscar.", "Campo Vacío", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    buscarTrajePorIdR(idTrajer);    
+    }//GEN-LAST:event_btnRBuscarActionPerformed
 
     /**
      * @param args the command line arguments
