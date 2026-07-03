@@ -7,6 +7,7 @@ package proyecto_final_casafolclore.GUI;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
+import proyecto_final_casafolclore.BaseDatos.conexionBD;
 
 /**
  *
@@ -16,7 +17,7 @@ public class GUI_reserva extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GUI_reserva.class.getName());
     private String origen;
-
+    
     /**
      * Creates new form GUI_reserva
      */
@@ -27,6 +28,7 @@ public class GUI_reserva extends javax.swing.JFrame {
         setResizable(false); //no deja maximizar, mas rapido aqui
         mostrarFechaActual();
         mostrarFechaFin();
+        cargarTrajesTipicos();
     }
     public GUI_reserva(String origen) { //este constructor es para que regrese a determinado menu dependiendo de quien inicio sesion
         initComponents();
@@ -49,6 +51,41 @@ public class GUI_reserva extends javax.swing.JFrame {
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         jTextField9.setText(fin.format(formato));
     }
+    
+    public void cargarTrajesTipicos() {
+        
+    cbTrajes.removeAllItems();
+    cbTrajes.addItem("Seleccione un traje...");
+
+    String sql = "SELECT nombre_traje FROM traje"; 
+
+    try {
+        // 1. Obtenemos la conexión de tu clase dedicada
+        java.sql.Connection con = conexionBD.getConexion();
+        
+        // 2. CREAMOS EL STATEMENT (Esto te faltaba para que funcione 'st')
+        java.sql.Statement st = con.createStatement();
+        
+        // 3. Ejecutamos la consulta
+        java.sql.ResultSet rs = st.executeQuery(sql);
+
+        while (rs.next()) {
+            String nombre = rs.getString("nombre_traje");
+            cbTrajes.addItem(nombre);
+        }
+
+        // 4. Cerramos únicamente el lector y el statement para liberar memoria
+        rs.close();
+        st.close();
+        // NOTA: No cerramos 'con' para no romper la conexión general de tu proyecto
+
+    } catch (Exception e) {
+        javax.swing.JOptionPane.showMessageDialog(null, "Error al cargar los trajes: " + e.getMessage());
+        e.printStackTrace();
+    }
+}
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -88,14 +125,12 @@ public class GUI_reserva extends javax.swing.JFrame {
         cbTDoc = new javax.swing.JComboBox<>();
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Cliente ID:");
 
         jPanel4.setBackground(new java.awt.Color(249, 241, 229));
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(137, 124, 104), 4));
 
         jTextField4.setBackground(new java.awt.Color(245, 217, 194));
-        jTextField4.setForeground(new java.awt.Color(0, 0, 0));
         jTextField4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -180,7 +215,6 @@ public class GUI_reserva extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(137, 124, 104), 4));
 
         txtnDocumento.setBackground(new java.awt.Color(245, 217, 194));
-        txtnDocumento.setForeground(new java.awt.Color(0, 0, 0));
         txtnDocumento.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtnDocumento.addActionListener(this::txtnDocumentoActionPerformed);
 
@@ -200,7 +234,6 @@ public class GUI_reserva extends javax.swing.JFrame {
 
         jTextField3.setEditable(false);
         jTextField3.setBackground(new java.awt.Color(245, 217, 194));
-        jTextField3.setForeground(new java.awt.Color(0, 0, 0));
         jTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField3.setEnabled(false);
         jTextField3.addActionListener(this::jTextField3ActionPerformed);
@@ -221,7 +254,6 @@ public class GUI_reserva extends javax.swing.JFrame {
 
         jTextField7.setEditable(false);
         jTextField7.setBackground(new java.awt.Color(245, 217, 194));
-        jTextField7.setForeground(new java.awt.Color(0, 0, 0));
         jTextField7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField7.setEnabled(false);
 
@@ -240,7 +272,6 @@ public class GUI_reserva extends javax.swing.JFrame {
         jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(137, 124, 104), 4));
 
         jTextField8.setBackground(new java.awt.Color(245, 217, 194));
-        jTextField8.setForeground(new java.awt.Color(0, 0, 0));
         jTextField8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField8.addActionListener(this::jTextField8ActionPerformed);
 
@@ -259,7 +290,6 @@ public class GUI_reserva extends javax.swing.JFrame {
         jPanel9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(137, 124, 104), 4));
 
         jTextField9.setBackground(new java.awt.Color(245, 217, 194));
-        jTextField9.setForeground(new java.awt.Color(0, 0, 0));
         jTextField9.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField9.addActionListener(this::jTextField9ActionPerformed);
 
@@ -275,19 +305,16 @@ public class GUI_reserva extends javax.swing.JFrame {
         );
 
         cbTalla.setBackground(new java.awt.Color(137, 124, 104));
-        cbTalla.setForeground(new java.awt.Color(0, 0, 0));
         cbTalla.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "S", "M", "L", "XL" }));
 
         jButton1.setBackground(new java.awt.Color(255, 153, 0));
         jButton1.setFont(new java.awt.Font("Artifakt Element Black", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("CONFIRMAR RESERVA");
         jButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton1.addActionListener(this::jButton1ActionPerformed);
 
         jButton2.setBackground(new java.awt.Color(105, 95, 79));
         jButton2.setFont(new java.awt.Font("Artifakt Element Black", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("CANCELAR");
         jButton2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton2.addActionListener(this::jButton2ActionPerformed);
@@ -298,15 +325,13 @@ public class GUI_reserva extends javax.swing.JFrame {
 
         cbTrajes.setBackground(new java.awt.Color(137, 124, 104));
         cbTrajes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbTrajes.setForeground(new java.awt.Color(0, 0, 0));
-        cbTrajes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vestido de marinera", "Yanques", "Ropa de saya" }));
+        cbTrajes.addActionListener(this::cbTrajesActionPerformed);
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(73, 43, 12));
         jLabel14.setText("Tipo de documento");
 
         cbTDoc.setBackground(new java.awt.Color(137, 124, 104));
-        cbTDoc.setForeground(new java.awt.Color(0, 0, 0));
         cbTDoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DNI", "CE" }));
 
         javax.swing.GroupLayout pnlPantallaLayout = new javax.swing.GroupLayout(pnlPantalla);
@@ -497,6 +522,10 @@ public class GUI_reserva extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_txtnDocumentoActionPerformed
+
+    private void cbTrajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTrajesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbTrajesActionPerformed
 
     /**
      * @param args the command line arguments
