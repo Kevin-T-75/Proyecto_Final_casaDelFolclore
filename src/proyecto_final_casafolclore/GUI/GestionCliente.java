@@ -58,7 +58,7 @@ public class GestionCliente extends javax.swing.JFrame {
         lblTit.setForeground(new java.awt.Color(255, 255, 255));
         lblTit.setText("GESTIÓN DE CLIENTES");
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto_final_casafolclore/GUI/Imagenes/iconponc.png"))); // NOI18N
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto_final_casafolclore/GUI/Imagenes/icon.png"))); // NOI18N
 
         javax.swing.GroupLayout pnlTituLayout = new javax.swing.GroupLayout(pnlTitu);
         pnlTitu.setLayout(pnlTituLayout);
