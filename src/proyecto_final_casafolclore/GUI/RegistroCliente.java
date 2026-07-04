@@ -4,6 +4,7 @@
  */
 package proyecto_final_casafolclore.GUI;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import proyecto_final_casafolclore.BaseDatos.conexionBD;
 import proyecto_final_casafolclore.BaseDatos.registrarCliente;
@@ -17,11 +18,22 @@ public class RegistroCliente extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RegistroCliente.class.getName());
     private ControladorCliente controlador = new ControladorCliente(); //controlador
+    private JFrame origen; //para ubicar en que GUI aparece el registro, desde donde es llamado
     /**
      * Creates new form RegistroCliente
      */
    public RegistroCliente() {
         initComponents();
+        setSize(612, 628); 
+        setLocationRelativeTo(null); 
+        setResizable(false); 
+        
+        mostrarSiguienteID(); 
+    }
+   
+   public RegistroCliente(JFrame origen) {
+        initComponents();
+        this.origen = origen;
         setSize(612, 628); 
         setLocationRelativeTo(null); 
         setResizable(false); 
@@ -332,8 +344,9 @@ public class RegistroCliente extends javax.swing.JFrame {
                 .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrar)
                     .addComponent(btnCancelar))
-                .addGap(48, 48, 48)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -478,8 +491,10 @@ public class RegistroCliente extends javax.swing.JFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         limpiarCampos();
-        MenuAdmin menu = new MenuAdmin();
-        menu.setVisible(true);
+        if (origen != null) {
+        origen.setVisible(true);
+        }
+
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
