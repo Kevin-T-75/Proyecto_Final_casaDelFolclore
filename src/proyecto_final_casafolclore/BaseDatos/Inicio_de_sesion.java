@@ -12,7 +12,7 @@ import java.sql.ResultSet;
  */
 public class Inicio_de_sesion {
     public boolean validarLoginAdmin(String correo, String contrasena) {
-        String sql = "SELECT * FROM administrador WHERE correo = ? AND contrasena = ?";
+        String sql = "SELECT * FROM Administrador WHERE correo = ? AND contrasena = ?";
         
         // Usamos el bloque try-with-resources que cierra automáticamente la conexión
        try (Connection con = conexionBD.getConexion(); 
