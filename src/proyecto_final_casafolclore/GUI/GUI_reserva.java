@@ -576,14 +576,6 @@ public class GUI_reserva extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
-
-    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField9ActionPerformed
-
     private void txtIdTrajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdTrajeActionPerformed
         // este codigo debe generarse automatico al el nombre del traje y la talla, esto igual que el dinero
         //quizas cambiar con combo box
@@ -635,6 +627,14 @@ public class GUI_reserva extends javax.swing.JFrame {
     private void cbGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGeneroActionPerformed
         buscarYAlimentarTraje();
     }//GEN-LAST:event_cbGeneroActionPerformed
+
+    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField9ActionPerformed
+
+    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField8ActionPerformed
 
     /**
      * @param args the command line arguments
