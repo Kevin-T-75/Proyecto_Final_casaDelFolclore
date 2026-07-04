@@ -42,6 +42,8 @@ public class GUI_reserva extends javax.swing.JFrame {
         setResizable(false); //no deja maximizar, mas rapido aqui
         mostrarFechaActual();
         mostrarFechaFin();
+        cargarTrajes();
+        
     }
     public void mostrarFechaActual() {
         LocalDate hoy = LocalDate.now();
@@ -58,33 +60,54 @@ public class GUI_reserva extends javax.swing.JFrame {
     
     public void cargarTrajes() {
         
-    cbTrajes.removeAllItems();
+    cbTrajes.removeAllItems(); 
     cbTrajes.addItem("Seleccione un traje...");
 
-    String sql = "SELECT nombre_traje FROM traje"; 
+    String sql = "SELECT DISTINCT nombre_traje FROM traje"; 
 
-    try {
-        java.sql.Connection con = conexionBD.getConexion();
+    // Blindamos la conexión para que se cierre automáticamente
+    try (java.sql.Connection con = conexionBD.getConexion()) {
         
-        java.sql.Statement st = con.createStatement();
+        if (con == null) return;
         
-        java.sql.ResultSet rs = st.executeQuery(sql);
+        try (java.sql.Statement st = con.createStatement();
+             java.sql.ResultSet rs = st.executeQuery(sql)) {
 
-        while (rs.next()) {
             while (rs.next()) {
-    String nombre = rs.getString("nombre_traje");
-    System.out.println("Traje encontrado en BD: " + nombre); // <-- AGREGA ESTO
-    cbTrajes.addItem(nombre);
-}
-            
-        }
-
-        rs.close();
-        st.close();
+                String nombre = rs.getString("nombre_traje");
+                System.out.println("Traje encontrado en BD: " + nombre);
+                cbTrajes.addItem(nombre); 
+            }
+        } // Aquí se cierran automáticamente rs y st
 
     } catch (Exception e) {
-        javax.swing.JOptionPane.showMessageDialog(null, "Error al cargar los trajes: " + e.getMessage());
-        e.printStackTrace();
+        System.out.println("Error al cargar los trajes: " + e.getMessage());
+    }
+}
+    
+    
+    private void buscarYAlimentarTraje() {
+    if (cbTrajes.getSelectedIndex() <= 0 || cbTalla.getSelectedIndex() < 0 || cbGenero.getSelectedIndex() < 0) {
+        txtIdTraje.setText("");
+        txtMontoAlquiler.setText("");
+        return;
+    }
+    
+    String nombreTraje = cbTrajes.getSelectedItem().toString();
+    String talla = cbTalla.getSelectedItem().toString();
+    String para = cbGenero.getSelectedItem().toString();
+    
+    proyecto_final_casafolclore.BaseDatos.reservaBD controlReserva = new proyecto_final_casafolclore.BaseDatos.reservaBD();
+    String[] datosTraje = controlReserva.obtenerDatosTraje(nombreTraje, talla, para);
+    
+    if (datosTraje != null) {
+        // Si coincide, se llenan los campos automáticamente en image_745483.png
+        txtIdTraje.setText(datosTraje[0]);
+        txtMontoAlquiler.setText(datosTraje[1]);
+    } else {
+        // Si no coincide, solo limpiamos los campos SILENCIOSAMENTE sin mandar alertas
+        txtIdTraje.setText("");
+        txtMontoAlquiler.setText("");
     }
 }
     
@@ -111,9 +134,9 @@ public class GUI_reserva extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         txtnDocumento = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
-        jTextField3 = new javax.swing.JTextField();
+        txtIdTraje = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
-        jTextField7 = new javax.swing.JTextField();
+        txtMontoAlquiler = new javax.swing.JTextField();
         jPanel8 = new javax.swing.JPanel();
         jTextField8 = new javax.swing.JTextField();
         jPanel9 = new javax.swing.JPanel();
@@ -221,6 +244,11 @@ public class GUI_reserva extends javax.swing.JFrame {
 
         txtnDocumento.setBackground(new java.awt.Color(245, 217, 194));
         txtnDocumento.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtnDocumento.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtnDocumentoFocusLost(evt);
+            }
+        });
         txtnDocumento.addActionListener(this::txtnDocumentoActionPerformed);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -237,30 +265,30 @@ public class GUI_reserva extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(249, 241, 229));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(137, 124, 104), 4));
 
-        jTextField3.setEditable(false);
-        jTextField3.setBackground(new java.awt.Color(245, 217, 194));
-        jTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField3.setEnabled(false);
-        jTextField3.addActionListener(this::jTextField3ActionPerformed);
+        txtIdTraje.setEditable(false);
+        txtIdTraje.setBackground(new java.awt.Color(245, 217, 194));
+        txtIdTraje.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtIdTraje.setEnabled(false);
+        txtIdTraje.addActionListener(this::txtIdTrajeActionPerformed);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTextField3)
+            .addComponent(txtIdTraje)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(txtIdTraje, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         jPanel7.setBackground(new java.awt.Color(249, 241, 229));
         jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(137, 124, 104), 4));
 
-        jTextField7.setEditable(false);
-        jTextField7.setBackground(new java.awt.Color(245, 217, 194));
-        jTextField7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField7.setEnabled(false);
+        txtMontoAlquiler.setEditable(false);
+        txtMontoAlquiler.setBackground(new java.awt.Color(245, 217, 194));
+        txtMontoAlquiler.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtMontoAlquiler.setEnabled(false);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -268,11 +296,11 @@ public class GUI_reserva extends javax.swing.JFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtMontoAlquiler, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTextField7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(txtMontoAlquiler, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         jPanel8.setBackground(new java.awt.Color(249, 241, 229));
@@ -313,6 +341,7 @@ public class GUI_reserva extends javax.swing.JFrame {
 
         cbTalla.setBackground(new java.awt.Color(137, 124, 104));
         cbTalla.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "S", "M", "L", "XL" }));
+        cbTalla.addActionListener(this::cbTallaActionPerformed);
 
         jButton1.setBackground(new java.awt.Color(255, 153, 0));
         jButton1.setFont(new java.awt.Font("Artifakt Element Black", 1, 14)); // NOI18N
@@ -340,6 +369,7 @@ public class GUI_reserva extends javax.swing.JFrame {
 
         cbTDoc.setBackground(new java.awt.Color(137, 124, 104));
         cbTDoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DNI", "CE" }));
+        cbTDoc.addActionListener(this::cbTDocActionPerformed);
 
         lblGenero.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblGenero.setForeground(new java.awt.Color(73, 43, 12));
@@ -347,6 +377,7 @@ public class GUI_reserva extends javax.swing.JFrame {
 
         cbGenero.setBackground(new java.awt.Color(137, 124, 104));
         cbGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Varón", "Mujer" }));
+        cbGenero.addActionListener(this::cbGeneroActionPerformed);
 
         javax.swing.GroupLayout pnlPantallaLayout = new javax.swing.GroupLayout(pnlPantalla);
         pnlPantalla.setLayout(pnlPantallaLayout);
@@ -484,7 +515,6 @@ public class GUI_reserva extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // boton cancelar:
         
          if (origen.equals("admin")) 
          {
@@ -498,32 +528,52 @@ public class GUI_reserva extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        javax.swing.JOptionPane.showMessageDialog(this,
-            "¡Reserva realizada con éxito!",
-            "Confirmación de Reserva",
-            javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        String documento = txtnDocumento.getText().trim();
+    if (documento.isEmpty() || nombreClienteActual.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Por favor, ingrese un número de documento válido antes de continuar.", 
+            "Cliente no validado", 
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
 
-       //validaciones
-       String tipoDocumento = cbTDoc.getSelectedItem().toString();
-       String nroDocumento = txtnDocumento.getText();
-       if (tipoDocumento.equals("DNI")) { //como no es un label no se puede poner == qwq no se escribe chanfles
-           if (nroDocumento.length() != 8 || !nroDocumento.matches("\\d+")) { //lo ultimo verifica que sean solo numeros
-                JOptionPane.showMessageDialog(this,"Ingrese un DNI válido");
-                return;
-            }
-        }
+    if (cbTrajes.getSelectedIndex() <= 0 || cbTalla.getSelectedIndex() < 0 || cbGenero.getSelectedIndex() < 0) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Por favor, seleccione el Nombre, Talla y Género del traje.", 
+            "Campos incompletos", 
+            javax.swing.JOptionPane.WARNING_MESSAGE);
+        return; 
+    }
 
-        if (tipoDocumento.equals("CE")) {
-            if (nroDocumento.length() != 9 || !nroDocumento.matches("\\d+")) {
-            JOptionPane.showMessageDialog(this,"Ingrese un CE válido");
-                return;
-            }
-        }
-        // 2. Cerrar la ventana actual
-        new MenuCliente().setVisible(true);
+    String nombreTraje = cbTrajes.getSelectedItem().toString();
+    String talla = cbTalla.getSelectedItem().toString();
+    String para = cbGenero.getSelectedItem().toString();
 
-        this.dispose();
+    proyecto_final_casafolclore.BaseDatos.reservaBD controlReserva = new proyecto_final_casafolclore.BaseDatos.reservaBD();
+    String[] datosTraje = controlReserva.obtenerDatosTraje(nombreTraje, talla, para);
+
+    if (datosTraje == null) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "No se puede realizar la reserva. El traje especificado con esa Talla y Género no existe en la base de datos.", 
+            "Error de Coincidencia", 
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+        return; 
+    }
+
+    String mensajeConfirmacion = "¿Está seguro que el cliente " + nombreClienteActual + " quiere reservar el traje " + nombreTraje + "?";
+    
+    int respuesta = javax.swing.JOptionPane.showConfirmDialog(this, 
+        mensajeConfirmacion, 
+        "Confirmar Operación", 
+        javax.swing.JOptionPane.YES_NO_OPTION, 
+        javax.swing.JOptionPane.QUESTION_MESSAGE);
+
+    if (respuesta == javax.swing.JOptionPane.YES_OPTION) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Reserva procesada con éxito.");
+        
+    } else {
+        System.out.println("Reserva cancelada por el usuario.");
+    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
@@ -534,10 +584,10 @@ public class GUI_reserva extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField9ActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void txtIdTrajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdTrajeActionPerformed
         // este codigo debe generarse automatico al el nombre del traje y la talla, esto igual que el dinero
         //quizas cambiar con combo box
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_txtIdTrajeActionPerformed
 
     private void txtnDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnDocumentoActionPerformed
         // TODO add your handling code here:
@@ -546,8 +596,45 @@ public class GUI_reserva extends javax.swing.JFrame {
     }//GEN-LAST:event_txtnDocumentoActionPerformed
 
     private void cbTrajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTrajesActionPerformed
-        // TODO add your handling code here:
+        buscarYAlimentarTraje();
     }//GEN-LAST:event_cbTrajesActionPerformed
+
+    private void cbTDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTDocActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbTDocActionPerformed
+    private String nombreClienteActual = "";
+    private void txtnDocumentoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtnDocumentoFocusLost
+       String documento = txtnDocumento.getText().trim(); 
+
+    if (documento.isEmpty()) {
+        return;
+    }
+
+    proyecto_final_casafolclore.BaseDatos.reservaBD controlReserva = new proyecto_final_casafolclore.BaseDatos.reservaBD();
+    
+    nombreClienteActual = controlReserva.obtenerNombreCliente(documento);
+
+    if (nombreClienteActual == null) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "El número de documento ingresado no corresponde a ningún cliente registrado.\nPor favor, verifíquelo o registre al cliente primero.", 
+            "Cliente no encontrado", 
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+        
+        txtnDocumento.setText(""); 
+        txtnDocumento.requestFocus(); 
+    } else {
+       
+        System.out.println("Cliente validado con éxito: " + nombreClienteActual);
+    }
+    }//GEN-LAST:event_txtnDocumentoFocusLost
+
+    private void cbTallaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTallaActionPerformed
+        buscarYAlimentarTraje();
+    }//GEN-LAST:event_cbTallaActionPerformed
+
+    private void cbGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGeneroActionPerformed
+        buscarYAlimentarTraje();
+    }//GEN-LAST:event_cbGeneroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -602,13 +689,13 @@ public class GUI_reserva extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     private javax.swing.JLabel lblGenero;
     private javax.swing.JPanel pnlPantalla;
+    private javax.swing.JTextField txtIdTraje;
+    private javax.swing.JTextField txtMontoAlquiler;
     private javax.swing.JTextField txtnDocumento;
     // End of variables declaration//GEN-END:variables
 }

@@ -71,7 +71,6 @@ public class InicioSesion extends javax.swing.JFrame {
 
         btnIngresar.setBackground(new java.awt.Color(202, 149, 90));
         btnIngresar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        btnIngresar.setForeground(new java.awt.Color(0, 0, 0));
         btnIngresar.setText("INGRESAR");
         btnIngresar.setName("btnLogin"); // NOI18N
         btnIngresar.addActionListener(this::btnIngresarActionPerformed);
@@ -96,7 +95,6 @@ public class InicioSesion extends javax.swing.JFrame {
 
         btnSalir.setBackground(new java.awt.Color(255, 204, 102));
         btnSalir.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        btnSalir.setForeground(new java.awt.Color(0, 0, 0));
         btnSalir.setText("SALIR");
         btnSalir.setName("btnSalir"); // NOI18N
         btnSalir.addActionListener(this::btnSalirActionPerformed);
@@ -198,45 +196,40 @@ public class InicioSesion extends javax.swing.JFrame {
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         // Ingresar boton
 
-        String correo = txtCorreo.getText();
-        String contraseña = String.valueOf(txtContrasena.getPassword());
+        String correo = txtCorreo.getText().trim();
+    String contrasena = new String(txtContrasena.getPassword()); // Usando JPasswordField para seguridad
 
-        //validaciones
-        if (correo.isEmpty() || contraseña.isEmpty())
-        {
-            //importar la libreria para mensajes
-            JOptionPane.showMessageDialog(this, "Llene todos los campos");
-            return;
-        }
-        // Validar correo
-        if (!correo.contains("@") || !correo.contains(".com")) {
-            JOptionPane.showMessageDialog(this, "Ingrese un correo valido");
-            return;
+    if (correo.isEmpty() || contrasena.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Por favor, llene todos los campos.");
+        return;
+    }
+    // Validamos si la opción "Administrador" está seleccionada
+    if (rbAdmin.isSelected()) {
+    proyecto_final_casafolclore.BaseDatos.Inicio_de_sesion controlAdmin = new proyecto_final_casafolclore.BaseDatos.Inicio_de_sesion();
+    
+    if (controlAdmin.validarLoginAdmin(correo, contrasena)) {
+        javax.swing.JOptionPane.showMessageDialog(this, "¡Inicio de sesión exitoso como Administrador!");
+        
+        if (controlAdmin.validarLoginAdmin(correo, contrasena)) {
+    javax.swing.JOptionPane.showMessageDialog(this, "¡Inicio de sesión exitoso como Administrador!");
+
+    MenuAdmin ventanaMenu = new MenuAdmin(); 
+    ventanaMenu.setVisible(true);
+
+
+    this.dispose();
         }
 
-        // Validar contraseña
-        if (contraseña.length() < 8) {
-            JOptionPane.showMessageDialog(this, "La contraseña debe tener al menos 8 caracteres.");
-            return;
-        }
+        this.dispose(); 
+    } else {
+        javax.swing.JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos.", "Error de acceso", javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
+    } else if (rbCliente.isSelected()) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Zona de clientes en mantenimiento.");
+    } else {
+        javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar si ingresa como Administrador o Cliente.");
+    }
 
-        //este mensaje permite indicar que todo va bien xd
-        JOptionPane.showMessageDialog(this, "Ingreso correcto");
-
-        if (rbAdmin.isSelected())
-        {
-            Sesion.correoActual = correo;
-            new MenuAdmin().setVisible(true); //con esto si inicia, aqui debe ir para base de datos
-            this.dispose(); //para cerrar ventana actual y abrir otra
-        }
-        else if (rbCliente.isSelected()) {
-            Sesion.correoActual = correo;
-            new MenuCliente().setVisible(true);
-            this.dispose();
-        }
-        else {
-            JOptionPane.showMessageDialog(this, "Seleccione una opcion");
-        }
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
