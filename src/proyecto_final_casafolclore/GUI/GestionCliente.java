@@ -41,6 +41,7 @@ public class GestionCliente extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,6 +103,13 @@ public class GestionCliente extends javax.swing.JFrame {
         btnRegresar.setName("btnLogin"); // NOI18N
         btnRegresar.addActionListener(this::btnRegresarActionPerformed);
 
+        btnAgregar.setBackground(new java.awt.Color(51, 153, 0));
+        btnAgregar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        btnAgregar.setForeground(new java.awt.Color(255, 255, 204));
+        btnAgregar.setText("Agregar");
+        btnAgregar.setName("btnLogin"); // NOI18N
+        btnAgregar.addActionListener(this::btnAgregarActionPerformed);
+
         javax.swing.GroupLayout pnlFCliLayout = new javax.swing.GroupLayout(pnlFCli);
         pnlFCli.setLayout(pnlFCliLayout);
         pnlFCliLayout.setHorizontalGroup(
@@ -114,10 +122,11 @@ public class GestionCliente extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFCliLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlFCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRegresar)
                     .addComponent(btnModificar)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(80, 80, 80))
+                .addGap(79, 79, 79))
         );
         pnlFCliLayout.setVerticalGroup(
             pnlFCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,13 +134,15 @@ public class GestionCliente extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlTitu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addGap(46, 46, 46)
+                .addComponent(btnAgregar)
+                .addGap(18, 18, 18)
                 .addComponent(btnEliminar)
                 .addGap(18, 18, 18)
                 .addComponent(btnModificar)
                 .addGap(18, 18, 18)
                 .addComponent(btnRegresar)
-                .addContainerGap(226, Short.MAX_VALUE))
+                .addContainerGap(177, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -178,6 +189,14 @@ public class GestionCliente extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        // boton de agregar, solo saca la ventana de registrar cliente nada mas
+        
+        RegistroCliente reg = new RegistroCliente(this);
+        reg.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -204,6 +223,7 @@ public class GestionCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnRegresar;
