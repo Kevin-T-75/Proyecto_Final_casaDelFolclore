@@ -38,6 +38,7 @@ public class RegistroCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jToolBar1 = new javax.swing.JToolBar();
         pnlFondo = new javax.swing.JPanel();
         txtApellidoP = new javax.swing.JTextField();
         lblApellidoM = new javax.swing.JLabel();
@@ -68,6 +69,8 @@ public class RegistroCliente extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
         cbTipo = new javax.swing.JComboBox<>();
         lblNombre = new javax.swing.JLabel();
+
+        jToolBar1.setRollover(true);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 51));
@@ -533,6 +536,7 @@ public class RegistroCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lblApellidoM;
     private javax.swing.JLabel lblApellidoP;
     private javax.swing.JLabel lblContrasena;
