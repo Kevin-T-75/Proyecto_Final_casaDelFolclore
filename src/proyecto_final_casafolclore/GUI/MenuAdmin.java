@@ -42,10 +42,11 @@ public class MenuAdmin extends javax.swing.JFrame {
         pnlDashboard = new javax.swing.JPanel();
         btnGAlquiler = new javax.swing.JButton();
         btnGTrajes = new javax.swing.JButton();
-        btnGCliente3 = new javax.swing.JButton();
+        btnRCliente = new javax.swing.JButton();
         btnInventario = new javax.swing.JButton();
         lblOpciones = new javax.swing.JLabel();
         btnRReserva = new javax.swing.JButton();
+        btnRCliente1 = new javax.swing.JButton();
         pnlPantalla = new javax.swing.JPanel();
         lblMensaje = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -98,9 +99,9 @@ public class MenuAdmin extends javax.swing.JFrame {
         btnGTrajes.setText("Gestionar trajes");
         btnGTrajes.addActionListener(this::btnGTrajesActionPerformed);
 
-        btnGCliente3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        btnGCliente3.setText("Registrar cliente");
-        btnGCliente3.addActionListener(this::btnGCliente3ActionPerformed);
+        btnRCliente.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        btnRCliente.setText("Registrar cliente");
+        btnRCliente.addActionListener(this::btnRClienteActionPerformed);
 
         btnInventario.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         btnInventario.setText("Ver inventario");
@@ -114,6 +115,10 @@ public class MenuAdmin extends javax.swing.JFrame {
         btnRReserva.setText("Registrar reserva");
         btnRReserva.addActionListener(this::btnRReservaActionPerformed);
 
+        btnRCliente1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        btnRCliente1.setText("Gestionar cliente");
+        btnRCliente1.addActionListener(this::btnRCliente1ActionPerformed);
+
         javax.swing.GroupLayout pnlDashboardLayout = new javax.swing.GroupLayout(pnlDashboard);
         pnlDashboard.setLayout(pnlDashboardLayout);
         pnlDashboardLayout.setHorizontalGroup(
@@ -123,29 +128,32 @@ public class MenuAdmin extends javax.swing.JFrame {
                 .addGroup(pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(btnGCliente3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnGTrajes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnGAlquiler, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                         .addComponent(btnInventario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRReserva, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))
+                        .addComponent(btnRReserva, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                        .addComponent(btnRCliente1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         pnlDashboardLayout.setVerticalGroup(
             pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDashboardLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(21, 21, 21)
                 .addComponent(lblOpciones)
-                .addGap(37, 37, 37)
-                .addComponent(btnGCliente3)
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
+                .addComponent(btnRCliente)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnRCliente1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(btnGTrajes)
                 .addGap(14, 14, 14)
                 .addComponent(btnRReserva)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnGAlquiler)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnInventario)
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addGap(85, 85, 85))
         );
 
         pnlPantalla.setBackground(new java.awt.Color(204, 204, 204));
@@ -212,12 +220,12 @@ public class MenuAdmin extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnLogoutActionPerformed
 
-    private void btnGCliente3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGCliente3ActionPerformed
-        // boton registro cliente
+    private void btnRClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRClienteActionPerformed
+        // boton gestionar cliente
         RegistroCliente cliente = new RegistroCliente();
         cliente.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnGCliente3ActionPerformed
+    }//GEN-LAST:event_btnRClienteActionPerformed
 
     private void btnGTrajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGTrajesActionPerformed
         // boton gestion traje
@@ -242,6 +250,10 @@ public class MenuAdmin extends javax.swing.JFrame {
         reserva.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRReservaActionPerformed
+
+    private void btnRCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRCliente1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRCliente1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -270,10 +282,11 @@ public class MenuAdmin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGAlquiler;
-    private javax.swing.JButton btnGCliente3;
     private javax.swing.JButton btnGTrajes;
     private javax.swing.JButton btnInventario;
     private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnRCliente;
+    private javax.swing.JButton btnRCliente1;
     private javax.swing.JButton btnRReserva;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblMensaje;
