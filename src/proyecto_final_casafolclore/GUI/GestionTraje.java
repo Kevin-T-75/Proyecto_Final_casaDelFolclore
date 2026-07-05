@@ -1143,47 +1143,66 @@ public class GestionTraje extends javax.swing.JDialog {
     }//GEN-LAST:event_btnATrajeActionPerformed
 
     private void btnCDevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCDevoActionPerformed
-        // Confirmar devolucion
-    String idTraje = txtRID.getText().trim(); 
-    
-    // Validamos que no esté vacío
-    if (idTraje.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Por favor, primero ingrese o busque un código de traje válido.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    
-    // 1. Cartel de advertencia
-    int op = JOptionPane.showConfirmDialog( 
-        this, "¿Desea realizar esta devolución?", "ADVERTENCIA",
-        JOptionPane.YES_NO_OPTION,
-        JOptionPane.WARNING_MESSAGE);
-    
-    // 2. Si el usuario presiona "SÍ", procedemos
-    if (op == JOptionPane.YES_OPTION) {
-        
-        // CORRECCIÓN AQUÍ: Llamamos al Controlador que tiene la lógica blindada
-        registrarTraje controlador = new registrarTraje();
-        boolean exito = controlador.registrarDevolucion(idTraje);
-        
-        if (exito) {
-            JOptionPane.showMessageDialog(this, "¡Excelente! La devolución fue registrada y el traje vuelve a estar DISPONIBLE.");
-            
-            txtRID.setText("");
-            txtRName.setText("");
-            txtRGenero.setText("");
-            txtRTalla.setText("");
-            txtREstado.setText(""); 
-            if (exito) {
-            JOptionPane.showMessageDialog(this, "¡Excelente! La devolución fue registrada y el traje vuelve a estar DISPONIBLE.");
-            
-            txtRID.setText("");
-            txtRName.setText("");
-            
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "No se pudo procesar la devolución.\nVerifica en la consola de NetBeans si el estado del contrato coincide.", "Error de Proceso", JOptionPane.ERROR_MESSAGE);
+       // 1. Obtener y validar el ID del traje
+        String idTraje = txtRID.getText().trim().toUpperCase(); 
+
+        if (idTraje.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, primero ingrese o busque un código de traje válido.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
+            return;
         }
-    }
+
+        // 2. Cartel de advertencia
+        int op = JOptionPane.showConfirmDialog( 
+            this, "¿Desea realizar esta devolución para el traje " + idTraje + "?", "ADVERTENCIA",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE);
+
+        // 3. Si el usuario presiona "SÍ", procedemos directamente con la base de datos
+        if (op == JOptionPane.YES_OPTION) {
+
+            java.sql.Connection con = null;
+            java.sql.PreparedStatement ps = null;
+
+            // Consulta SQL directa para modificar el estado del traje a Disponible
+            String sql = "UPDATE traje SET estado = 'Disponible' WHERE id_traje = ?";
+
+            try {
+                con = conexionBD.getConexion();
+
+                if (con == null) {
+                    JOptionPane.showMessageDialog(this, "No se pudo establecer conexión con la base de datos.", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                ps = con.prepareStatement(sql);
+                ps.setString(1, idTraje);
+
+                int filasAfectadas = ps.executeUpdate();
+
+                if (filasAfectadas > 0) {
+                    JOptionPane.showMessageDialog(this, "¡Excelente! La devolución fue registrada y el traje " + idTraje + " vuelve a estar DISPONIBLE.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+                    // Limpiamos todos los campos de la interfaz de devolución
+                    txtRID.setText("");
+                    txtRName.setText("");
+                    txtRGenero.setText("");
+                    txtRTalla.setText("");
+                    txtREstado.setText(""); 
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se pudo actualizar el estado del traje.\nVerifique que el ID '" + idTraje + "' exista en la base de datos.", "Error de Proceso", JOptionPane.ERROR_MESSAGE);
+                }
+
+            } catch (java.sql.SQLException e) {
+                JOptionPane.showMessageDialog(this, "Error al procesar la devolución: " + e.getMessage(), "Error SQL", JOptionPane.ERROR_MESSAGE);
+            } finally {
+                try {
+                    if (ps != null) ps.close();
+                    if (con != null) con.close();
+                } catch (java.sql.SQLException ex) {
+                    System.out.println("Error al cerrar recursos: " + ex.getMessage());
+                }
+            }
+        }
     }//GEN-LAST:event_btnCDevoActionPerformed
 
     private void txtRGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRGeneroActionPerformed
@@ -1207,25 +1226,35 @@ public class GestionTraje extends javax.swing.JDialog {
     }//GEN-LAST:event_cbTallaActionPerformed
 
     private void btnEBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEBuscarActionPerformed
-    String idTraje = txtEID.getText().trim();
+   // Obtenemos el ID, quitamos espacios y lo pasamos a MAYÚSCULAS automáticamente
+        String idTraje = txtEID.getText().trim().toUpperCase();
 
-    if (idTraje.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Por favor, ingrese el código del traje para buscar.", "Campo Vacío", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+        if (idTraje.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese el código del traje para buscar.", "Campo Vacío", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-    buscarTrajePorId(idTraje);       
+        // Actualizamos el campo de texto visual para que el usuario vea el ID corregido en mayúsculas
+        txtEID.setText(idTraje); 
+
+        // Ejecuta tu método de búsqueda para la pestaña Eliminar
+        buscarTrajePorId(idTraje);      
     }//GEN-LAST:event_btnEBuscarActionPerformed
 
     private void btnRBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRBuscarActionPerformed
-        String idTrajer = txtRID.getText().trim();
+      // Obtenemos el ID, quitamos espacios y lo pasamos a MAYÚSCULAS automáticamente
+        String idTrajer = txtRID.getText().trim().toUpperCase();
 
-    if (idTrajer.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Por favor, ingrese el código del traje para buscar.", "Campo Vacío", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+        if (idTrajer.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese el código del traje para buscar.", "Campo Vacío", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-    buscarTrajePorIdR(idTrajer);    
+        // Actualizamos el campo de texto visual para que el usuario vea el ID corregido en mayúsculas
+        txtRID.setText(idTrajer);
+
+        // Ejecuta tu método de búsqueda para la pestaña Devolución
+        buscarTrajePorIdR(idTrajer);   
     }//GEN-LAST:event_btnRBuscarActionPerformed
 
     /**
