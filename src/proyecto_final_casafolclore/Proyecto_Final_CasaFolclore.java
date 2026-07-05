@@ -7,6 +7,7 @@ package proyecto_final_casafolclore;
 //import proyecto_final_casafolclore.Clases.Pago;
 
 import proyecto_final_casafolclore.BaseDatos.conexionBD;
+import proyecto_final_casafolclore.GUI.InicioSesion;
 
 //import proyecto_final_casafolclore.Clases.Cliente;
 //import proyecto_final_casafolclore.Clases.Alquiler;
@@ -31,7 +32,13 @@ public class Proyecto_Final_CasaFolclore {
         if (conexionActiva != null) {
             System.out.println("¡Todo listo para empezar a programar el sistema!");
    }
+        
+            InicioSesion inicio_s = new InicioSesion();
+            inicio_s.setVisible(true);
+        
    }
+   
+   
 }
 
 

@@ -32,6 +32,7 @@ public class GUI_regalquiler extends javax.swing.JFrame {
      */
     public GUI_regalquiler() {
         initComponents();
+        setSize(800, 750); //tamaño
         setLocationRelativeTo(null); //centrado
         setResizable(false); //no deja maximizar, mas rapido aqui
         txt_fechaInicio.setDate(new java.util.Date());
