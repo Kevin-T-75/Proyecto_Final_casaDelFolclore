@@ -358,7 +358,7 @@ public class GUI_inventario extends javax.swing.JFrame {
         } else if ("RESERVADO".equalsIgnoreCase(estadoTraje)) {
             lbl_estadoContrato.setForeground(new java.awt.Color(128, 0, 128)); // Morado
         } else {
-            lbl_estadoContrato.setForeground(new java.awt.Color(204, 0, 0)); // Rojo para ALQUILADO
+            lbl_estadoContrato.setForeground(new java.awt.Color(0,102,204)); // Rojo para ALQUILADO
         }
     }
     
