@@ -71,4 +71,52 @@ public class registrarTraje {
     return "T0001"; 
 
     }
+    
+    
+      public boolean registrarDevolucion(String idTraje) {
+   String sqlContrato = "UPDATE contrato_alquiler SET estado_contrato = 'Disponible' "
+                       + "WHERE id_traje = ? AND UPPER(TRIM(estado_contrato)) IN ('ALQUILADO', 'ALQUILER', 'RESERVADO')";
+    
+    String sqlTraje = "UPDATE traje SET estado = 'Disponible' WHERE id_traje = ?";
+    
+    Connection con = null;
+    try {
+        con = conexionBD.getConexion(); 
+        con.setAutoCommit(false); 
+        
+        // PASO 1: Cambiar estado del contrato a Disponible
+        int filasContrato = 0;
+        try (PreparedStatement psContrato = con.prepareStatement(sqlContrato)) {
+            psContrato.setString(1, idTraje);
+            filasContrato = psContrato.executeUpdate();
+        }
+        
+        // PASO 2: Liberar el traje a Disponible
+        int filasTraje = 0;
+        try (PreparedStatement psTraje = con.prepareStatement(sqlTraje)) {
+            psTraje.setString(1, idTraje);
+            filasTraje = psTraje.executeUpdate();
+        }
+        
+        // Si no se afectó ninguna fila, cancelamos todo el proceso de forma segura
+        if (filasContrato == 0 || filasTraje == 0) {
+            con.rollback();
+            return false;
+        }
+        
+        con.commit(); 
+        return true;
+        
+    } catch (SQLException e) {
+        if (con != null) {
+            try { con.rollback(); } catch (SQLException ex) { /* Silencioso */ }
+        }
+        return false;
+    } finally {
+        if (con != null) {
+            try { con.close(); } catch (SQLException e) { /* Silencioso */ }
+        }
+    }
+  }  
+    
 }

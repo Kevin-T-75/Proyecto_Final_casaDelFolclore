@@ -5,6 +5,9 @@
 package proyecto_final_casafolclore.GUI;
 
 import javax.swing.JOptionPane;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import proyecto_final_casafolclore.BaseDatos.conexionBD;
 import proyecto_final_casafolclore.BaseDatos.registrarTraje;
 import proyecto_final_casafolclore.Clases.Traje; //importar clase traje
@@ -30,7 +33,10 @@ public class GestionTraje extends javax.swing.JDialog {
         setSize(600, 500); //tamaño
         setLocationRelativeTo(null); //centrado
         setResizable(false); //no deja maximizar, mas rapido aqui
-        txtAID.setText(controladorTraje.generarID());
+        //actualiza el IDdeTraje cuando se ejecuta desde el menuAdmin
+        registrarTraje controlador = new registrarTraje();
+        txtAID.setText(controlador.obtenerSiguienteIDTraje());
+        
     }
     
     private void buscarTrajePorId(String idTraje) {
@@ -130,7 +136,9 @@ public class GestionTraje extends javax.swing.JDialog {
         txtAID.setEditable(false); 
     }
 }  
-    
+
+  
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1136,21 +1144,46 @@ public class GestionTraje extends javax.swing.JDialog {
 
     private void btnCDevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCDevoActionPerformed
         // Confirmar devolucion
+    String idTraje = txtRID.getText().trim(); 
+    
+    // Validamos que no esté vacío
+    if (idTraje.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Por favor, primero ingrese o busque un código de traje válido.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+    
+    // 1. Cartel de advertencia
+    int op = JOptionPane.showConfirmDialog( 
+        this, "¿Desea realizar esta devolución?", "ADVERTENCIA",
+        JOptionPane.YES_NO_OPTION,
+        JOptionPane.WARNING_MESSAGE);
+    
+    // 2. Si el usuario presiona "SÍ", procedemos
+    if (op == JOptionPane.YES_OPTION) {
         
-        String id = txtRID.getText();
-        if (id.isEmpty()) {
-
-            JOptionPane.showMessageDialog(this, "Ingrese un código");
-            return;
+        // CORRECCIÓN AQUÍ: Llamamos al Controlador que tiene la lógica blindada
+        registrarTraje controlador = new registrarTraje();
+        boolean exito = controlador.registrarDevolucion(idTraje);
+        
+        if (exito) {
+            JOptionPane.showMessageDialog(this, "¡Excelente! La devolución fue registrada y el traje vuelve a estar DISPONIBLE.");
+            
+            txtRID.setText("");
+            txtRName.setText("");
+            txtRGenero.setText("");
+            txtRTalla.setText("");
+            txtREstado.setText(""); 
+            if (exito) {
+            JOptionPane.showMessageDialog(this, "¡Excelente! La devolución fue registrada y el traje vuelve a estar DISPONIBLE.");
+            
+            txtRID.setText("");
+            txtRName.setText("");
+            
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo procesar la devolución.\nVerifica en la consola de NetBeans si el estado del contrato coincide.", "Error de Proceso", JOptionPane.ERROR_MESSAGE);
         }
-         int op= JOptionPane.showConfirmDialog( //esto es para confirmar si si borrar o no, esta predeterminado en Joption
-            this,"¿Está seguro/a de que desea registrar la devolución?","ADVERTENCIA",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.WARNING_MESSAGE);
-
-         if (op == JOptionPane.YES_OPTION) {
-            JOptionPane.showMessageDialog(this, "Se registró la devolución correctamente");
-        }  
+    }
     }//GEN-LAST:event_btnCDevoActionPerformed
 
     private void txtRGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRGeneroActionPerformed

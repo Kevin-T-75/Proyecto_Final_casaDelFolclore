@@ -28,4 +28,7 @@ public class ControladorTraje {
     public ArrayList<Traje> getListaClientes() {
         return listaTrajes;
     }
+    
+    
 }
+
