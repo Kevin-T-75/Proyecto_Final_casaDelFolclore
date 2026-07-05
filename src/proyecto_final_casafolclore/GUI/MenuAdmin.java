@@ -240,6 +240,9 @@ public class MenuAdmin extends javax.swing.JFrame {
 
     private void btnInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventarioActionPerformed
         // boton inventario
+        
+        new GUI_inventario().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnInventarioActionPerformed
 
     private void btnRReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRReservaActionPerformed

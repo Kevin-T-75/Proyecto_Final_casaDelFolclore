@@ -4,6 +4,15 @@
  */
 package proyecto_final_casafolclore.GUI;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import static proyecto_final_casafolclore.BaseDatos.conexionBD.getConexion;
+import proyecto_final_casafolclore.BaseDatos.registrarTraje;
+
 /**
  *
  * @author OS
@@ -17,6 +26,7 @@ public class GUI_inventario extends javax.swing.JFrame {
      */
     public GUI_inventario() {
         initComponents();
+        Cargar_tabla();
     }
 
     /**
@@ -31,7 +41,7 @@ public class GUI_inventario extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         pnlPantalla = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        bd_inventariooo = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
@@ -43,12 +53,12 @@ public class GUI_inventario extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        txt_idtraje = new javax.swing.JTextField();
+        txt_nombreTraje = new javax.swing.JTextField();
+        cbo_genero = new javax.swing.JTextField();
+        cbo_talla = new javax.swing.JTextField();
+        txt_precio = new javax.swing.JTextField();
+        lbl_estadoContrato = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -60,9 +70,9 @@ public class GUI_inventario extends javax.swing.JFrame {
 
         pnlPantalla.setBackground(new java.awt.Color(249, 243, 234));
 
-        jTable1.setBackground(new java.awt.Color(249, 243, 234));
-        jTable1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(224, 192, 145), 2));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        bd_inventariooo.setBackground(new java.awt.Color(249, 243, 234));
+        bd_inventariooo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(224, 192, 145), 2));
+        bd_inventariooo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -72,9 +82,22 @@ public class GUI_inventario extends javax.swing.JFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
-        jTable1.setSelectionBackground(new java.awt.Color(102, 102, 102));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        bd_inventariooo.setSelectionBackground(new java.awt.Color(102, 102, 102));
+        bd_inventariooo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bd_inventarioooMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(bd_inventariooo);
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel2.setText("== I N V E N T A R I O ==");
@@ -100,23 +123,24 @@ public class GUI_inventario extends javax.swing.JFrame {
 
         jLabel10.setText("Disponibilidad:");
 
-        jTextField1.setEditable(false);
-        jTextField1.setBackground(new java.awt.Color(224, 192, 145));
+        txt_idtraje.setEditable(false);
+        txt_idtraje.setBackground(new java.awt.Color(224, 192, 145));
 
-        jTextField2.setEditable(false);
-        jTextField2.setBackground(new java.awt.Color(224, 192, 145));
+        txt_nombreTraje.setEditable(false);
+        txt_nombreTraje.setBackground(new java.awt.Color(224, 192, 145));
+        txt_nombreTraje.addActionListener(this::txt_nombreTrajeActionPerformed);
 
-        jTextField3.setEditable(false);
-        jTextField3.setBackground(new java.awt.Color(224, 192, 145));
+        cbo_genero.setEditable(false);
+        cbo_genero.setBackground(new java.awt.Color(224, 192, 145));
 
-        jTextField4.setEditable(false);
-        jTextField4.setBackground(new java.awt.Color(224, 192, 145));
+        cbo_talla.setEditable(false);
+        cbo_talla.setBackground(new java.awt.Color(224, 192, 145));
 
-        jTextField5.setEditable(false);
-        jTextField5.setBackground(new java.awt.Color(224, 192, 145));
+        txt_precio.setEditable(false);
+        txt_precio.setBackground(new java.awt.Color(224, 192, 145));
 
-        jTextField6.setEditable(false);
-        jTextField6.setBackground(new java.awt.Color(224, 192, 145));
+        lbl_estadoContrato.setEditable(false);
+        lbl_estadoContrato.setBackground(new java.awt.Color(224, 192, 145));
 
         jButton1.setBackground(new java.awt.Color(224, 183, 123));
         jButton1.setText("Salir");
@@ -140,12 +164,12 @@ public class GUI_inventario extends javax.swing.JFrame {
                     .addComponent(jLabel10))
                 .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField3)
-                    .addComponent(jTextField4)
-                    .addComponent(jTextField5)
-                    .addComponent(jTextField6))
+                    .addComponent(txt_idtraje, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                    .addComponent(txt_nombreTraje)
+                    .addComponent(cbo_genero)
+                    .addComponent(cbo_talla)
+                    .addComponent(txt_precio)
+                    .addComponent(lbl_estadoContrato))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(73, Short.MAX_VALUE)
@@ -167,27 +191,27 @@ public class GUI_inventario extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_idtraje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_nombreTraje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbo_genero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbo_talla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbl_estadoContrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(92, 92, 92)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -258,7 +282,31 @@ public class GUI_inventario extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
+        new MenuAdmin().setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txt_nombreTrajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombreTrajeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_nombreTrajeActionPerformed
+
+    private void bd_inventarioooMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bd_inventarioooMouseClicked
+        // TODO add your handling code here:
+        
+        int fila = bd_inventariooo.getSelectedRow();
+
+    if (fila >= 0) {
+        // 2. Extraemos el ID del traje (Columna 0)
+        String id = bd_inventariooo.getValueAt(fila, 0).toString();
+
+        // 3. Llamamos al método que creamos en el paso anterior.
+        // Este método ya hace todo el trabajo: busca en Clever Cloud y llena tus txt por separado.
+        buscarYMostrarTraje(id);
+    }
+    
+    }//GEN-LAST:event_bd_inventarioooMouseClicked
 
     /**
      * @param args the command line arguments
@@ -284,8 +332,129 @@ public class GUI_inventario extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new GUI_inventario().setVisible(true));
     }
+    
+    public void Cargar_tabla(){
+        
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("ID Traje");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Precio");
+        modelo.addColumn("Estado Contrato");
+    
+    // Asignamos el modelo vacío a tu JTable por si acaso
+       bd_inventariooo.setModel(modelo);
+    
+    // Consulta SQL: Trae todos los trajes y el estado de su ÚLTIMO contrato de alquiler
+       String sql = "SELECT t.id_traje, t.nombre_traje, t.precio_traje, c.estado_contrato " +
+                 "FROM traje t " +
+                 "LEFT JOIN contrato_alquiler c ON t.id_traje = c.id_traje " +
+                 "AND c.id_contrato_alquiler = (SELECT MAX(id_contrato_alquiler) " +
+                 "                              FROM contrato_alquiler " +
+                 "                              WHERE id_traje = t.id_traje) " +
+                 "ORDER BY t.id_traje ASC";
+                 
+    try (Connection cn = getConexion();
+         PreparedStatement pst = cn.prepareStatement(sql);
+         ResultSet rs = pst.executeQuery()) {
+        
+        // Creamos un arreglo de Strings para ir metiendo fila por fila
+        String[] datos = new String[4];
+        
+        while (rs.next()) {
+            datos[0] = rs.getString("id_traje");
+            datos[1] = rs.getString("nombre_traje");
+            datos[2] = rs.getString("precio_traje");
+            
+            // Validamos el estado del contrato
+            String estado = rs.getString("estado_contrato");
+            if (estado == null) {
+                datos[3] = "DISPONIBLE"; // Si el JOIN da null, significa que nunca se ha alquilado
+            } else {
+                datos[3] = estado.toUpperCase(); // Muestra el estado real (Alquilado, Devuelto, etc.)
+            }
+            
+            // Agregamos la fila cargada al modelo de la tabla
+            modelo.addRow(datos);
+        }
+        
+        // Refrescamos la tabla visual con los nuevos datos
+        bd_inventariooo.setModel(modelo);
+        
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error al cargar la lista de trajes: " + e.getMessage());
+        e.printStackTrace();
+    }
+        
+    }
+    
+    public void buscarYMostrarTraje(String idTraje) {
+    String sql = "SELECT t.id_traje,t.nombre_traje, t.genero, t.talla, t.precio_traje, c.estado_contrato " +
+                 "FROM traje t " +
+                 "LEFT JOIN contrato_alquiler c ON t.id_traje = c.id_traje " +
+                 "AND c.id_contrato_alquiler = (SELECT MAX(id_contrato_alquiler) " +
+                 "                              FROM contrato_alquiler " +
+                 "                              WHERE id_traje = t.id_traje) " +
+                 "WHERE t.id_traje = ?";
+                 
+    // Nos conectamos directamente usando el método getConexion() de tu proyecto
+    try (Connection cn = getConexion();
+         PreparedStatement pst = cn.prepareStatement(sql)) {
+        
+        pst.setString(1, idTraje);
+        
+        try (ResultSet rs = pst.executeQuery()) {
+            if (rs.next()) {
+                // Asignamos los datos directamente a cada JTextField independiente
+                txt_idtraje.setText(rs.getString("id_traje"));
+                txt_nombreTraje.setText(rs.getString("nombre_traje"));
+                cbo_genero.setText(rs.getString("genero"));
+                cbo_talla.setText(rs.getString("talla"));
+                txt_precio.setText(rs.getString("precio_traje"));
+                
+                // Extraemos el estado del contrato
+                String estado = rs.getString("estado_contrato");
+                
+                if (estado == null) {
+                    lbl_estadoContrato.setText("Estado: DISPONIBLE");
+                    lbl_estadoContrato.setForeground(new java.awt.Color(0, 153, 51)); // Verde
+                } else {
+                    lbl_estadoContrato.setText("Estado: " + estado.toUpperCase());
+                    
+                    // Si está alquilado o activo, lo pone en naranja, si no, en azul
+                    if (estado.equalsIgnoreCase("Activo") || estado.equalsIgnoreCase("Alquilado")) {
+                        lbl_estadoContrato.setForeground(new java.awt.Color(255, 153, 0)); // Naranja
+                    } else {
+                        lbl_estadoContrato.setForeground(new java.awt.Color(0, 102, 204)); // Azul
+                    }
+                }
+                
+            } else {
+                JOptionPane.showMessageDialog(this, "No se encontró ningún traje con el ID: " + idTraje, "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                limpiarCampos(); // Vacía los campos si el ID no existe
+            }
+        }
+        
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error al consultar la base de datos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        e.printStackTrace();
+    }
+}
+    
+    private void limpiarCampos() {
+    txt_nombreTraje.setText("");
+    cbo_genero.setText("");
+    cbo_talla.setText("");
+    txt_precio.setText("");
+    
+    lbl_estadoContrato.setText("Estado: -");
+    lbl_estadoContrato.setForeground(java.awt.Color.BLACK); 
+}
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable bd_inventariooo;
+    private javax.swing.JTextField cbo_genero;
+    private javax.swing.JTextField cbo_talla;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -301,13 +470,10 @@ public class GUI_inventario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField lbl_estadoContrato;
     private javax.swing.JPanel pnlPantalla;
+    private javax.swing.JTextField txt_idtraje;
+    private javax.swing.JTextField txt_nombreTraje;
+    private javax.swing.JTextField txt_precio;
     // End of variables declaration//GEN-END:variables
 }
