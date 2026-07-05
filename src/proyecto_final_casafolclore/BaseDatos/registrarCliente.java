@@ -48,7 +48,8 @@ public class registrarCliente {
     }
     
    public String obtenerSiguienteID() {
-    String sql = "SELECT id_usuario FROM clientes ORDER BY id_usuario ASC";
+    // Cambiado a "F0001" (4 dígitos para coincidir con tu controlador)
+   String sql = "SELECT id_usuario FROM clientes ORDER BY id_usuario ASC";
   
     java.util.HashSet<String> idsExistentes = new java.util.HashSet<>();
     
@@ -56,13 +57,17 @@ public class registrarCliente {
          PreparedStatement pst = cn.prepareStatement(sql);
          ResultSet rs = pst.executeQuery()) {
         
+        // Guardamos todos los IDs que ya existen en la nube
         while (rs.next()) {
             idsExistentes.add(rs.getString("id_usuario"));
         }
         
+        // Buscamos el primer hueco libre del 1 al 9999
         for (int i = 1; i <= 9999; i++) {
+            // Formateamos con "F" para tus clientes (ej: F0001, F0002...)
             String idCandidato = String.format("F%04d", i);
             
+            // Si este ID NO existe, significa que es un hueco libre por una eliminación
             if (!idsExistentes.contains(idCandidato)) {
                 return idCandidato; 
             }
@@ -72,8 +77,8 @@ public class registrarCliente {
         System.out.println("Error al generar el siguiente ID automático: " + e);
     }
     
+    // Si la tabla está vacía o hay error, empieza en F0001
     return "F0001";
-    }
     
 }
    public boolean modificarCliente(String id, String nombre, String appPaterno, String appMaterno, 
