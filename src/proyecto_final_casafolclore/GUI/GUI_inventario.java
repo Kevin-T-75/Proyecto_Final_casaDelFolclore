@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static proyecto_final_casafolclore.BaseDatos.conexionBD.getConexion;
 import proyecto_final_casafolclore.BaseDatos.registrarTraje;
+import proyecto_final_casafolclore.Logica.RepoInventario;
 
 /**
  *
@@ -150,6 +151,7 @@ public class GUI_inventario extends javax.swing.JFrame {
 
         jButton2.setBackground(new java.awt.Color(224, 200, 165));
         jButton2.setText("Reporte");
+        jButton2.addActionListener(this::jButton2ActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -310,6 +312,13 @@ public class GUI_inventario extends javax.swing.JFrame {
     
     }//GEN-LAST:event_bd_inventarioooMouseClicked
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+
+        RepoInventario report = new RepoInventario();
+        report.GenerarReporte(bd_inventariooo);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -417,10 +426,10 @@ public class GUI_inventario extends javax.swing.JFrame {
                 String estado = rs.getString("estado_contrato");
                 
                 if (estado == null) {
-                    lbl_estadoContrato.setText("Estado: DISPONIBLE");
+                    lbl_estadoContrato.setText("DISPONIBLE");
                     lbl_estadoContrato.setForeground(new java.awt.Color(0, 153, 51)); // Verde
                 } else {
-                    lbl_estadoContrato.setText("Estado: " + estado.toUpperCase());
+                    lbl_estadoContrato.setText(estado.toUpperCase());
                     
                     // Si está alquilado o activo, lo pone en naranja, si no, en azul
                     if (estado.equalsIgnoreCase("Activo") || estado.equalsIgnoreCase("Alquilado")) {
