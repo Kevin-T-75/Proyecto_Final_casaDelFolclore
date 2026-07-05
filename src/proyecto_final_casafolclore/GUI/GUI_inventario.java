@@ -26,6 +26,8 @@ public class GUI_inventario extends javax.swing.JFrame {
      */
     public GUI_inventario() {
         initComponents();
+        setLocationRelativeTo(null); //centrado
+        setResizable(false); //no deja maximizar, mas rapido aqui
         Cargar_tabla();
     }
 

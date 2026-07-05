@@ -70,7 +70,7 @@
     <Container class="javax.swing.JPanel" name="pnlPantalla">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ea" green="e2" red="cd" type="rgb"/>
+          <Color blue="cc" green="eb" red="ff" type="rgb"/>
         </Property>
       </Properties>
 
@@ -265,7 +265,7 @@
         <Container class="javax.swing.JPanel" name="jPanel1">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="e8" green="c8" red="88" type="rgb"/>
+              <Color blue="0" green="99" red="99" type="rgb"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
@@ -634,7 +634,7 @@
         <Component class="javax.swing.JButton" name="btnCAlquiler">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="e8" green="c8" red="88" type="rgb"/>
+              <Color blue="0" green="99" red="99" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Artifakt Element Black" size="14" style="1"/>
