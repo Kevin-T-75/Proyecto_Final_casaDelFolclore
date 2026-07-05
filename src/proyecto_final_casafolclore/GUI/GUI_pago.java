@@ -17,7 +17,8 @@ public class GUI_pago extends javax.swing.JFrame {
      */
     public GUI_pago() {
         initComponents();
-       
+        setLocationRelativeTo(null); //centrado
+        setResizable(false); //no deja maximizar, mas rapido aqui
         
         java.util.Random random = new java.util.Random();
         int numeroAleatorio = random.nextInt(999999) + 1;

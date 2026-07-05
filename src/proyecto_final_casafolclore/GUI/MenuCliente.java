@@ -192,7 +192,7 @@ public class MenuCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void btnAlquilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlquilarActionPerformed
-         new GUI_alquiler().setVisible(true);
+        new GUI_regalquiler().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAlquilarActionPerformed
 

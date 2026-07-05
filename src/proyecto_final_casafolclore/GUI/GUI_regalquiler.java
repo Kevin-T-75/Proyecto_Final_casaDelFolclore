@@ -31,6 +31,8 @@ public class GUI_regalquiler extends javax.swing.JFrame {
      */
     public GUI_regalquiler() {
         initComponents();
+        setLocationRelativeTo(null); //centrado
+        setResizable(false); //no deja maximizar, mas rapido aqui
         txt_fechaInicio.setDate(new java.util.Date());
         
         generarIdCorrelativo(); // Asegúrate de que este método use try-with-resources también
@@ -270,9 +272,9 @@ public class GUI_regalquiler extends javax.swing.JFrame {
         jLabel9.setText("jLabel1");
         jLabel9.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        pnlPantalla.setBackground(new java.awt.Color(205, 226, 234));
+        pnlPantalla.setBackground(new java.awt.Color(255, 235, 204));
 
-        jPanel1.setBackground(new java.awt.Color(136, 200, 232));
+        jPanel1.setBackground(new java.awt.Color(153, 153, 0));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel2.setBackground(new java.awt.Color(249, 241, 229));
@@ -439,7 +441,7 @@ public class GUI_regalquiler extends javax.swing.JFrame {
         cbTalla.addItemListener(this::cbTallaItemStateChanged);
         cbTalla.addActionListener(this::cbTallaActionPerformed);
 
-        btnCAlquiler.setBackground(new java.awt.Color(136, 200, 232));
+        btnCAlquiler.setBackground(new java.awt.Color(153, 153, 0));
         btnCAlquiler.setFont(new java.awt.Font("Artifakt Element Black", 1, 14)); // NOI18N
         btnCAlquiler.setText("CONFIRMAR ALQUILER");
         btnCAlquiler.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
