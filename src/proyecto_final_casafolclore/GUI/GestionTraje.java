@@ -231,7 +231,8 @@ public class GestionTraje extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jtpGTrajes.setBackground(new java.awt.Color(51, 0, 51));
+        jtpGTrajes.setBackground(new java.awt.Color(51, 0, 0));
+        jtpGTrajes.setForeground(new java.awt.Color(255, 255, 255));
 
         pnlFDevo.setBackground(new java.awt.Color(206, 190, 158));
 
