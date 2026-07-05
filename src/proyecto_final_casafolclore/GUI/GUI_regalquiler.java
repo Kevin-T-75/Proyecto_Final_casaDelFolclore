@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
@@ -133,11 +134,7 @@ public class GUI_regalquiler extends javax.swing.JFrame {
             System.err.println("Error al buscar cliente: " + e.getMessage());
         }
 }
-        
-        
-        
-        
-        
+     
         public void cargarTallasTraje(String nombreTraje)
         {       
            cbTalla.removeAllItems();
@@ -713,69 +710,27 @@ public class GUI_regalquiler extends javax.swing.JFrame {
 
     private void btnCAlquilerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCAlquilerActionPerformed
         // TODO add your handling code here:
-        
-        if (txtaDocumento.getText().trim().isEmpty() || txt_idTraje.getText().trim().isEmpty()) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Por favor, busque un cliente y seleccione un traje válido antes de confirmar.", "Campos vacíos", javax.swing.JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-        
-        String docCliente = txtaDocumento.getText().trim();
+        String documento = txtaDocumento.getText().trim();
         String idTraje = txt_idTraje.getText().trim();
-        double monto = Double.parseDouble(txt_monto.getText().trim());
-        
-        java.text.SimpleDateFormat formateador = new java.text.SimpleDateFormat("yyyy-MM-dd");
-    String fecha_in = formateador.format(txt_fechaInicio.getDate());
-    String fecha_fn = formateador.format(txt_fechaFin.getDate());
-        
-    
-        String sqlInsert = "INSERT INTO contrato_alquiler (nro_documento, id_traje, monto, fecha_inicio, fecha_fin, estado_contrato) VALUES (?, ?, ?, ?, ?, 'ALQUILADO')";    
-        String sqlUpdate = "UPDATE traje SET estado = 'ALQUILADO' WHERE id_traje = ?";
-        
-    try (Connection con = proyecto_final_casafolclore.BaseDatos.conexionBD.getConexion()) {
-        if (con == null) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Error de conexión con el servidor remoto.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+
+        // Validar que no estén vacíos
+        if (documento.isEmpty() || idTraje.isEmpty() || txt_fechaInicio.getDate() == null || txt_fechaFin.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos y fechas antes de continuar.", "Campos Vacíos", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        con.setAutoCommit(false);
+        // Formatear las fechas del JDateChooser a String
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        String fechaInicioStr = sdf.format(txt_fechaInicio.getDate());
+        String fechaFinStr = sdf.format(txt_fechaFin.getDate());
 
-        try (PreparedStatement psInsert = con.prepareStatement(sqlInsert);
-             PreparedStatement psUpdate = con.prepareStatement(sqlUpdate)) {
+        // Abrir la ventana de pago pasándole los datos requeridos
+        GUI_pago ventanaPago = new GUI_pago(documento, idTraje, fechaInicioStr, fechaFinStr);
+        ventanaPago.setVisible(true);
 
-            // Seteamos los parámetros del INSERT
-            psInsert.setString(1, docCliente);
-            psInsert.setString(2, idTraje);
-            psInsert.setDouble(3, monto);
-            psInsert.setString(4, fecha_in);
-            psInsert.setString(5, fecha_fn);
-            psInsert.executeUpdate();
-
-            psUpdate.setString(1, idTraje);
-            psUpdate.executeUpdate();
-
-            con.commit();
-
-            javax.swing.JOptionPane.showMessageDialog(this, "Alquiler registrado: El traje " + idTraje + " ahora figura como ALQUILADO.", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-
-            
-            limpiarCampos();
-
-        } catch (SQLException e) {
-            con.rollback();
-            javax.swing.JOptionPane.showMessageDialog(this, "Error al procesar la transacción: " + e.getMessage(), "Error SQL", javax.swing.JOptionPane.ERROR_MESSAGE);
-        }
-
-    } catch (SQLException e) {
-        System.err.println("Error general de conexión: " + e.getMessage());
-    
-        }
-        
-        
-        //validaciones
-      
-        // 2. Cerrar la ventana actual
-         new MenuAdmin().setVisible(true);
+        // Cerrar esta ventana de alquiler
         this.dispose();
+       
     }//GEN-LAST:event_btnCAlquilerActionPerformed
 
     private void limpiarCampos() {
