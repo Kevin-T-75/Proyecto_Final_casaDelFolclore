@@ -710,27 +710,41 @@ public class GUI_regalquiler extends javax.swing.JFrame {
 
     private void btnCAlquilerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCAlquilerActionPerformed
         // TODO add your handling code here:
+
+         // 1. Validar que los campos esenciales no estén vacíos
         String documento = txtaDocumento.getText().trim();
         String idTraje = txt_idTraje.getText().trim();
+        String estadoTraje = txt_estado.getText().trim();
 
-        // Validar que no estén vacíos
-        if (documento.isEmpty() || idTraje.isEmpty() || txt_fechaInicio.getDate() == null || txt_fechaFin.getDate() == null) {
-            JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos y fechas antes de continuar.", "Campos Vacíos", JOptionPane.WARNING_MESSAGE);
+        if (documento.isEmpty() || idTraje.isEmpty()) {
+            JOptionPane.showMessageDialog(this, 
+                    "Por favor, asegúrese de ingresar el documento del cliente y seleccionar un traje válido.", 
+                    "Campos Incompletos", 
+                    JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        // Formatear las fechas del JDateChooser a String
-        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        // 2. Validar que las fechas hayan sido seleccionadas
+        if (txt_fechaInicio.getDate() == null || txt_fechaFin.getDate() == null) {
+            JOptionPane.showMessageDialog(this, 
+                    "Por favor, seleccione una Fecha de Inicio y una Fecha de Fin para la reserva.", 
+                    "Fechas Requeridas", 
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // 3. Convertir las fechas de JDateChooser a String con formato estándar (yyyy-MM-dd)
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String fechaInicioStr = sdf.format(txt_fechaInicio.getDate());
         String fechaFinStr = sdf.format(txt_fechaFin.getDate());
 
-        // Abrir la ventana de pago pasándole los datos requeridos
+        // 4. Abrir la interfaz de Pago enviando los parámetros requeridos
+        // (Asumiendo que tu GUI_pago está en el mismo paquete proyecto_final_casafolclore.GUI)
         GUI_pago ventanaPago = new GUI_pago(documento, idTraje, fechaInicioStr, fechaFinStr);
         ventanaPago.setVisible(true);
 
-        // Cerrar esta ventana de alquiler
+        // 5. Cerrar la ventana actual de alquiler
         this.dispose();
-       
     }//GEN-LAST:event_btnCAlquilerActionPerformed
 
     private void limpiarCampos() {

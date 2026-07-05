@@ -38,29 +38,32 @@ public class reservaBD {
     }
      
      
-     public String[] obtenerDatosTraje(String nombreTraje, String talla, String genero) {
-       
-        String sql = "SELECT id_traje, precio_traje FROM traje WHERE nombre_traje = ? AND talla = ? AND genero = ?";
+    public String[] obtenerDatosTraje(String nombreTraje, String talla, String genero) {
+    // Consulta corregida limpiamente sin errores de comillas ni letras extra
+    String sql = "SELECT id_traje, precio_traje FROM traje "
+               + "WHERE nombre_traje LIKE ? "
+               + "AND talla LIKE ? "
+               + "AND (genero LIKE ? OR genero LIKE 'VARON%')";
+    
+    try (Connection con = conexionBD.getConexion();
+         PreparedStatement ps = con.prepareStatement(sql)) {
         
-        try (Connection con = conexionBD.getConexion();
-             PreparedStatement ps = con.prepareStatement(sql)) {
-            
-            ps.setString(1, nombreTraje);
-            ps.setString(2, talla);
-            ps.setString(3, genero);
-            
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                  
-                    String id = rs.getString("id_traje");
-                    String precio = rs.getString("precio_traje");
-                    return new String[]{id, precio}; 
-                }
+        // Pasamos los parámetros asegurando que no lleven espacios accidentales
+        ps.setString(1, nombreTraje.trim());
+        ps.setString(2, talla.trim());
+        ps.setString(3, genero.trim());
+        
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                String id = rs.getString("id_traje");
+                String precio = rs.getString("precio_traje");
+                return new String[]{id, precio}; 
             }
-            
-        } catch (Exception e) {
-            System.out.println("Error al buscar los datos del traje: " + e.getMessage());
         }
-        return null; 
+        
+    } catch (Exception e) {
+        System.out.println("Error al buscar los datos del traje: " + e.getMessage());
     }
+    return null; 
+}
 }
