@@ -5,10 +5,13 @@
 package proyecto_final_casafolclore.GUI;
 
 
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 
@@ -30,38 +33,33 @@ public class GUI_regalquiler extends javax.swing.JFrame {
         initComponents();
         txt_fechaInicio.setDate(new java.util.Date());
         
-        
-        generarIdCorrelativo();
+        generarIdCorrelativo(); // Asegúrate de que este método use try-with-resources también
         mostrarClientesEnTabla();
-        cargarTrajesA();
-        this.getContentPane().setBackground(new java.awt.Color(249, 241, 229));
+        cargarTrajesA(); // Se corrigió el nombre para que coincida con el método real
         
+        this.getContentPane().setBackground(new java.awt.Color(249, 241, 229));
         this.setLocationRelativeTo(null);
         
-            java.util.Date hoy = new java.util.Date();
-    java.text.SimpleDateFormat formato = new java.text.SimpleDateFormat("dd/MM/yyyy");
-    String fechaActual = formato.format(hoy);
-    
-   
-    cargar_nombres_cbTrajes();
+        java.util.Date hoy = new java.util.Date();
+        java.text.SimpleDateFormat formato = new java.text.SimpleDateFormat("dd/MM/yyyy");
+        String fechaActual = formato.format(hoy);
     
     }
     public void mostrarClientesEnTabla() {
-        javax.swing.table.DefaultTableModel modelo = new javax.swing.table.DefaultTableModel();
+        DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("DNI/Nro Doc");
         modelo.addColumn("Nombres");
         modelo.addColumn("Apellidos");
         modelo.addColumn("Teléfono");
         modelo.addColumn("Correo");
         
-        
         String sql = "SELECT nro_documento, nombre, apellido_paterno, apellido_materno, telefono, correo FROM clientes";
         String[] datos = new String[5];
         
-        try {
-            java.sql.Connection con = conexionBD.getConexion();
-            java.sql.Statement st = con.createStatement();
-            java.sql.ResultSet rs = st.executeQuery(sql);
+        // CORRECCIÓN: Try-with-resources para cerrar la conexión de clientes automáticamente
+        try (Connection con = conexionBD.getConexion();
+             Statement st = con.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
             
             while (rs.next()) {
                 datos[0] = rs.getString("nro_documento");
@@ -72,77 +70,66 @@ public class GUI_regalquiler extends javax.swing.JFrame {
                 
                 modelo.addRow(datos);
             }
-        } catch (java.sql.SQLException e) {
-            System.out.println("Error al cargar la tabla en regalquiler: " + e.getMessage());
+            // Suponiendo que tienes un jTable llamado tablaClientes asignado en el diseño:
+            // tablaClientes.setModel(modelo); 
+            
+        } catch (SQLException e) {
+            System.err.println("Error al cargar la tabla en regalquiler: " + e.getMessage());
         }
     }
-        public void cargarTrajesA() {
+    public void cargarTrajesA() {
+    // Asumiendo que cbTrajes es tu JComboBox de nombres de trajes
+        cbTrajes.removeAllItems();
+        cbTrajes.addItem("Selecciona");
         
-    String sql = "SELECT nombre_traje FROM traje"; 
+        String sql = "SELECT DISTINCT nombre_traje FROM traje"; 
 
-    try {
-        java.sql.Connection con = conexionBD.getConexion();
-        
-        java.sql.Statement st = con.createStatement();
-        
-        java.sql.ResultSet rs = st.executeQuery(sql);
+        // CORRECCIÓN: Eliminado doble bucle while y añadido cierre automático de conexión
+        try (Connection con = conexionBD.getConexion();
+             Statement st = con.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
 
-        while (rs.next()) {
             while (rs.next()) {
-    String nombre = rs.getString("nombre_traje");
-    System.out.println("Traje encontrado en BD: " + nombre); // <-- AGREGA ESTO
-    
-        }
-                    
-        }
+                String nombre = rs.getString("nombre_traje");
+                cbTrajes.addItem(nombre); // Llena el JComboBox con los datos de la nube
+                System.out.println("Traje encontrado en BD: " + nombre);
+            }
 
-        rs.close();
-        st.close();
-
-    } catch (Exception e) {
-        javax.swing.JOptionPane.showMessageDialog(null, "Error al cargar los trajes: " + e.getMessage());
-        e.printStackTrace();
-    }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error al cargar los trajes: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
 }
         
      public void buscarClienteXDocumento(String nroDoc) {
     String sql = "SELECT tipo_documento, nombre, apellido_paterno FROM clientes WHERE nro_documento = ?";
-    
-    Connection con = conexionBD.getConexion();
-    if (con == null) {
-        return;
-    }
-
-    try (PreparedStatement ps = con.prepareStatement(sql)) {
         
-        ps.setString(1, nroDoc);
-        
-        try (ResultSet rs = ps.executeQuery()) {
-            if (rs.next()) {
-                String tipoDocBD = rs.getString("tipo_documento");
-                String nombre_ap = rs.getString("nombre") + " " + rs.getString("apellido_paterno");
-                
-                System.out.println("Cliente encontrado: " + nombre_ap);
-                
-                javax.swing.JOptionPane.showMessageDialog(this, "Cliente: " + nombre_ap);
-                
-                java.awt.EventQueue.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        jLabel_nomb.setText(nombre_ap);
-                        jLabel_nomb.revalidate();
-                        jLabel_nomb.repaint();
-                    }
-                });
-                
-            } else {
-                javax.swing.JOptionPane.showMessageDialog(this, "Cliente no encontrado");
+        // CORRECCIÓN: Estructura try-with-resources limpia
+        try (Connection con = conexionBD.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            
+            ps.setString(1, nroDoc);
+            
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    String nombre_ap = rs.getString("nombre") + " " + rs.getString("apellido_paterno");
+                    System.out.println("Cliente encontrado: " + nombre_ap);
+                    
+                    JOptionPane.showMessageDialog(this, "Cliente: " + nombre_ap);
+                    
+                    java.awt.EventQueue.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            jLabel_nomb.setText(nombre_ap);
+                        }
+                    });
+                } else {
+                    JOptionPane.showMessageDialog(this, "Cliente no encontrado");
+                }
             }
+        } catch (SQLException e) {
+            System.err.println("Error al buscar cliente: " + e.getMessage());
         }
-
-    } catch (SQLException e) {
-        System.err.println("Error al buscar cliente: " + e.getMessage());
-    }
 }
         
         
@@ -151,83 +138,80 @@ public class GUI_regalquiler extends javax.swing.JFrame {
         
         public void cargarTallasTraje(String nombreTraje)
         {       
-            cbTalla.removeAllItems();
-            cbTalla.addItem("Selecciona");
-            
-            String sql = "SELECT DISTINCT talla FROM traje WHERE nombre_traje = ? ";
-            
-            try (Connection con = conexionBD.getConexion();
-         PreparedStatement ps = con.prepareStatement(sql)) {
+           cbTalla.removeAllItems();
+        cbTalla.addItem("Selecciona");
         
-        ps.setString(1, nombreTraje);
-        try (ResultSet rs = ps.executeQuery()) {
-            while (rs.next()) {
-                cbTalla.addItem(rs.getString("talla"));
+        String sql = "SELECT DISTINCT talla FROM traje WHERE nombre_traje = ? ";
+        
+        try (Connection con = conexionBD.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+        
+            ps.setString(1, nombreTraje);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    cbTalla.addItem(rs.getString("talla"));
+                }
             }
+        } catch (SQLException e) {
+            System.err.println("Error al cargar tallas: " + e.getMessage());
         }
-    } catch (SQLException e) {
-        System.err.println("Error al cargar tallas: " + e.getMessage());
-    }
         }
         
     public void cargarGeneroXtraje_talla(String nombreTraje, String tallaTraje) {
     cbGenero.removeAllItems();
-    cbGenero.addItem("Selecciona");
-    
-    String sql = "SELECT DISTINCT genero FROM traje WHERE nombre_traje = ? AND talla = ?";
-    Connection con = conexionBD.getConexion();
-
-    if (con == null) return;
-
-    try (PreparedStatement ps = con.prepareStatement(sql)) {
-        ps.setString(1, nombreTraje);
-        ps.setString(2, tallaTraje);
+        cbGenero.addItem("Selecciona");
         
-        try (ResultSet rs = ps.executeQuery()) {
-            while (rs.next()) {
-                cbGenero.addItem(rs.getString("genero"));
+        String sql = "SELECT DISTINCT genero FROM traje WHERE nombre_traje = ? AND talla = ?";
+
+        // CORRECCIÓN: Se integró la conexión al try-with-resources para evitar fugas
+        try (Connection con = conexionBD.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+             
+            ps.setString(1, nombreTraje);
+            ps.setString(2, tallaTraje);
+            
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    cbGenero.addItem(rs.getString("genero"));
+                }
             }
+        } catch (SQLException e) {
+            System.err.println("Error al cargar géneros: " + e.getMessage());
         }
-    } catch (SQLException e) {
-        System.err.println("Error al cargar géneros: " + e.getMessage());
-    }
     
     }
 
    public void mostrarID_Monto(String nombre, String talla, String genero) {
     
-    String sql = "SELECT id_traje, precio_traje, estado FROM traje "
-                + "WHERE nombre_traje = ? AND talla = ? AND genero = ? AND estado = 'DISPONIBLE'";
-    
-    try (Connection con = conexionBD.getConexion();
-         PreparedStatement ps = con.prepareStatement(sql)) {
+   String sql = "SELECT id_traje, precio_traje, estado FROM traje "
+                    + "WHERE nombre_traje = ? AND talla = ? AND genero = ? AND estado = 'DISPONIBLE'";
         
-        if (con == null) return; // Si la conexión falló, cancela discretamente
+        try (Connection con = conexionBD.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            
+            ps.setString(1, nombre);
+            ps.setString(2, talla);
+            ps.setString(3, genero);
+            
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    String idEncontrado = rs.getString("id_traje");
+                    double montoEncontrado = rs.getDouble("precio_traje");
+                    String estadoEncontrado = rs.getString("estado");
 
-        ps.setString(1, nombre);
-        ps.setString(2, talla);
-        ps.setString(3, genero);
-        
-        try (ResultSet rs = ps.executeQuery()) {
-            if (rs.next()) {
-                String idEncontrado = rs.getString("id_traje");
-                double montoEncontrado = rs.getDouble("precio_traje");
-                String estadoEncontrado = rs.getString("estado");
-
-                java.awt.EventQueue.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        txt_idTraje.setText(idEncontrado);
-                        txt_monto.setText(String.valueOf(montoEncontrado));
-                        txt_estado.setText(estadoEncontrado);
-                    }
-                });
+                    java.awt.EventQueue.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            txt_idTraje.setText(idEncontrado);
+                            txt_monto.setText(String.valueOf(montoEncontrado));
+                            txt_estado.setText(estadoEncontrado);
+                        }
+                    });
+                }
             }
+        } catch (SQLException e) {
+            System.err.println("Error al obtener datos finales: " + e.getMessage());
         }
-
-    } catch (SQLException e) {
-        System.err.println("Error al obtener datos finales: " + e.getMessage());
-    }
 }
     
     
@@ -788,8 +772,7 @@ public class GUI_regalquiler extends javax.swing.JFrame {
         //validaciones
       
         // 2. Cerrar la ventana actual
-        new MenuCliente().setVisible(true);
-
+         new MenuAdmin().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCAlquilerActionPerformed
 
@@ -808,6 +791,8 @@ public class GUI_regalquiler extends javax.swing.JFrame {
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // boton cancelar:
+          new MenuAdmin().setVisible(true);
+        this.dispose();
 
     }//GEN-LAST:event_jButton2ActionPerformed
 

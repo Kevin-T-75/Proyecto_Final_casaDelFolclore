@@ -52,7 +52,7 @@
                   <Component id="pnlDashboard" min="-2" max="-2" attributes="0"/>
                   <Component id="pnlPantalla" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="63" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
