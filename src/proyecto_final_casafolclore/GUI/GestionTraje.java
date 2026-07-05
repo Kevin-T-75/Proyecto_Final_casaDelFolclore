@@ -117,6 +117,19 @@ public class GestionTraje extends javax.swing.JDialog {
         }
     }
 }
+  public class FormularioTraje extends javax.swing.JFrame {
+
+    // CONSTRUCTOR de la ventana
+    public FormularioTraje() {
+        initComponents(); 
+        
+        String siguienteID = new registrarTraje().obtenerSiguienteIDTraje();
+        
+        txtAID.setText(siguienteID); 
+        
+        txtAID.setEditable(false); 
+    }
+}  
     
 
     /**
@@ -1057,7 +1070,7 @@ public class GestionTraje extends javax.swing.JDialog {
     private void txtACostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtACostoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtACostoActionPerformed
-
+     
     private void btnATrajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnATrajeActionPerformed
         conexionBD conexion = new conexionBD();
         registrarTraje regT = new registrarTraje();
@@ -1065,7 +1078,6 @@ public class GestionTraje extends javax.swing.JDialog {
 
         String nombre = txtAName.getText().trim();
 
-// Captura de los JRadioButton para el Género
         String genero = "";
         if (rbVaron.isSelected()) {         
             genero = "VARÓN";
@@ -1076,7 +1088,7 @@ public class GestionTraje extends javax.swing.JDialog {
         String talla = cbTalla.getSelectedItem().toString(); 
         String costoTexto = txtACosto.getText().trim(); 
 
-// 2. Validaciones de campos vacíos
+//  Validaciones de campos vacíos
         if (nombre.isEmpty() || genero.isEmpty() || talla.isEmpty() || costoTexto.isEmpty()) { 
             JOptionPane.showMessageDialog(this, "Complete todos los campos de la sección 'Datos del traje'.");
             return;
@@ -1084,7 +1096,7 @@ public class GestionTraje extends javax.swing.JDialog {
 
         double costo;
 
-// 3. Validación de formato numérico
+//  Validación de formato numérico
         try {
             costo = Double.parseDouble(costoTexto);
             if (costo <= 0) {
@@ -1096,7 +1108,6 @@ public class GestionTraje extends javax.swing.JDialog {
             return;
 }
 
-// 4. Confirmación corregida (Texto cambiado de 'devolución' a 'traje')
         int op = JOptionPane.showConfirmDialog( 
             this, "¿Está seguro/a de que desea agregar este traje al registro?", "ADVERTENCIA",
             JOptionPane.YES_NO_OPTION,
@@ -1104,17 +1115,17 @@ public class GestionTraje extends javax.swing.JDialog {
 
         if (op == JOptionPane.YES_OPTION) {
 
-            // 5. Intentamos guardar en la BD una única vez usando el ID dinámico
+            // Intentamos guardar en la BD una única vez usando el ID dinámico
             boolean exitoBD = regT.registrarTraje(id, nombre, genero, talla, String.valueOf(costo));
 
             if (exitoBD) {
-                // 6. Si la BD lo aceptó, lo guardamos en la lista en memoria
+                // Si la BD lo aceptó, lo guardamos en la lista en memoria
                 Traje traje = new Traje(id, nombre, genero, talla, true, costo);
                 controladorTraje.registrarTraje(traje);
 
                 JOptionPane.showMessageDialog(this, "Traje registrado correctamente en el sistema.");
 
-                // 7. Limpiamos las cajas y actualizamos el campo de texto con el código que sigue (T0002, T0003...)
+                // Limpiamos las cajas y actualizamos el campo de texto con el código que sigue (T0002, T0003...)
                 limpiarCamposTraje();       
                 txtAID.setText(regT.obtenerSiguienteIDTraje()); // <-- Se actualiza con el ID real de la nube
           } else {

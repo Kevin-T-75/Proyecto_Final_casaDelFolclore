@@ -34,29 +34,31 @@ public class GestionCliente extends javax.swing.JFrame {
 
 
 public void cargarClientes() {
-    String[] titulos = {"ID Usuario", "Nombre Completo", "Correo", "Teléfono", "Dirección"};
+    String[] titulos = {"ID Usuario", "DNI", "Nombre Completo", "Correo", "Teléfono", "Dirección"};
     
     DefaultTableModel modelo = new DefaultTableModel(null, titulos) {
         @Override
         public boolean isCellEditable(int row, int column) {
-            return column == 2 || column == 3 || column == 4;
+            return column == 3 || column == 4 || column == 5;
         }
     };
     
-    String sql = "SELECT id_usuario, nombre, apellido_paterno, correo, telefono, direccion FROM clientes"; 
+    // 2. Agregamos 'nro_documento' en tu consulta SQL
+    String sql = "SELECT id_usuario, nombre, apellido_paterno, nro_documento, correo, telefono, direccion FROM clientes"; 
     
     try (Connection con = conexionBD.getConexion();
          PreparedStatement ps = con.prepareStatement(sql);
          ResultSet rs = ps.executeQuery()) {
         
-        Object[] fila = new Object[5];
+        Object[] fila = new Object[6]; // Cambiamos a 6 columnas en total
         
         while (rs.next()) {
             fila[0] = rs.getString("id_usuario");
-            fila[1] = rs.getString("nombre") + " " + rs.getString("apellido_paterno");
-            fila[2] = rs.getString("correo");
-            fila[3] = rs.getString("telefono");
-            fila[4] = rs.getString("direccion");
+            fila[1] = rs.getString("nro_documento");
+            fila[2] = rs.getString("nombre") + " " + rs.getString("apellido_paterno");
+            fila[3] = rs.getString("correo");
+            fila[4] = rs.getString("telefono");
+            fila[5] = rs.getString("direccion");
             
             modelo.addRow(fila);
         }
@@ -194,15 +196,16 @@ public class FormularioCliente extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 760, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pnlTitu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFCliLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addGap(42, 42, 42)
+                .addComponent(jScrollPane1)
+                .addGap(33, 33, 33)
                 .addGroup(pnlFCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegresar)
-                    .addComponent(btnModificar, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(79, 79, 79))
+                    .addGroup(pnlFCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnModificar))
+                    .addComponent(btnRegresar))
+                .addGap(51, 51, 51))
         );
         pnlFCliLayout.setVerticalGroup(
             pnlFCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,18 +216,17 @@ public class FormularioCliente extends javax.swing.JFrame {
                 .addGroup(pnlFCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlFCliLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlFCliLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                        .addGap(51, 51, 51)
                         .addComponent(btnAgregar)
-                        .addGap(45, 45, 45)
+                        .addGap(18, 18, 18)
                         .addComponent(btnEliminar)
-                        .addGap(48, 48, 48)
+                        .addGap(18, 18, 18)
                         .addComponent(btnModificar)
-                        .addGap(56, 56, 56)
-                        .addComponent(btnRegresar)
-                        .addGap(128, 128, 128))))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnRegresar)))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
