@@ -48,32 +48,32 @@ public class registrarCliente {
     }
     
    public String obtenerSiguienteID() {
-    // Cambiado a "F0001" (4 dígitos para coincidir con tu controlador)
-    String siguienteID = "F0001"; 
-    
-    String sql = "SELECT MAX(id_usuario) FROM clientes";
+    String sql = "SELECT id_usuario FROM clientes ORDER BY id_usuario ASC";
+  
+    java.util.HashSet<String> idsExistentes = new java.util.HashSet<>();
     
     try (Connection cn = conexionBD.getConexion();
          PreparedStatement pst = cn.prepareStatement(sql);
          ResultSet rs = pst.executeQuery()) {
         
-        if (rs.next() && rs.getString(1) != null) {
-            String idMaximo = rs.getString(1); // Recupera el de la nube, ej: "F0015"
-            
-            // Extrae el número quitando la 'F' de la posición 0
-            int numero = Integer.parseInt(idMaximo.substring(1)); 
-            
-            // Incrementa en 1 para el siguiente cliente
-            numero++; 
-            
-            // Vuelve a armar el formato manteniendo los 4 dígitos (Ej: "F0016")
-            siguienteID = String.format("F%04d", numero); 
+        while (rs.next()) {
+            idsExistentes.add(rs.getString("id_usuario"));
         }
+        
+        for (int i = 1; i <= 9999; i++) {
+            String idCandidato = String.format("F%04d", i);
+            
+            if (!idsExistentes.contains(idCandidato)) {
+                return idCandidato; 
+            }
+        }
+        
     } catch (SQLException e) {
-        System.out.println("Error al generar el siguiente ID en la nube: " + e);
+        System.out.println("Error al generar el siguiente ID automático: " + e);
     }
     
-    return siguienteID; 
+    return "F0001";
+    }
     
 }
    public boolean modificarCliente(String id, String nombre, String appPaterno, String appMaterno, 
