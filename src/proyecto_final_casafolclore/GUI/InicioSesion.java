@@ -4,7 +4,12 @@
  */
 package proyecto_final_casafolclore.GUI;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import proyecto_final_casafolclore.BaseDatos.conexionBD;
 import proyecto_final_casafolclore.Logica.Sesion; //para que no se borre el correo al salir entre botones, se creo una clase mejor
 
 /**
@@ -196,39 +201,39 @@ public class InicioSesion extends javax.swing.JFrame {
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         // Ingresar boton
 
-        String correo = txtCorreo.getText().trim();
-    String contrasena = new String(txtContrasena.getPassword()); // Usando JPasswordField para seguridad
-
-    if (correo.isEmpty() || contrasena.isEmpty()) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Por favor, llene todos los campos.");
-        return;
-    }
-    // Validamos si la opción "Administrador" está seleccionada
-    if (rbAdmin.isSelected()) {
-    proyecto_final_casafolclore.BaseDatos.Inicio_de_sesion controlAdmin = new proyecto_final_casafolclore.BaseDatos.Inicio_de_sesion();
+         String correoIngresado = txtCorreo.getText().trim();
+    String passwordIngresada = new String(txtContrasena.getPassword());
     
-    if (controlAdmin.validarLoginAdmin(correo, contrasena)) {
-        javax.swing.JOptionPane.showMessageDialog(this, "¡Inicio de sesión exitoso como Administrador!");
+    String sql = "SELECT * FROM Administrador WHERE correo = ? AND contrasena = ?"; 
+    
+    try (Connection con = conexionBD.getConexion(); 
+         PreparedStatement ps = con.prepareStatement(sql)) {
         
-        if (controlAdmin.validarLoginAdmin(correo, contrasena)) {
-    javax.swing.JOptionPane.showMessageDialog(this, "¡Inicio de sesión exitoso como Administrador!");
-
-    MenuAdmin ventanaMenu = new MenuAdmin(); 
-    ventanaMenu.setVisible(true);
-
-
-    this.dispose();
+        ps.setString(1, correoIngresado);
+        ps.setString(2, passwordIngresada);
+        
+        try (ResultSet rs = ps.executeQuery()) {
+            
+            if (rs.next()) { 
+                // 1. Guardamos el correo en la sesión global (RAM)
+                Sesion.correoActual = correoIngresado; 
+                
+                // 2. Abrimos tu menú principal
+                MenuAdmin menu = new MenuAdmin();
+                menu.setVisible(true);
+                
+                // 3. Cerramos esta ventana de Login
+                this.dispose(); 
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");
+            }
+            
         }
+        
+    } catch (SQLException e) {
+        System.out.println("Error al validar login: " + e.getMessage());
+    }
 
-        this.dispose(); 
-    } else {
-        javax.swing.JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos.", "Error de acceso", javax.swing.JOptionPane.ERROR_MESSAGE);
-    }
-    } else if (rbCliente.isSelected()) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Zona de clientes en mantenimiento.");
-    } else {
-        javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar si ingresa como Administrador o Cliente.");
-    }
 
     }//GEN-LAST:event_btnIngresarActionPerformed
 

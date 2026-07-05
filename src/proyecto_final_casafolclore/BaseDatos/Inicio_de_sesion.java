@@ -6,6 +6,7 @@ package proyecto_final_casafolclore.BaseDatos;
 import java.sql.PreparedStatement;
 import java.sql.Connection;          
 import java.sql.ResultSet;
+import java.sql.SQLException;
 /**
  *
  * @author SAHIR
@@ -14,9 +15,9 @@ public class Inicio_de_sesion {
     public boolean validarLoginAdmin(String correo, String contrasena) {
         String sql = "SELECT * FROM Administrador WHERE correo = ? AND contrasena = ?";
         
-        // Usamos el bloque try-with-resources que cierra automáticamente la conexión
-       try (Connection con = conexionBD.getConexion(); 
-        PreparedStatement ps = con.prepareStatement(sql)){
+        // Tu código estaba perfecto, solo necesitaba los imports de arriba
+        try (Connection con = conexionBD.getConexion(); 
+             PreparedStatement ps = con.prepareStatement(sql)) {
             
             ps.setString(1, correo);
             ps.setString(2, contrasena);
@@ -25,8 +26,9 @@ public class Inicio_de_sesion {
                 return rs.next(); // Retorna true si encontró coincidencia, false si no
             }
             
-        } catch (Exception e) {
+        } catch (SQLException e) { // Cambié Exception por SQLException que es más preciso para BD
             System.out.println("Error al validar administrador: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
     }

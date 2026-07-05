@@ -40,29 +40,35 @@ public class registrarTraje {
     } 
 
     public String obtenerSiguienteIDTraje() {
-        String siguienteID = "T0001"; // ID por defecto si la tabla está vacía
-        String sql = "SELECT MAX(id_traje) FROM traje";
+       String sql = "SELECT id_traje FROM traje ORDER BY id_traje ASC";
+  
+    java.util.HashSet<String> idsExistentes = new java.util.HashSet<>();
+    
+    try (Connection cn = getConexion();
+         PreparedStatement pst = cn.prepareStatement(sql);
+         ResultSet rs = pst.executeQuery()) {
         
-        try (Connection cn = getConexion();
-             PreparedStatement pst = cn.prepareStatement(sql);
-             ResultSet rs = pst.executeQuery()) {
-            
-            if (rs.next() && rs.getString(1) != null) {
-                String idMaximo = rs.getString(1); // Recupera el más alto, ej: "T0001"
-                
-                // Extrae el número quitando la 'T' de la posición 0
-                int numero = Integer.parseInt(idMaximo.substring(1)); 
-                
-                // Incrementa en 1 para el nuevo traje (Se volverá 2)
-                numero++; 
-                
-                // Lo vuelve a formatear con 4 dígitos (Ej: "T0002")
-                siguienteID = String.format("T%04d", numero); 
-            }
-        } catch (SQLException e) {
-            System.out.println("Error al generar el siguiente ID de traje en la nube: " + e);
+      
+        while (rs.next()) {
+            idsExistentes.add(rs.getString("id_traje"));
         }
         
-        return siguienteID; 
+       
+        for (int i = 1; i <= 9999; i++) {
+            // Formateamos el número actual (ej: si i=6, se vuelve "T0006")
+            String idCandidato = String.format("T%04d", i);
+            
+            // Si este ID NO existe en la base de datos, ¡encontramos el hueco disponible!
+            if (!idsExistentes.contains(idCandidato)) {
+                return idCandidato; 
+            }
+        }
+        
+    } catch (SQLException e) {
+        System.out.println("Error al generar el siguiente ID automático: " + e);
+    }
+    
+    return "T0001"; 
+
     }
 }
