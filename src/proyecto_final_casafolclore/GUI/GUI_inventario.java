@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import proyecto_final_casafolclore.BaseDatos.conexionBD;
 import static proyecto_final_casafolclore.BaseDatos.conexionBD.getConexion;
 import proyecto_final_casafolclore.BaseDatos.registrarTraje;
 import proyecto_final_casafolclore.Logica.RepoInventario;
@@ -297,17 +298,68 @@ public class GUI_inventario extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_nombreTrajeActionPerformed
 
     private void bd_inventarioooMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bd_inventarioooMouseClicked
-        // TODO add your handling code here:
+     int filaSeleccionada = bd_inventariooo.getSelectedRow();
+    
+    if (filaSeleccionada >= 0) {
+        // 1. Extraemos los datos que la JTable sí nos muestra en pantalla
+        String idTraje = bd_inventariooo.getValueAt(filaSeleccionada, 0).toString().trim();
+        String nombre = bd_inventariooo.getValueAt(filaSeleccionada, 1).toString().trim();
+        String precio = bd_inventariooo.getValueAt(filaSeleccionada, 2).toString().trim();
+        String estadoTraje = bd_inventariooo.getValueAt(filaSeleccionada, 3).toString().trim(); 
+
+        // 2. Asignamos de inmediato lo que ya tenemos seguro
+        txt_idtraje.setText(idTraje);
+        txt_nombreTraje.setText(nombre);
+        txt_precio.setText(precio);
+        lbl_estadoContrato.setText(estadoTraje.toUpperCase());
         
-        int fila = bd_inventariooo.getSelectedRow();
-
-    if (fila >= 0) {
-        // 2. Extraemos el ID del traje (Columna 0)
-        String id = bd_inventariooo.getValueAt(fila, 0).toString();
-
-        // 3. Llamamos al método que creamos en el paso anterior.
-        // Este método ya hace todo el trabajo: busca en Clever Cloud y llena tus txt por separado.
-        buscarYMostrarTraje(id);
+        // 3. Consulta limpia usando SELECT * para evitar errores con los nombres de columnas
+        String sqlBackup = "SELECT * FROM traje WHERE id_traje = ?";
+        
+        try (java.sql.Connection con = conexionBD.getConexion(); // Si te da error, usa la ruta larga: proyecto_final_casafolclore.BaseDatos.conexionBD.getConexion()
+             java.sql.PreparedStatement pst = con.prepareStatement(sqlBackup)) {
+            
+            if (con != null) {
+                pst.setString(1, idTraje);
+                try (java.sql.ResultSet rs = pst.executeQuery()) {
+                    if (rs.next()) {
+                        
+                        // INTENTO 1: Buscamos dinámicamente si tus columnas se llaman 'para' o 'genero'
+                        String generoDetectado = "";
+                        try { 
+                            generoDetectado = rs.getString("para"); 
+                        } catch (Exception e) {
+                            try { generoDetectado = rs.getString("genero"); } catch (Exception ex) { generoDetectado = "M/F"; }
+                        }
+                        
+                        String tallaDetectada = "";
+                        try { 
+                            tallaDetectada = rs.getString("talla"); 
+                        } catch (Exception e) { 
+                            tallaDetectada = "S/M/L"; 
+                        }
+                        
+                        // Seteamos los textos finales en mayúsculas
+                        cbo_genero.setText(generoDetectado.toUpperCase());
+                        cbo_talla.setText(tallaDetectada.toUpperCase());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            // Si sale algún error inesperado de conexión, te lo mostrará en pantalla para saber qué es
+            javax.swing.JOptionPane.showMessageDialog(this, "Error de conexión: " + e.getMessage());
+            cbo_genero.setText("ERROR");
+            cbo_talla.setText("ERROR");
+        }
+        
+        // 4. Cambiamos el color de la disponibilidad (¡Con tu color morado funcionando!)
+        if ("DISPONIBLE".equalsIgnoreCase(estadoTraje)) {
+            lbl_estadoContrato.setForeground(new java.awt.Color(0, 153, 51)); // Verde
+        } else if ("RESERVADO".equalsIgnoreCase(estadoTraje)) {
+            lbl_estadoContrato.setForeground(new java.awt.Color(128, 0, 128)); // Morado
+        } else {
+            lbl_estadoContrato.setForeground(new java.awt.Color(204, 0, 0)); // Rojo para ALQUILADO
+        }
     }
     
     }//GEN-LAST:event_bd_inventarioooMouseClicked

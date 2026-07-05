@@ -528,51 +528,67 @@ public class GUI_reserva extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String documento = txtnDocumento.getText().trim();
-    if (documento.isEmpty() || nombreClienteActual.isEmpty()) {
-        javax.swing.JOptionPane.showMessageDialog(this, 
-            "Por favor, ingrese un número de documento válido antes de continuar.", 
-            "Cliente no validado", 
-            javax.swing.JOptionPane.ERROR_MESSAGE);
+      String documento = txtnDocumento.getText().trim();
+    
+    // Validaciones básicas de campos vacíos
+    if (documento.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Por favor, ingrese un número de documento.", "Campos incompletos", javax.swing.JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+    if (cbTrajes.getSelectedIndex() <= 0 || cbTalla.getSelectedIndex() < 0 || cbGenero.getSelectedIndex() < 0) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Por favor, seleccione el Nombre, Talla y Género del traje.", "Campos incompletos", javax.swing.JOptionPane.WARNING_MESSAGE);
+        return; 
+    }
+
+    // ARREGLADO: Ahora manejamos el ID como String ("T0015") en vez de int
+    String idTraje = txtIdTraje.getText().trim();
+    if (idTraje.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this, "No se ha podido recuperar el ID del traje. Verifique los datos.", "Error de Coincidencia", javax.swing.JOptionPane.ERROR_MESSAGE);
         return;
     }
 
-    if (cbTrajes.getSelectedIndex() <= 0 || cbTalla.getSelectedIndex() < 0 || cbGenero.getSelectedIndex() < 0) {
-        javax.swing.JOptionPane.showMessageDialog(this, 
-            "Por favor, seleccione el Nombre, Talla y Género del traje.", 
-            "Campos incompletos", 
-            javax.swing.JOptionPane.WARNING_MESSAGE);
-        return; 
-    }
+    // Consultas SQL utilizando VARCHAR/CHAR para el id_traje
+    String sqlBuscarEstado = "SELECT estado FROM traje WHERE id_traje = ?";
+    String sqlActualizarEstado = "UPDATE traje SET estado = 'Reservado' WHERE id_traje = ?";
 
-    String nombreTraje = cbTrajes.getSelectedItem().toString();
-    String talla = cbTalla.getSelectedItem().toString();
-    String para = cbGenero.getSelectedItem().toString();
-
-    proyecto_final_casafolclore.BaseDatos.reservaBD controlReserva = new proyecto_final_casafolclore.BaseDatos.reservaBD();
-    String[] datosTraje = controlReserva.obtenerDatosTraje(nombreTraje, talla, para);
-
-    if (datosTraje == null) {
-        javax.swing.JOptionPane.showMessageDialog(this, 
-            "No se puede realizar la reserva. El traje especificado con esa Talla y Género no existe en la base de datos.", 
-            "Error de Coincidencia", 
-            javax.swing.JOptionPane.ERROR_MESSAGE);
-        return; 
-    }
-
-    String mensajeConfirmacion = "¿Está seguro que el cliente " + nombreClienteActual + " quiere reservar el traje " + nombreTraje + "?";
-    
-    int respuesta = javax.swing.JOptionPane.showConfirmDialog(this, 
-        mensajeConfirmacion, 
-        "Confirmar Operación", 
-        javax.swing.JOptionPane.YES_NO_OPTION, 
-        javax.swing.JOptionPane.QUESTION_MESSAGE);
-
-    if (respuesta == javax.swing.JOptionPane.YES_OPTION) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Reserva procesada con éxito.");
+    try (java.sql.Connection con = conexionBD.getConexion();
+         java.sql.PreparedStatement pstBuscar = con.prepareStatement(sqlBuscarEstado)) {
         
-    } else {
-        System.out.println("Reserva cancelada por el usuario.");
+        if (con == null) return;
+        
+        // 1. Verificar el estado actual del traje en la BD usando setString
+        pstBuscar.setString(1, idTraje);
+        try (java.sql.ResultSet rs = pstBuscar.executeQuery()) {
+            if (rs.next()) {
+                String estadoActual = rs.getString("estado");
+                
+                if ("Alquilado".equalsIgnoreCase(estadoActual)) {
+                    javax.swing.JOptionPane.showMessageDialog(this, "El traje seleccionado está Alquilado. No se puede reservar.", "Traje no disponible", javax.swing.JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                
+                if ("Reservado".equalsIgnoreCase(estadoActual)) {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Este traje ya se encuentra Reservado.", "Traje no disponible", javax.swing.JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+            }
+        }
+
+        // 2. Si está disponible, procedemos a cambiar el estado a 'Reservado'
+        try (java.sql.PreparedStatement pstActualizar = con.prepareStatement(sqlActualizarEstado)) {
+            pstActualizar.setString(1, idTraje); // Usamos setString aquí también
+            int filasAfectadas = pstActualizar.executeUpdate();
+            
+            if (filasAfectadas > 0) {
+                javax.swing.JOptionPane.showMessageDialog(this, "¡Reserva confirmada! El estado del traje ha cambiado a 'Reservado'.", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                
+                // Limpia la pantalla o regresa usando tu botón cancelar
+                jButton2ActionPerformed(null); 
+            }
+        }
+
+    } catch (Exception e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Error al procesar la reserva: " + e.getMessage(), "Error de Base de Datos", javax.swing.JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -588,7 +604,41 @@ public class GUI_reserva extends javax.swing.JFrame {
     }//GEN-LAST:event_txtnDocumentoActionPerformed
 
     private void cbTrajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTrajesActionPerformed
+        // 1. Si se selecciona la opción por defecto, limpiamos y salimos
+        if (cbTrajes.getSelectedIndex() <= 0) {
+            cbTalla.removeAllItems();
+            txtIdTraje.setText("");
+            txtMontoAlquiler.setText("");
+            return;
+        }
+
+        String trajeSeleccionado = cbTrajes.getSelectedItem().toString();
+
+        // 2. Limpiamos el combo de tallas para llenarlo con las correctas
+        cbTalla.removeAllItems();
+
+        // 3. Consultamos a la BD las tallas que pertenecen a este traje
+        String sql = "SELECT DISTINCT talla FROM traje WHERE nombre_traje = ?";
+
+        try (java.sql.Connection con = conexionBD.getConexion();
+             java.sql.PreparedStatement pst = con.prepareStatement(sql)) {
+
+            if (con == null) return;
+
+            pst.setString(1, trajeSeleccionado);
+
+            try (java.sql.ResultSet rs = pst.executeQuery()) {
+                while (rs.next()) {
+                    cbTalla.addItem(rs.getString("talla"));
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error al filtrar las tallas de forma dinámica: " + e.getMessage());
+        }
+
+        // 4. Ejecutamos tu método para intentar recalcular ID y Monto de inmediato
         buscarYAlimentarTraje();
+        
     }//GEN-LAST:event_cbTrajesActionPerformed
 
     private void cbTDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTDocActionPerformed
@@ -622,6 +672,7 @@ public class GUI_reserva extends javax.swing.JFrame {
 
     private void cbTallaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTallaActionPerformed
         buscarYAlimentarTraje();
+        
     }//GEN-LAST:event_cbTallaActionPerformed
 
     private void cbGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGeneroActionPerformed
