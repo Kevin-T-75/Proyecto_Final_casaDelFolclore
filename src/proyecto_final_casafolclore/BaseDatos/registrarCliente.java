@@ -76,6 +76,43 @@ public class registrarCliente {
     return siguienteID; 
     
 }
+   public boolean modificarCliente(String id, String nombre, String appPaterno, String appMaterno, 
+                                String tipoDoc, String nroDoc, String correo, String contra, 
+                                String tel, String dir, String tipoCliente) {
+    
+    // Consulta SQL con los nombres exactos de tus columnas
+    String sql = "UPDATE clientes SET nombre = ?, apellido_paterno = ?, apellido_materno = ?, "
+               + "tipo_documento = ?, nro_documento = ?, correo = ?, contrasena = ?, "
+               + "tipo_cliente = ?, telefono = ?, direccion = ? WHERE id_usuario = ?";
+    
+    try (Connection cn = conexionBD.getConexion(); 
+         PreparedStatement pst = cn.prepareStatement(sql)) {
+
+        // Pasamos los nuevos datos a los parámetros '?'
+        pst.setString(1, nombre);
+        pst.setString(2, appPaterno);
+        pst.setString(3, appMaterno);
+        pst.setString(4, tipoDoc);
+        pst.setString(5, nroDoc);
+        pst.setString(6, correo);
+        pst.setString(7, contra);
+        pst.setString(8, tipoCliente);
+        pst.setString(9, tel);
+        pst.setString(10, dir);
+        
+        // El último '?' es el WHERE para saber a qué cliente modificar
+        pst.setString(11, id); 
+        
+        int filasAfectadas = pst.executeUpdate(); 
+        
+        // Si filasAfectadas es mayor a 0, significa que se actualizó con éxito
+        return filasAfectadas > 0;
+        
+    } catch (SQLException e) {
+        System.out.println("Error al modificar el cliente en la nube: " + e);
+        return false;
+    }
+}
     
 }
 

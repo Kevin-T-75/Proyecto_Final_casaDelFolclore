@@ -3,8 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package proyecto_final_casafolclore.GUI;
-
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
+import proyecto_final_casafolclore.BaseDatos.conexionBD;
+import proyecto_final_casafolclore.BaseDatos.registrarCliente;
 
 /**
  *
@@ -22,7 +29,58 @@ public class GestionCliente extends javax.swing.JFrame {
         setSize(750, 560); //tamaño
         setLocationRelativeTo(null); //centrado
         setResizable(false); //no deja maximizar, mas rapido aqui
+        cargarClientes();
     }
+
+
+public void cargarClientes() {
+    String[] titulos = {"ID Usuario", "Nombre Completo", "Correo", "Teléfono", "Dirección"};
+    
+    DefaultTableModel modelo = new DefaultTableModel(null, titulos) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return column == 2 || column == 3 || column == 4;
+        }
+    };
+    
+    String sql = "SELECT id_usuario, nombre, apellido_paterno, correo, telefono, direccion FROM clientes"; 
+    
+    try (Connection con = conexionBD.getConexion();
+         PreparedStatement ps = con.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+        
+        Object[] fila = new Object[5];
+        
+        while (rs.next()) {
+            fila[0] = rs.getString("id_usuario");
+            fila[1] = rs.getString("nombre") + " " + rs.getString("apellido_paterno");
+            fila[2] = rs.getString("correo");
+            fila[3] = rs.getString("telefono");
+            fila[4] = rs.getString("direccion");
+            
+            modelo.addRow(fila);
+        }
+        
+        tabla_cliente.setModel(modelo); 
+        
+    } catch (SQLException e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Error al cargar los clientes: " + e.getMessage());
+    }
+}
+public class FormularioCliente extends javax.swing.JFrame {
+    
+    private String idClienteEditar = null;
+
+    public FormularioCliente() {
+        initComponents();
+    }
+
+    public FormularioCliente(String idRecibido) {
+        initComponents();
+        this.idClienteEditar = idRecibido; 
+        
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,6 +91,7 @@ public class GestionCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSeparator1 = new javax.swing.JSeparator();
         pnlFCli = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         pnlTitu = new javax.swing.JPanel();
@@ -42,6 +101,8 @@ public class GestionCliente extends javax.swing.JFrame {
         btnModificar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla_cliente = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,6 +171,19 @@ public class GestionCliente extends javax.swing.JFrame {
         btnAgregar.setName("btnLogin"); // NOI18N
         btnAgregar.addActionListener(this::btnAgregarActionPerformed);
 
+        tabla_cliente.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tabla_cliente);
+
         javax.swing.GroupLayout pnlFCliLayout = new javax.swing.GroupLayout(pnlFCli);
         pnlFCli.setLayout(pnlFCliLayout);
         pnlFCliLayout.setHorizontalGroup(
@@ -121,11 +195,13 @@ public class GestionCliente extends javax.swing.JFrame {
                     .addComponent(pnlTitu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFCliLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
                 .addGroup(pnlFCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRegresar)
-                    .addComponent(btnModificar)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnModificar, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(79, 79, 79))
         );
         pnlFCliLayout.setVerticalGroup(
@@ -134,15 +210,21 @@ public class GestionCliente extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlTitu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
-                .addComponent(btnAgregar)
-                .addGap(18, 18, 18)
-                .addComponent(btnEliminar)
-                .addGap(18, 18, 18)
-                .addComponent(btnModificar)
-                .addGap(18, 18, 18)
-                .addComponent(btnRegresar)
-                .addContainerGap(177, Short.MAX_VALUE))
+                .addGroup(pnlFCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlFCliLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnlFCliLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                        .addComponent(btnAgregar)
+                        .addGap(45, 45, 45)
+                        .addComponent(btnEliminar)
+                        .addGap(48, 48, 48)
+                        .addComponent(btnModificar)
+                        .addGap(56, 56, 56)
+                        .addComponent(btnRegresar)
+                        .addGap(128, 128, 128))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -160,25 +242,103 @@ public class GestionCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // Eliminar cliente boton
+        int filaSeleccionada = tabla_cliente.getSelectedRow();
+    
+    if (filaSeleccionada == -1) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Por favor, seleccione el cliente que desea eliminar de la tabla.");
+        return;
+    }
+    
+    // 2. Recuperamos datos
+    String idUsuario = tabla_cliente.getValueAt(filaSeleccionada, 0).toString();
+    String nombreUsuario = tabla_cliente.getValueAt(filaSeleccionada, 1).toString();
+    
+    // 3. Confirmación
+    int confirmar = javax.swing.JOptionPane.showConfirmDialog(this, 
+            "¿Está seguro de que desea eliminar al cliente " + nombreUsuario + " (" + idUsuario + ")?", 
+            "ADVERTENCIA", 
+            javax.swing.JOptionPane.YES_NO_OPTION,
+            javax.swing.JOptionPane.WARNING_MESSAGE);
+    
+    // 4. Intento de borrado
+    if (confirmar == javax.swing.JOptionPane.YES_OPTION) {
+        String sql = "DELETE FROM clientes WHERE id_usuario = ?";
         
-        
-        //confirmacion de eliminacion
-        int op = JOptionPane.showConfirmDialog( 
-        this, "¿Está seguro/a de que desea eliminar al cliente?", "ADVERTENCIA",
-        JOptionPane.YES_NO_OPTION,
-        JOptionPane.WARNING_MESSAGE);
+        try (Connection con = conexionBD.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            
+            ps.setString(1, idUsuario);
+            ps.executeUpdate();
+            
+            javax.swing.JOptionPane.showMessageDialog(this, "Cliente eliminado correctamente de la nube.");
+            cargarClientes();
+            
+        } catch (SQLException e) {
+            // ¡EL TRUCO ESTÁ AQUÍ! El código 1451 es el bloqueo de llave foránea en MySQL
+            if (e.getErrorCode() == 1451) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "No se puede eliminar al cliente '" + nombreUsuario + "' porque tiene contratos de alquiler activos.\n\n" +
+                    "Para poder borrarlo, primero debes eliminar o archivar sus contratos correspondientes.", 
+                    "No se puede eliminar", 
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+            } else {
+                // Cualquier otro error de base de datos que pueda surgir
+                javax.swing.JOptionPane.showMessageDialog(this, "Error al eliminar cliente: " + e.getMessage());
+            }
+        }
+    }
 
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        // Modficar datos boton
-        
-        //confirmacion de modificacion
-        int op = JOptionPane.showConfirmDialog( 
+    int filaSeleccionada = tabla_cliente.getSelectedRow();
+    
+    if (filaSeleccionada == -1) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Por favor, seleccione en la tabla el cliente que acaba de editar.");
+        return;
+    }
+    
+    if (tabla_cliente.isEditing()) {
+        tabla_cliente.getCellEditor().stopCellEditing();
+    }
+    
+    int op = javax.swing.JOptionPane.showConfirmDialog( 
         this, "¿Está seguro/a de que desea realizar la modificación?", "ADVERTENCIA",
-        JOptionPane.YES_NO_OPTION,
-        JOptionPane.WARNING_MESSAGE);
+        javax.swing.JOptionPane.YES_NO_OPTION,
+        javax.swing.JOptionPane.WARNING_MESSAGE); 
+    
+    if (op == javax.swing.JOptionPane.YES_OPTION) {
+        
+        // Capturamos los datos modificados de la fila
+        String idUsuario = tabla_cliente.getValueAt(filaSeleccionada, 0).toString();
+        String correo = tabla_cliente.getValueAt(filaSeleccionada, 2).toString();
+        String telefono = tabla_cliente.getValueAt(filaSeleccionada, 3).toString();
+        String direccion = (tabla_cliente.getValueAt(filaSeleccionada, 4) != null) 
+                           ? tabla_cliente.getValueAt(filaSeleccionada, 4).toString() : "";
+        
+        String sql = "UPDATE clientes SET correo = ?, telefono = ?, direccion = ? WHERE id_usuario = ?";
+        
+        try (Connection con = conexionBD.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            
+            ps.setString(1, correo);
+            ps.setString(2, telefono);
+            ps.setString(3, direccion);
+            ps.setString(4, idUsuario);
+            
+            ps.executeUpdate();
+            
+            javax.swing.JOptionPane.showMessageDialog(this, "¡Excelente! Datos actualizados directamente en la nube.");
+            
+            cargarClientes();
+            
+            
+        } catch (SQLException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al actualizar los datos: " + e.getMessage());
+        }
+    }
+    
+    
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
@@ -229,8 +389,11 @@ public class GestionCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblTit;
     private javax.swing.JPanel pnlFCli;
     private javax.swing.JPanel pnlTitu;
+    private javax.swing.JTable tabla_cliente;
     // End of variables declaration//GEN-END:variables
 }
