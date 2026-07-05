@@ -346,55 +346,45 @@ public class GUI_inventario extends javax.swing.JFrame {
     
     public void Cargar_tabla(){
         
-        DefaultTableModel modelo = new DefaultTableModel();
+       DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("ID Traje");
         modelo.addColumn("Nombre");
         modelo.addColumn("Precio");
-        modelo.addColumn("Estado Contrato");
-    
-    // Asignamos el modelo vacío a tu JTable por si acaso
-       bd_inventariooo.setModel(modelo);
-    
-    // Consulta SQL: Trae todos los trajes y el estado de su ÚLTIMO contrato de alquiler
-       String sql = "SELECT t.id_traje, t.nombre_traje, t.precio_traje, c.estado_contrato " +
-                 "FROM traje t " +
-                 "LEFT JOIN contrato_alquiler c ON t.id_traje = c.id_traje " +
-                 "AND c.id_contrato_alquiler = (SELECT MAX(id_contrato_alquiler) " +
-                 "                              FROM contrato_alquiler " +
-                 "                              WHERE id_traje = t.id_traje) " +
-                 "ORDER BY t.id_traje ASC";
-                 
-    try (Connection cn = getConexion();
-         PreparedStatement pst = cn.prepareStatement(sql);
-         ResultSet rs = pst.executeQuery()) {
-        
-        // Creamos un arreglo de Strings para ir metiendo fila por fila
-        String[] datos = new String[4];
-        
-        while (rs.next()) {
-            datos[0] = rs.getString("id_traje");
-            datos[1] = rs.getString("nombre_traje");
-            datos[2] = rs.getString("precio_traje");
-            
-            // Validamos el estado del contrato
-            String estado = rs.getString("estado_contrato");
-            if (estado == null) {
-                datos[3] = "DISPONIBLE"; // Si el JOIN da null, significa que nunca se ha alquilado
-            } else {
-                datos[3] = estado.toUpperCase(); // Muestra el estado real (Alquilado, Devuelto, etc.)
-            }
-            
-            // Agregamos la fila cargada al modelo de la tabla
-            modelo.addRow(datos);
-        }
-        
-        // Refrescamos la tabla visual con los nuevos datos
+        modelo.addColumn("Estado Traje"); // Cambiado a Estado del Traje directamente
+
         bd_inventariooo.setModel(modelo);
-        
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(this, "Error al cargar la lista de trajes: " + e.getMessage());
-        e.printStackTrace();
-    }
+
+        // Consulta directa: Leemos el estado real del traje directamente de su tabla
+        String sql = "SELECT id_traje, nombre_traje, precio_traje, estado FROM traje ORDER BY id_traje ASC";
+
+        try (Connection cn = getConexion(); // Si te da error getConexion(), usa conexionBD.getConexion()
+             PreparedStatement pst = cn.prepareStatement(sql);
+             ResultSet rs = pst.executeQuery()) {
+
+            String[] datos = new String[4];
+
+            while (rs.next()) {
+                datos[0] = rs.getString("id_traje");
+                datos[1] = rs.getString("nombre_traje");
+                datos[2] = rs.getString("precio_traje");
+
+                // Leemos la columna 'estado' de la tabla 'traje'
+                String estado = rs.getString("estado"); 
+                if (estado == null || estado.trim().isEmpty()) {
+                    datos[3] = "DISPONIBLE"; 
+                } else {
+                    datos[3] = estado.toUpperCase().trim(); // Traerá "ALQUILADO" o "DISPONIBLE" según lo que guardó el pago
+                }
+
+                modelo.addRow(datos);
+            }
+
+            bd_inventariooo.setModel(modelo);
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error al cargar la lista de trajes: " + e.getMessage());
+            e.printStackTrace();
+        }
         
     }
     

@@ -693,7 +693,7 @@ public class GUI_pago extends javax.swing.JFrame {
                         javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
                 // Redireccionar al menú del cliente y cerrar la ventana de pago
-                new MenuCliente().setVisible(true);
+                new MenuAdmin().setVisible(true);
                 this.dispose(); 
 
             } else {
