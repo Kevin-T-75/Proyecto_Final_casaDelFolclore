@@ -343,7 +343,7 @@ public class GestionTraje extends javax.swing.JDialog {
         lblREstado.setBackground(new java.awt.Color(204, 204, 204));
         lblREstado.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         lblREstado.setForeground(new java.awt.Color(51, 0, 51));
-        lblREstado.setText("Estado:");
+        lblREstado.setText("Precio:");
 
         txtREstado.setEditable(false);
         txtREstado.setBackground(new java.awt.Color(51, 51, 51));
